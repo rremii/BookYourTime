@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-export type ModalNames = 'SearchFilters' | 'EditBooking' | 'CreateBooking'
+export type ModalNames = 'SearchFilters' | 'CreateEditBooking'
 
 export interface IModal {
   isOpen: boolean

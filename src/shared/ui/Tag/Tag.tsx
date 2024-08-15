@@ -4,13 +4,13 @@ import { Tags } from './types'
 import { colorByTag } from './colorByTag'
 
 interface Props extends PropsWithChildren {
-  tag: Tags
+  value: Tags
 }
 
-export const Tag = ({ tag }: Props) => {
-  const styles = getStyles(colorByTag(tag))
+export const Tag = ({ value }: Props) => {
+  const styles = getStyles(colorByTag(value))
 
-  return <Text style={styles.workingDay}>{tag}</Text>
+  return <Text style={styles.workingDay}>{value}</Text>
 }
 const getStyles = (color: string) =>
   StyleSheet.create({

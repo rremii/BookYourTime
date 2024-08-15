@@ -10,6 +10,7 @@ import {
   Animated,
   Text,
   TouchableOpacity,
+  LayoutChangeEvent,
 } from 'react-native'
 import RNDateTimePicker from '@react-native-community/datetimepicker'
 import React, { useState } from 'react'
@@ -19,6 +20,7 @@ import { TagsPicker } from '@shared/moduls/tagsPicker/TagsPicker'
 import { BtnSimple } from '@shared/ui/BtnSimple'
 import { BtnFilled } from '@shared/ui/BtnFilled'
 import { initTags } from '@shared/moduls/tagsPicker/constants'
+import { inputSectionStyles } from '@shared/ui/InputSection/InputSectionStyles'
 
 interface Filters {
   date: Date | null
@@ -29,8 +31,11 @@ interface Filters {
 
 interface Props extends ModalProps {}
 
-const modalHeight = +Math.round(+Dimensions.get('screen').height * 0.6)
 export const SearchFilters = ({ isOpen }: Props) => {
+  const [modalHeight, setModalHeight] = useState(
+    Dimensions.get('screen').height * 0.6, // approximate
+  )
+
   const [filters, setFilters] = useState<Filters>({
     date: null,
     startTime: null,
@@ -72,11 +77,14 @@ export const SearchFilters = ({ isOpen }: Props) => {
   const close = () => {
     closeModal('SearchFilters')
   }
-
+  const onLayout = (e: LayoutChangeEvent) => {
+    setModalHeight(+e.nativeEvent.layout.height)
+  }
   return (
     <>
       <Overlay onPress={close} isActive={isOpen} />
       <Animated.View
+        onLayout={onLayout}
         style={[
           styles.container,
           {
@@ -85,23 +93,33 @@ export const SearchFilters = ({ isOpen }: Props) => {
         ]}
       >
         <Text style={styles.title}>Filters</Text>
-        <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>Date:</Text>
+        <View style={inputSectionStyles.sectionContainer}>
+          <Text style={inputSectionStyles.sectionTitle}>Date:</Text>
           <DatePicker
             initDate={filters.date}
             onChange={onFilterChange('date')}
           />
         </View>
         <View>
-          <Text style={styles.sectionTitle}>Time:</Text>
-          <View style={[styles.sectionContainer, { paddingLeft: 20 }]}>
+          <Text style={inputSectionStyles.sectionTitle}>Time:</Text>
+          <View
+            style={[
+              inputSectionStyles.sectionContainer,
+              inputSectionStyles.withPadding,
+            ]}
+          >
             <Text style={{ fontSize: 16 }}>Start</Text>
             <TimePicker
               initTime={filters.startTime}
               onChange={onFilterChange('startTime')}
             />
           </View>
-          <View style={[styles.sectionContainer, { paddingLeft: 20 }]}>
+          <View
+            style={[
+              inputSectionStyles.sectionContainer,
+              inputSectionStyles.withPadding,
+            ]}
+          >
             <Text style={{ fontSize: 16 }}>End</Text>
             <TimePicker
               initTime={filters.endTime}
@@ -110,8 +128,8 @@ export const SearchFilters = ({ isOpen }: Props) => {
           </View>
         </View>
         <View>
-          <Text style={styles.sectionTitle}>Tags:</Text>
-          <View style={{ paddingLeft: 20 }}>
+          <Text style={inputSectionStyles.sectionTitle}>Tags:</Text>
+          <View style={inputSectionStyles.withPadding}>
             <TagsPicker onChange={onFilterChange('tags')} tags={filters.tags} />
           </View>
         </View>
@@ -147,17 +165,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  sectionContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
-    marginBottom: 5,
-  },
   btnContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end',

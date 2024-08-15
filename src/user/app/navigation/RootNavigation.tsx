@@ -13,7 +13,7 @@ import React from 'react'
 import SearchIcon from '@icons/search.svg'
 import ProfileIcon from '@icons/profile.svg'
 import BookingIcon from '@icons/calendar.svg'
-import { HostPreview } from '@user/screens/hostPreview/HostPreview'
+import { HostPreview } from '@user/screens/hostPreview/ui/HostPreview'
 import { SearchNavigation } from './SearchNavigation'
 
 interface BottomTabIconProps {

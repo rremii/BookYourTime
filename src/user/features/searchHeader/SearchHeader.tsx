@@ -1,7 +1,6 @@
-import { TextInput, View } from 'react-native'
+import { TextInput, TouchableOpacity, View } from 'react-native'
 import { StyleSheet, Text } from 'react-native'
 import React from 'react'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import SearchIcon from '@icons/search.svg'
 import FilterIcon from '@icons/filter.svg'
 import { useModal } from '@shared/moduls/modals/useModal'

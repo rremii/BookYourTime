@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   btnContainer: {
     width: '100%',
 
-    marginTop: 200,
+    marginTop: 10,
     padding: 10,
     alignItems: 'flex-end',
     justifyContent: 'flex-end',

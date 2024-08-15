@@ -1,11 +1,18 @@
 import { View, Text, StyleSheet, FlatList } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SearchHeader } from '@user/features/searchHeader/SearchHeader'
 import { HostCard } from '@user/features/hostCard/HostCard'
+import { useModal } from '@shared/moduls/modals/useModal'
+import { CreateBookingModal } from '@shared/features/CreateEditBookingModal/CreateEditBookingModal'
 
 export const Search = () => {
-  const cards = new Array(10).fill(0)
+  const { openModal } = useModal()
 
+  // useEffect(() => {
+  //   openModal({ name: 'CreateBooking', modal: CreateBookingModal })
+  // }, [])
+
+  const cards = new Array(10).fill(0)
   return (
     <View style={styles.container}>
       <SearchHeader />
