@@ -3,14 +3,14 @@ import React, { useEffect } from 'react'
 import { SearchHeader } from '@user/features/searchHeader/SearchHeader'
 import { HostCard } from '@user/features/hostCard/HostCard'
 import { useModal } from '@shared/moduls/modals/useModal'
-import { CreateBookingModal } from '@shared/features/CreateEditBookingModal/CreateEditBookingModal'
+import { SearchFilters } from '@user/features/searchFilters.tsx/SearchFilters'
 
 export const Search = () => {
   const { openModal } = useModal()
 
-  // useEffect(() => {
-  //   openModal({ name: 'CreateBooking', modal: CreateBookingModal })
-  // }, [])
+  useEffect(() => {
+    openModal({ name: 'SearchFilters', modal: SearchFilters })
+  }, [])
 
   const cards = new Array(10).fill(0)
   return (

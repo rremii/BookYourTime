@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-export type ModalNames = 'SearchFilters' | 'CreateEditBooking'
+export type ModalNames = 'SearchFilters' | 'CreateEditBooking' | 'Toast'
 
 export interface IModal {
   isOpen: boolean
@@ -22,6 +22,7 @@ type Action<T, P> = {
 export interface RegisterModal<PropsType> {
   modal: FC<PropsType & ModalProps>
   name: ModalNames
+  duration?: number
   props?: PropsType
 }
 export type AddModalAction<PropsType> = Action<'add', RegisterModal<PropsType>>

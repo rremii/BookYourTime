@@ -1,7 +1,6 @@
 import { View, Text } from 'react-native'
 import { Avatar } from '@shared/ui/Avatar'
-import { Tag } from '@shared/ui/Tag/Tag'
-import { Tags } from '@shared/ui/Tag/types'
+import { Tag } from '@shared/ui/Tag'
 import { StyleSheet } from 'react-native'
 
 export const HostInfo = () => {
@@ -12,10 +11,10 @@ export const HostInfo = () => {
       <Text style={styles.name}>Jon Doue</Text>
       <Text style={styles.specialty}>Software Engineer</Text>
       <View style={styles.tagsContainer}>
-        <Tag value={Tags.FRONTEND} />
-        <Tag value={Tags.BACKEND} />
-        <Tag value={Tags.BACKEND} />
-        <Tag value={Tags.BACKEND} />
+        <Tag>Frontend</Tag>
+        <Tag>Frontend</Tag>
+        <Tag>Frontend</Tag>
+        <Tag>Frontend</Tag>
       </View>
     </View>
   )
@@ -24,7 +23,7 @@ const styles = StyleSheet.create({
   hostInfoTitle: {
     fontSize: 18,
     marginBottom: 5,
-    textAlign: 'center',
+    width: '100%',
   },
   hostName: {
     fontSize: 18,

@@ -16,11 +16,10 @@ import RNDateTimePicker from '@react-native-community/datetimepicker'
 import React, { useState } from 'react'
 import { DatePicker } from '../../../shared/moduls/datePicker/DatePicker'
 import { TimePicker } from '@shared/moduls/timePicker/TimePicker'
-import { TagsPicker } from '@shared/moduls/tagsPicker/TagsPicker'
 import { BtnSimple } from '@shared/ui/BtnSimple'
 import { BtnFilled } from '@shared/ui/BtnFilled'
-import { initTags } from '@shared/moduls/tagsPicker/constants'
 import { inputSectionStyles } from '@shared/ui/InputSection/InputSectionStyles'
+import { TagsPicker } from '@shared/moduls/tagsPicker/TagsPicker'
 
 interface Filters {
   date: Date | null
@@ -28,6 +27,8 @@ interface Filters {
   endTime: Date | null
   tags: string[]
 }
+
+const initTags = ['Frontend', 'Backend']
 
 interface Props extends ModalProps {}
 
@@ -129,7 +130,7 @@ export const SearchFilters = ({ isOpen }: Props) => {
         </View>
         <View>
           <Text style={inputSectionStyles.sectionTitle}>Tags:</Text>
-          <View style={inputSectionStyles.withPadding}>
+          <View style={[inputSectionStyles.withPadding, { marginTop: 5 }]}>
             <TagsPicker onChange={onFilterChange('tags')} tags={filters.tags} />
           </View>
         </View>

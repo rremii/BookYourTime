@@ -1,5 +1,5 @@
 import { BaseNavigationContainer } from '@react-navigation/native'
-import { Tag } from '@shared/ui/Tag/Tag'
+import { Tag } from '@shared/ui/Tag'
 import { Tags } from '@shared/ui/Tag/types'
 import { Avatar } from '@shared/ui/Avatar'
 import { BtnFilled } from '@shared/ui/BtnFilled'

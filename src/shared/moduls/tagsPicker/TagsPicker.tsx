@@ -1,43 +1,120 @@
-import React, { useEffect, useState } from 'react'
-import { View } from 'react-native'
-import SelectBox, { Item } from 'react-native-multi-selectbox-typescript'
-import { initTags } from './constants'
+import React, { useEffect, useRef, useState } from 'react'
+import {
+  TextInput,
+  View,
+  Text,
+  TouchableOpacity,
+  NativeSyntheticEvent,
+  TextInputSubmitEditingEventData,
+} from 'react-native'
+import { Tag } from '@shared/ui/Tag'
+import { StyleSheet } from 'react-native'
+import Cross from '@icons/cross.svg'
 
 interface Props {
   tags: string[]
   onChange?: (tags: string[]) => void
 }
-
 export const TagsPicker = ({ onChange, tags = [] }: Props) => {
-  function onRemove(item: Item) {
+  const [isAdding, setIsAdding] = useState(false)
+  const inputRef = useRef<TextInput | null>(null)
+
+  const onSubmit = (
+    e: NativeSyntheticEvent<TextInputSubmitEditingEventData>,
+  ) => {
     if (!onChange) return
 
-    onChange(tags.filter((tag) => tag !== item.item))
+    const newTag = e.nativeEvent.text
+    if (newTag.length > 0) {
+      onChange([...tags, newTag])
+    }
+
+    setIsAdding(false)
   }
-  function onSelect(item: Item) {
+  const onRemove = (tag: string) => {
     if (!onChange) return
-
-    if (tags.find((tag) => tag === item.item)) onRemove(item)
-    else onChange([...tags, item.item])
+    onChange(tags.filter((t) => t !== tag))
   }
 
+  const startAdding = () => {
+    setIsAdding(true)
+  }
+
+  useEffect(() => {
+    if (!inputRef.current) return
+    inputRef.current.focus()
+  }, [isAdding])
   return (
-    <SelectBox
-      containerStyle={{
-        width: '100%',
-        alignItems: 'center',
-      }}
-      selectedItemStyle={{ backgroundColor: '#0A8537' }}
-      multiOptionContainerStyle={{ backgroundColor: '#494949' }}
-      multiListEmptyLabelStyle={{ color: '#000000' }}
-      optionsLabelStyle={{ color: '#000000' }}
-      labelStyle={{ display: 'none' }}
-      options={initTags.map((tag, index) => ({ item: tag, id: index }))}
-      selectedValues={tags.map((tag, index) => ({ item: tag, id: index }))}
-      onMultiSelect={onSelect}
-      onTapClose={onRemove}
-      hideInputFilter
-      isMulti
-    />
+    <View style={styles.container}>
+      {tags.map((tag) => (
+        <TouchableOpacity key={tag} onPress={() => onRemove(tag)}>
+          <Tag>
+            {tag} <Cross width={10} height={10} color="black" />
+          </Tag>
+        </TouchableOpacity>
+      ))}
+
+      {isAdding ? (
+        <TextInput
+          ref={inputRef}
+          onSubmitEditing={onSubmit}
+          style={styles.input}
+        />
+      ) : (
+        <TouchableOpacity style={styles.btn} onPress={startAdding}>
+          <Text style={styles.text}>+</Text>
+        </TouchableOpacity>
+      )}
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 7,
+    flexWrap: 'wrap',
+  },
+  inputContainer: {
+    borderRadius: 10,
+    paddingLeft: 7,
+    paddingRight: 7,
+    paddingTop: 3,
+    paddingBottom: 3,
+    borderColor: '#0a853760',
+    borderWidth: 1,
+  },
+  input: {
+    height: 30,
+    borderRadius: 20,
+    paddingLeft: 7,
+    paddingRight: 7,
+    paddingTop: 3,
+    paddingBottom: 3,
+    borderColor: '#0a853760',
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  btn: {
+    width: 30,
+    height: 30,
+    borderRadius: 20,
+    paddingLeft: 7,
+    paddingRight: 7,
+    paddingTop: 3,
+    paddingBottom: 3,
+    borderColor: '#0a853760',
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    width: 35,
+    height: 35,
+    textAlign: 'center',
+    color: '#000000',
+    fontSize: 25,
+  },
+})

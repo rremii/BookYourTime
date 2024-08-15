@@ -6,10 +6,12 @@ import { ModalNames, RegisterModal } from './types'
 export const useModal = () => {
   const { dispatch, modals } = useContext(ModalContext)
 
-  function openModal<PropsType>(
-    { name, modal, props }: RegisterModal<PropsType>,
-    duration?: number,
-  ) {
+  function openModal<PropsType>({
+    name,
+    modal,
+    props,
+    duration,
+  }: RegisterModal<PropsType>) {
     dispatch(addModal({ modal, name, props }))
 
     if (duration) {

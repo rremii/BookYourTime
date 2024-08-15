@@ -10,5 +10,9 @@
       "@icons/*": ["./assets/icons/*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "src/shared/moduls/tagsPicker/TagsPicker.tsx"
+  ]
 }

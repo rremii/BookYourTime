@@ -6,7 +6,7 @@ import TagIcon from '@icons/tag.svg'
 import { Avatar } from '@shared/ui/Avatar'
 import { WorkingDay } from '@shared/ui/WorkingDay'
 import { Tags } from '@shared/ui/Tag/types'
-import { Tag } from '@shared/ui/Tag/Tag'
+import { Tag } from '@shared/ui/Tag'
 import { SearchNavigationParam } from '@user/app/navigation/types'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { useNavigation } from '@react-navigation/native'
@@ -44,9 +44,9 @@ export const HostCard = () => {
       </View>
       <View style={styles.tagsContainer}>
         <TagIcon width={20} height={20} color={'#8E898A'} />
-        <Tag value={Tags.BACKEND} />
-        <Tag value={Tags.FULLSTACK} />
-        <Tag value={Tags.FRONTEND} />
+        <Tag>Frontend</Tag>
+        <Tag>Frontend</Tag>
+        <Tag>Frontend</Tag>
       </View>
     </TouchableOpacity>
   )
