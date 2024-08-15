@@ -5,7 +5,6 @@ import CalendarIcon from '@icons/calendar.svg'
 import TagIcon from '@icons/tag.svg'
 import { Avatar } from '@shared/ui/Avatar'
 import { WorkingDay } from '@shared/ui/WorkingDay'
-import { Tags } from '@shared/ui/Tag/types'
 import { Tag } from '@shared/ui/Tag'
 import { SearchNavigationParam } from '@user/app/navigation/types'
 import { StackNavigationProp } from '@react-navigation/stack'
@@ -16,7 +15,6 @@ export const HostCard = () => {
   const navigation = useNavigation<StackNavigationProp<SearchNavigationParam>>()
 
   const goToHostPreview = () => {
-    console.log('go to host preview')
     navigation.navigate('HostPreview')
   }
   return (

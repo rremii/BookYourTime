@@ -3,17 +3,12 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs'
 import { Profile } from '../../screens/profile/Profile'
-import { createStackNavigator } from '@react-navigation/stack'
-import { SignIn } from '../../screens/signIn/SignIn'
-import { SignUp } from '../../screens/signUp/SignUp'
 import { RootNavigationParam, SearchNavigationParam } from './types'
-import { Search } from '../../screens/search/Search'
 import { Booking } from '../../screens/booking/Booking'
 import React from 'react'
 import SearchIcon from '@icons/search.svg'
 import ProfileIcon from '@icons/profile.svg'
 import BookingIcon from '@icons/calendar.svg'
-import { HostPreview } from '@user/screens/hostPreview/ui/HostPreview'
 import { SearchNavigation } from './SearchNavigation'
 
 interface BottomTabIconProps {

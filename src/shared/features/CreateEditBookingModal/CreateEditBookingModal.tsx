@@ -6,8 +6,6 @@ import { Avatar } from '@shared/ui/Avatar'
 import { BtnFilled } from '@shared/ui/BtnFilled'
 import { BtnSimple } from '@shared/ui/BtnSimple'
 import { Overlay } from '@shared/ui/Overlay'
-import { Tag } from '@shared/ui/Tag'
-import { Tags } from '@shared/ui/Tag/types'
 import { useAnimatedValue } from '@shared/utils/useAnimatedValue'
 import { useState } from 'react'
 import {
@@ -19,14 +17,21 @@ import {
   TextInput,
   ScrollView,
   LayoutChangeEvent,
+  TouchableOpacity,
 } from 'react-native'
 
-import { HostInfo } from './HostInfo'
-import { BookingForm } from './BookingForm'
+import { HostInfo } from './ui/HostInfo'
+import { BookingForm } from './ui/BookingForm'
+import Cross from '@icons/cross.svg'
+import { Header } from './ui/Header'
 
-interface Props extends ModalProps {}
+export type BookingModalType = 'create' | 'edit'
 
-export const CreateEditBookingModal = ({ isOpen, name }: Props) => {
+interface Props extends ModalProps {
+  type: BookingModalType
+}
+
+export const CreateEditBookingModal = ({ isOpen, type }: Props) => {
   const { closeModal } = useModal()
 
   const [modalHeight, setModalHeight] = useState(
@@ -47,7 +52,6 @@ export const CreateEditBookingModal = ({ isOpen, name }: Props) => {
   const close = () => {
     closeModal('CreateEditBooking')
   }
-
   const onLayout = (e: LayoutChangeEvent) => {
     setModalHeight(+e.nativeEvent.layout.height)
   }
@@ -59,11 +63,11 @@ export const CreateEditBookingModal = ({ isOpen, name }: Props) => {
         style={[styles.container, { transform: [{ translateY: slideAnim }] }]}
       >
         <ScrollView contentContainerStyle={styles.scrollContainer}>
-          <Text style={styles.modalTitle}>Book an appointment</Text>
+          <Header type={type} />
 
           <HostInfo />
 
-          <BookingForm />
+          <BookingForm type={type} />
         </ScrollView>
       </Animated.View>
     </>
@@ -85,9 +89,5 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     gap: 15,
-  },
-  modalTitle: {
-    fontSize: 20,
-    marginBottom: 10,
   },
 })

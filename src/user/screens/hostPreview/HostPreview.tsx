@@ -1,6 +1,5 @@
 import { BaseNavigationContainer } from '@react-navigation/native'
 import { Tag } from '@shared/ui/Tag'
-import { Tags } from '@shared/ui/Tag/types'
 import { Avatar } from '@shared/ui/Avatar'
 import { BtnFilled } from '@shared/ui/BtnFilled'
 import { WorkingDay } from '@shared/ui/WorkingDay'
@@ -9,18 +8,27 @@ import { View } from 'react-native'
 import { Text, StyleSheet } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { useModal } from '@shared/moduls/modals/useModal'
-import { CreateEditBookingModal } from '@shared/features/CreateEditBookingModal/CreateEditBookingModal'
-import { HostProfile } from '../HostProfile'
-import { WorkingDays } from './WorkingDays'
-import { BreakTime } from './BreakTime'
-import { TagsSection } from './TagsSection'
-import { WorkingHours } from './WorkingHours'
+import {
+  BookingModalType,
+  CreateEditBookingModal,
+} from '@shared/features/CreateEditBookingModal/CreateEditBookingModal'
+import { HostProfile } from './ui/HostProfile'
+import { WorkingHours } from './ui/WorkingHours'
+import { WorkingDays } from './ui/WorkingDays'
+import { BreakTime } from './ui/BreakTime'
+import { TagsSection } from './ui/TagsSection'
 
 export const HostPreview = () => {
   const { openModal } = useModal()
 
   const openBookingModal = () => {
-    openModal({ name: 'CreateEditBooking', modal: CreateEditBookingModal })
+    openModal<{
+      type: BookingModalType
+    }>({
+      name: 'CreateEditBooking',
+      modal: CreateEditBookingModal,
+      props: { type: 'create' },
+    })
   }
 
   return (

@@ -21,7 +21,7 @@ export const HostInfo = () => {
 }
 const styles = StyleSheet.create({
   hostInfoTitle: {
-    fontSize: 18,
+    fontSize: 16,
     marginBottom: 5,
     width: '100%',
   },

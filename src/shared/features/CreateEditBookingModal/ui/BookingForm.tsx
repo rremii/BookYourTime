@@ -9,6 +9,8 @@ import { useModal } from '@shared/moduls/modals/useModal'
 import { ReactNode, useState } from 'react'
 import { set } from 'react-hook-form'
 import { Toast, ToastType } from '@shared/ui/Toast'
+import { BookingModalType } from '../CreateEditBookingModal'
+import { BtnDanger } from '@shared/ui/BtnDanger'
 
 interface FormValues {
   date: Date | null
@@ -17,7 +19,11 @@ interface FormValues {
   title: string
 }
 
-export const BookingForm = () => {
+interface Props {
+  type: BookingModalType
+}
+
+export const BookingForm = ({ type }: Props) => {
   const { closeModal, openModal } = useModal()
 
   const [formValues, setFormValues] = useState<FormValues>({
@@ -26,6 +32,19 @@ export const BookingForm = () => {
     endTime: null,
     title: '',
   })
+
+  const onFilterChange =
+    (filter: keyof FormValues) => (value: string[] | Date | null | string) => {
+      if (filter === 'title') {
+        const title = value as string
+        if (title.length > 25) return
+      }
+
+      setFormValues({
+        ...formValues,
+        [filter]: value,
+      })
+    }
 
   const onSubmit = () => {
     const { date, endTime, startTime, title } = formValues
@@ -51,18 +70,14 @@ export const BookingForm = () => {
     })
   }
 
-  const onFilterChange =
-    (filter: keyof FormValues) => (value: string[] | Date | null | string) => {
-      if (filter === 'title') {
-        const title = value as string
-        if (title.length > 25) return
-      }
+  const onCancel = () => {
+    onReset()
+    closeModal('CreateEditBooking')
+  }
 
-      setFormValues({
-        ...formValues,
-        [filter]: value,
-      })
-    }
+  const onDelete = () => {
+    closeModal('CreateEditBooking')
+  }
 
   const close = () => {
     closeModal('CreateEditBooking')
@@ -113,8 +128,18 @@ export const BookingForm = () => {
         </View>
       </View>
       <View style={styles.btnContainer}>
-        <BtnSimple onPress={onReset}>Reset</BtnSimple>
-        <BtnFilled onPress={onSubmit}>Apply</BtnFilled>
+        {type === 'create' ? (
+          <>
+            <BtnSimple onPress={onReset}>Reset</BtnSimple>
+            <BtnFilled onPress={onSubmit}>Create</BtnFilled>
+          </>
+        ) : (
+          <>
+            <BtnDanger onPress={onDelete}>Delete</BtnDanger>
+            <BtnSimple onPress={onCancel}>Cancel</BtnSimple>
+            <BtnFilled onPress={onSubmit}>Apply</BtnFilled>
+          </>
+        )}
       </View>
     </>
   )
@@ -137,7 +162,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    gap: 15,
+    gap: 10,
     marginTop: 15,
   },
 })

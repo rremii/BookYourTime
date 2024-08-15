@@ -20,6 +20,7 @@ import { BtnSimple } from '@shared/ui/BtnSimple'
 import { BtnFilled } from '@shared/ui/BtnFilled'
 import { inputSectionStyles } from '@shared/ui/InputSection/InputSectionStyles'
 import { TagsPicker } from '@shared/moduls/tagsPicker/TagsPicker'
+import { Header } from './ui/Header'
 
 interface Filters {
   date: Date | null
@@ -93,7 +94,8 @@ export const SearchFilters = ({ isOpen }: Props) => {
           },
         ]}
       >
-        <Text style={styles.title}>Filters</Text>
+        <Header />
+
         <View style={inputSectionStyles.sectionContainer}>
           <Text style={inputSectionStyles.sectionTitle}>Date:</Text>
           <DatePicker
@@ -160,10 +162,6 @@ const styles = StyleSheet.create({
     transform: [{ translateY: 0 }],
     borderTopEndRadius: 40,
     borderTopStartRadius: 40,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
   },
 
   btnContainer: {

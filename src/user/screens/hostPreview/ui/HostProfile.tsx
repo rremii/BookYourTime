@@ -1,5 +1,5 @@
 import { Avatar } from '@shared/ui/Avatar'
-import { styles } from './ui/styles'
+import { styles } from './styles'
 import { View, Text } from 'react-native'
 
 export const HostProfile = () => {
