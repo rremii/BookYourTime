@@ -15,7 +15,7 @@ import {
 import RNDateTimePicker from '@react-native-community/datetimepicker'
 import React, { useState } from 'react'
 import { DatePicker } from '../../../shared/moduls/datePicker/DatePicker'
-import { TimePicker } from '@shared/moduls/timePicker/TimePicker'
+import { TimePicker } from '@shared/moduls/timePickers/ui/TimePicker'
 import { BtnSimple } from '@shared/ui/BtnSimple'
 import { BtnFilled } from '@shared/ui/BtnFilled'
 import { inputSectionStyles } from '@shared/ui/InputSection/InputSectionStyles'

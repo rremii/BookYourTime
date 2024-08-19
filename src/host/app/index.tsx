@@ -10,4 +10,4 @@ function App() {
   )
 }
 
-export const UserApp = withProviders(App)
+export const HostApp = withProviders(App)

@@ -4,9 +4,8 @@ import { Avatar } from '@shared/ui/Avatar'
 import { BtnFilled } from '@shared/ui/BtnFilled'
 import { WorkingDay } from '@shared/ui/WorkingDay'
 import { WorkingTime } from '@shared/ui/WorkingTime'
-import { View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { Text, StyleSheet } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
 import { useModal } from '@shared/moduls/modals/useModal'
 import {
   BookingModalType,

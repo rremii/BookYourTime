@@ -1,7 +1,7 @@
 import { View, Text, TextInput } from 'react-native'
 import { inputSectionStyles } from '@shared/ui/InputSection/InputSectionStyles'
 import { DatePicker } from '@shared/moduls/datePicker/DatePicker'
-import { TimePicker } from '@shared/moduls/timePicker/TimePicker'
+import { TimePicker } from '@shared/moduls/timePickers/ui/TimePicker'
 import { BtnSimple } from '@shared/ui/BtnSimple'
 import { BtnFilled } from '@shared/ui/BtnFilled'
 import { StyleSheet } from 'react-native'

@@ -13,6 +13,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "src/shared/moduls/tagsPicker/TagsPicker.tsx"
+    "src/shared/moduls/tagsPicker/TagsPicker.tsx",
+    "src/host/features/BookingPreviewModal"
   ]
 }
