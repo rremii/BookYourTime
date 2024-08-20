@@ -12,7 +12,7 @@ import { BtnSimple } from '@shared/ui/BtnSimple'
 import { BtnFilled } from '@shared/ui/BtnFilled'
 
 export const Profile = () => {
-  const [isEditing, setIsEditing] = useState(true)
+  const [isEditing, setIsEditing] = useState(false)
 
   const startEditing = () => {
     setIsEditing(true)

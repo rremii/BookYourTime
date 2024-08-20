@@ -1,14 +1,28 @@
 import { PropsWithChildren } from 'react'
-import { Text, TouchableOpacity, StyleSheet } from 'react-native'
+import {
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  TextStyle,
+} from 'react-native'
 
 interface Props extends PropsWithChildren {
   onPress?: () => void
+  btnStyles?: StyleProp<ViewStyle>
+  textStyles?: StyleProp<TextStyle>
 }
 
-export const BtnSimple = ({ onPress, children }: Props) => {
+export const BtnSimple = ({
+  onPress,
+  children,
+  btnStyles,
+  textStyles,
+}: Props) => {
   return (
-    <TouchableOpacity style={styles.btn} onPress={onPress}>
-      <Text style={styles.text}>{children}</Text>
+    <TouchableOpacity onPress={onPress} style={[styles.btn, btnStyles]}>
+      <Text style={[styles.text, textStyles]}>{children}</Text>
     </TouchableOpacity>
   )
 }

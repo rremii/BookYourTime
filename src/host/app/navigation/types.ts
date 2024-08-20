@@ -1,6 +1,6 @@
 import { NavigatorScreenParams } from '@react-navigation/native'
 
-export type RootNavigationParam = {
+export type HostRootNavigationParam = {
   Booking: undefined
   Profile: undefined
 }

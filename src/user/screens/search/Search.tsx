@@ -10,18 +10,6 @@ import {
 } from '@shared/features/CreateEditBookingModal'
 
 export const Search = () => {
-  const { openModal } = useModal()
-
-  useEffect(() => {
-    openModal<{
-      type: BookingModalType
-    }>({
-      name: 'CreateEditBooking',
-      modal: CreateEditBookingModal,
-      props: { type: 'create' },
-    })
-  }, [])
-
   const cards = new Array(10).fill(0)
   return (
     <View style={styles.container}>

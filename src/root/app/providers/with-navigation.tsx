@@ -5,11 +5,9 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 export const withNavigation = (Component: FC): FC => {
   return (props) => {
     return (
-      <SafeAreaProvider>
-        <NavigationContainer>
-          <Component {...props} />
-        </NavigationContainer>
-      </SafeAreaProvider>
+      <NavigationContainer>
+        <Component {...props} />
+      </NavigationContainer>
     )
   }
 }
