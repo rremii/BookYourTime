@@ -12,23 +12,22 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker'
 interface Props {
   onChange?: (date: Date | null) => void
   initTime: Date | null
-  styles?: {
-    btn?: StyleProp<ViewStyle>
-    Text?: StyleProp<TextStyle>
-  }
+  btnStyles?: StyleProp<ViewStyle>
+  textStyles?: StyleProp<TextStyle>
 }
 
-export const TimePicker = ({ initTime, onChange, ...props }: Props) => {
+export const TimePicker = ({
+  initTime,
+  onChange,
+  btnStyles,
+  textStyles,
+}: Props) => {
   const [date, setDate] = useState<Date | null>(initTime)
   const [isPicker, setIsPicker] = useState(false)
 
   useEffect(() => {
     setDate(initTime)
   }, [initTime])
-
-  useEffect(() => {
-    if (onChange) onChange(date)
-  }, [date])
 
   const openPicker = () => {
     setIsPicker(true)
@@ -39,10 +38,9 @@ export const TimePicker = ({ initTime, onChange, ...props }: Props) => {
   const handleChange = (date: Date) => {
     closePicker()
     setDate(date)
+    if (onChange) onChange(date)
   }
 
-  const btnStyles = props.styles?.btn || {}
-  const textStyles = props.styles?.Text || {}
   return (
     <>
       <DateTimePickerModal

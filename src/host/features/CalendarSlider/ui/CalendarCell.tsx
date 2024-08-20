@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 10,
     paddingBottom: 10,
-    maxWidth: Math.floor(Dimensions.get('screen').width / 7), // (width - padding) / daysAmount
+    maxWidth: Math.floor(Dimensions.get('screen').width / 7) - 1, // width  / daysAmount
     width: '100%',
     height: '13%',
     maxHeight: 130,

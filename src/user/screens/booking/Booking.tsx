@@ -21,7 +21,7 @@ export const Booking = () => {
 }
 const styles = StyleSheet.create({
   listContainer: {
-    paddingBottom: 20,
+    paddingBottom: 70,
     paddingTop: 20,
     gap: 10,
   },

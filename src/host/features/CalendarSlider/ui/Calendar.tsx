@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   emptyCell: {
-    maxWidth: Math.floor(Dimensions.get('screen').width / 7), // (width - padding) / daysAmount
+    maxWidth: Math.floor(Dimensions.get('screen').width / 7) - 1, // width - / daysAmount
     width: '100%',
     height: '15%',
   },

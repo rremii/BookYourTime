@@ -35,17 +35,12 @@ export const LabelWithEdit = ({
     setValue(label)
   }, [label])
 
-  useEffect(() => {
-    if (isEditing) inputRef.current?.focus()
-  }, [isEditing])
-
   const onSubmit = () => {
     if (onChange) onChange(value)
     setIsEditing(false)
   }
 
-  const inputRef = useRef<TextInput | null>(null)
-  const editIconStyle = props.editIconStyle || {}
+  const editIconStyle = (props.editIconStyle || {}) as SvgProps
   return (
     <View style={styles.container}>
       {isEditing ? (
@@ -53,7 +48,7 @@ export const LabelWithEdit = ({
           value={value}
           onChangeText={setValue}
           onBlur={onSubmit}
-          ref={inputRef}
+          autoFocus={true}
           style={[styles.input, inputStyle]}
         />
       ) : (
@@ -64,7 +59,7 @@ export const LabelWithEdit = ({
           <Text style={[styles.label, labelStyle]}>{value}</Text>
           <View style={styles.editIcon}>
             <EditIcon
-              {...(editIconStyle as SvgProps)}
+              {...editIconStyle}
               color={'#0A8537'}
               width={24}
               height={24}

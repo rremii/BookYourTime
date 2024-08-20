@@ -16,7 +16,10 @@ export const WorkingDays = ({ isEditing }: Props) => {
       {isEditing ? (
         <>
           <Text style={styles.sectionTitle}>Choose working days</Text>
-          <WeekDaysPicker onChange={setSelectedDays} />
+          <WeekDaysPicker
+            initSelectedDays={['Monday', 'Tuesday']}
+            onChange={setSelectedDays}
+          />
         </>
       ) : (
         <>

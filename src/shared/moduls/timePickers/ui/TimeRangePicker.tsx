@@ -14,13 +14,16 @@ import { TimeRange } from '../types'
 interface Props {
   onChange: (time: TimeRange) => void
   initTime: TimeRange
-  styles?: {
-    btn?: StyleProp<ViewStyle>
-    Text?: StyleProp<TextStyle>
-  }
+  btnStyles?: StyleProp<ViewStyle>
+  textStyles?: StyleProp<TextStyle>
 }
 
-export const TimeRangePicker = ({ initTime, onChange, ...props }: Props) => {
+export const TimeRangePicker = ({
+  initTime,
+  onChange,
+  btnStyles,
+  textStyles,
+}: Props) => {
   const { openModal } = useModal()
 
   const openPicker = () => {
@@ -30,9 +33,6 @@ export const TimeRangePicker = ({ initTime, onChange, ...props }: Props) => {
       props: { initTime, onChange },
     })
   }
-
-  const btnStyles = props.styles?.btn || {}
-  const textStyles = props.styles?.Text || {}
 
   const { start: startTime, end: endTime } = initTime
   return (

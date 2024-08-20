@@ -17,7 +17,6 @@ interface Props {
 }
 export const TagsPicker = ({ onChange, tags = [] }: Props) => {
   const [isAdding, setIsAdding] = useState(false)
-  const inputRef = useRef<TextInput | null>(null)
 
   const onSubmit = (
     e: NativeSyntheticEvent<TextInputSubmitEditingEventData>,
@@ -31,19 +30,15 @@ export const TagsPicker = ({ onChange, tags = [] }: Props) => {
 
     setIsAdding(false)
   }
-  const onRemove = (tag: string) => {
+  const onRemove = (removeTag: string) => {
     if (!onChange) return
-    onChange(tags.filter((t) => t !== tag))
+    onChange(tags.filter((tag) => tag !== removeTag))
   }
 
   const startAdding = () => {
     setIsAdding(true)
   }
 
-  useEffect(() => {
-    if (!inputRef.current) return
-    inputRef.current.focus()
-  }, [isAdding])
   return (
     <View style={styles.container}>
       {tags.map((tag) => (
@@ -56,7 +51,7 @@ export const TagsPicker = ({ onChange, tags = [] }: Props) => {
 
       {isAdding ? (
         <TextInput
-          ref={inputRef}
+          autoFocus={true}
           onSubmitEditing={onSubmit}
           style={styles.input}
         />
