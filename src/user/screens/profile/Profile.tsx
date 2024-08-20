@@ -1,7 +1,7 @@
 import { Avatar } from '@shared/ui/Avatar'
-import { BtnDanger } from '@shared/ui/BtnDanger'
 import { LabelWithEdit } from '@shared/ui/LabelWithEdit'
 import { ProfileStatus } from '@shared/ui/ProfileStatus'
+import { UIButton } from '@shared/ui/UIButton/UIButton'
 import { StyleSheet, Text, View } from 'react-native'
 
 export const Profile = () => {
@@ -28,7 +28,7 @@ export const Profile = () => {
       </View>
 
       <View style={styles.btnContainer}>
-        <BtnDanger>Delete account</BtnDanger>
+        <UIButton type="danger">Delete account</UIButton>
       </View>
     </View>
   )

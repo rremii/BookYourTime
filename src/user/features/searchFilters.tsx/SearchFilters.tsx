@@ -13,11 +13,10 @@ import {
 import React, { useState } from 'react'
 import { DatePicker } from '../../../shared/moduls/datePicker/DatePicker'
 import { TimePicker } from '@shared/moduls/timePickers/ui/TimePicker'
-import { BtnSimple } from '@shared/ui/BtnSimple'
-import { BtnFilled } from '@shared/ui/BtnFilled'
 import { inputSectionStyles } from '@shared/ui/InputSection/InputSectionStyles'
 import { TagsPicker } from '@shared/moduls/tagsPicker/TagsPicker'
 import { Header } from './ui/Header'
+import { UIButton } from '@shared/ui/UIButton/UIButton'
 
 interface Filters {
   date: Date | null
@@ -135,8 +134,12 @@ export const SearchFilters = ({ isOpen }: Props) => {
         </View>
 
         <View style={styles.btnContainer}>
-          <BtnSimple onPress={onReset}>Reset</BtnSimple>
-          <BtnFilled onPress={onSubmit}>Apply</BtnFilled>
+          <UIButton type="simple" onPress={onReset}>
+            Reset
+          </UIButton>
+          <UIButton type="filled" onPress={onSubmit}>
+            Apply
+          </UIButton>
         </View>
       </Animated.View>
     </>

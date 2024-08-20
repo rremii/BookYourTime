@@ -1,15 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
+  NativeSyntheticEvent,
   StyleProp,
   StyleSheet,
   Text,
   TextInput,
+  TextInputSubmitEditingEventData,
   TextStyle,
   TouchableOpacity,
   View,
 } from 'react-native'
 import EditIcon from '@icons/edit.svg'
 import { SvgProps } from 'react-native-svg'
+import { set } from 'react-hook-form'
 
 interface Props {
   onChange?: (value: string) => void
@@ -26,16 +29,16 @@ export const LabelWithEdit = ({
   labelStyle,
   ...props
 }: Props) => {
-  const [value, setValue] = useState(label)
   const [isEditing, setIsEditing] = useState(false)
-
-  useEffect(() => {
-    setValue(label)
-  }, [label])
+  const [curLabel, setCurLabel] = useState(label)
 
   const onSubmit = () => {
-    if (onChange) onChange(value)
+    if (onChange) onChange(curLabel)
     setIsEditing(false)
+  }
+
+  const onTextChange = (newLabel: string) => {
+    setCurLabel(newLabel)
   }
 
   const editIconStyle = (props.editIconStyle || {}) as SvgProps
@@ -43,9 +46,9 @@ export const LabelWithEdit = ({
     <View style={styles.container}>
       {isEditing ? (
         <TextInput
-          value={value}
-          onChangeText={setValue}
-          onBlur={onSubmit}
+          onChangeText={onTextChange}
+          value={curLabel}
+          onSubmitEditing={onSubmit}
           autoFocus={true}
           style={[styles.input, inputStyle]}
         />
@@ -54,7 +57,7 @@ export const LabelWithEdit = ({
           style={styles.labelContainer}
           onPress={() => setIsEditing(true)}
         >
-          <Text style={[styles.label, labelStyle]}>{value}</Text>
+          <Text style={[styles.label, labelStyle]}>{curLabel}</Text>
           <View style={styles.editIcon}>
             <EditIcon
               {...editIconStyle}

@@ -2,13 +2,11 @@ import { StyleSheet, Text, TextInput, View } from 'react-native'
 import { inputSectionStyles } from '@shared/ui/InputSection/InputSectionStyles'
 import { DatePicker } from '@shared/moduls/datePicker/DatePicker'
 import { TimePicker } from '@shared/moduls/timePickers/ui/TimePicker'
-import { BtnSimple } from '@shared/ui/BtnSimple'
-import { BtnFilled } from '@shared/ui/BtnFilled'
 import { useModal } from '@shared/moduls/modals/useModal'
 import { ReactNode, useState } from 'react'
 import { Toast, ToastType } from '@shared/ui/Toast'
 import { BookingModalType } from '../CreateEditBookingModal'
-import { BtnDanger } from '@shared/ui/BtnDanger'
+import { UIButton } from '@shared/ui/UIButton/UIButton'
 
 interface FormValues {
   date: Date | null
@@ -128,14 +126,24 @@ export const BookingForm = ({ type }: Props) => {
       <View style={styles.btnContainer}>
         {type === 'create' ? (
           <>
-            <BtnSimple onPress={onReset}>Reset</BtnSimple>
-            <BtnFilled onPress={onSubmit}>Create</BtnFilled>
+            <UIButton type="simple" onPress={onReset}>
+              Reset
+            </UIButton>
+            <UIButton type="filled" onPress={onSubmit}>
+              Create
+            </UIButton>
           </>
         ) : (
           <>
-            <BtnDanger onPress={onDelete}>Delete</BtnDanger>
-            <BtnSimple onPress={onCancel}>Cancel</BtnSimple>
-            <BtnFilled onPress={onSubmit}>Apply</BtnFilled>
+            <UIButton type="danger" onPress={onDelete}>
+              Delete
+            </UIButton>
+            <UIButton type="simple" onPress={onCancel}>
+              Cancel
+            </UIButton>
+            <UIButton type="filled" onPress={onSubmit}>
+              Apply
+            </UIButton>
           </>
         )}
       </View>

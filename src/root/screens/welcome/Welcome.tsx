@@ -1,8 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { RootNavigationParam } from '@root/app/navigation/types'
-import { BtnFilled } from '@shared/ui/BtnFilled'
-import { BtnSimple } from '@shared/ui/BtnSimple'
+import { UIButton } from '@shared/ui/UIButton/UIButton'
 import { StyleSheet, Text, View } from 'react-native'
 
 export const Welcome = () => {
@@ -24,12 +23,12 @@ export const Welcome = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Welcome</Text>
       <Text style={styles.subTitle}>choose who you are</Text>
-      <BtnFilled onPress={goToHost} btnStyles={styles.btn}>
+      <UIButton type="filled" onPress={goToHost} btnStyles={styles.btn}>
         Host
-      </BtnFilled>
-      <BtnSimple onPress={goToClient} btnStyles={styles.btn}>
+      </UIButton>
+      <UIButton type="simple" onPress={goToClient} btnStyles={styles.btn}>
         Client
-      </BtnSimple>
+      </UIButton>
     </View>
   )
 }

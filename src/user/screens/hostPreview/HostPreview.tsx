@@ -1,4 +1,3 @@
-import { BtnFilled } from '@shared/ui/BtnFilled'
 import { ScrollView, StyleSheet, View } from 'react-native'
 import { useModal } from '@shared/moduls/modals/useModal'
 import {
@@ -10,6 +9,7 @@ import { WorkingHours } from './ui/WorkingHours'
 import { WorkingDays } from './ui/WorkingDays'
 import { BreakTime } from './ui/BreakTime'
 import { TagsSection } from './ui/TagsSection'
+import { UIButton } from '@shared/ui/UIButton/UIButton'
 
 export const HostPreview = () => {
   const { openModal } = useModal()
@@ -37,7 +37,9 @@ export const HostPreview = () => {
         <TagsSection />
       </View>
       <View style={styles.btnContainer}>
-        <BtnFilled onPress={openBookingModal}>Book Appointment</BtnFilled>
+        <UIButton type="filled" onPress={openBookingModal}>
+          Book Appointment
+        </UIButton>
       </View>
     </ScrollView>
   )
