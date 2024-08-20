@@ -1,13 +1,7 @@
-import { View, Text, StyleSheet, FlatList } from 'react-native'
-import React, { useEffect } from 'react'
+import { FlatList, StyleSheet, View } from 'react-native'
+import React from 'react'
 import { SearchHeader } from '@user/features/searchHeader/SearchHeader'
 import { HostCard } from '@user/features/hostCard/HostCard'
-import { useModal } from '@shared/moduls/modals/useModal'
-import { SearchFilters } from '@user/features/searchFilters.tsx/SearchFilters'
-import {
-  BookingModalType,
-  CreateEditBookingModal,
-} from '@shared/features/CreateEditBookingModal'
 
 export const Search = () => {
   const cards = new Array(10).fill(0)

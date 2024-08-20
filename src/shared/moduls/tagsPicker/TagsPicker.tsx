@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import {
-  TextInput,
-  View,
-  Text,
-  TouchableOpacity,
   NativeSyntheticEvent,
+  StyleSheet,
+  Text,
+  TextInput,
   TextInputSubmitEditingEventData,
+  TouchableOpacity,
+  View,
 } from 'react-native'
 import { Tag } from '@shared/ui/Tag'
-import { StyleSheet } from 'react-native'
 import Cross from '@icons/cross.svg'
 
 interface Props {

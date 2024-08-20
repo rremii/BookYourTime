@@ -1,5 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import ProfileIcon from '@icons/profile.svg'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import CalendarIcon from '@icons/calendar.svg'
 import TagIcon from '@icons/tag.svg'
@@ -9,7 +8,6 @@ import { Tag } from '@shared/ui/Tag'
 import { SearchNavigationParam } from '@user/app/navigation/types'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { useNavigation } from '@react-navigation/native'
-import { BtnFilled } from '@shared/ui/BtnFilled'
 
 export const HostCard = () => {
   const navigation = useNavigation<StackNavigationProp<SearchNavigationParam>>()

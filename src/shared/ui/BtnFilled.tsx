@@ -1,13 +1,11 @@
 import { PropsWithChildren } from 'react'
 import {
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  View,
-  ViewStyle,
   StyleProp,
-  Button,
+  StyleSheet,
+  Text,
   TextStyle,
+  TouchableOpacity,
+  ViewStyle,
 } from 'react-native'
 
 interface Props extends PropsWithChildren {

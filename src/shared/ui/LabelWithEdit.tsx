@@ -1,14 +1,12 @@
-import { PropsWithChildren, useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  TextInput,
-  Touchable,
-  TouchableOpacity,
-  TextStyle,
   StyleProp,
+  StyleSheet,
+  Text,
+  TextInput,
+  TextStyle,
+  TouchableOpacity,
+  View,
 } from 'react-native'
 import EditIcon from '@icons/edit.svg'
 import { SvgProps } from 'react-native-svg'

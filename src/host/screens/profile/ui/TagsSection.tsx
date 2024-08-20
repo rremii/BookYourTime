@@ -1,7 +1,6 @@
 import { Tag } from '@shared/ui/Tag'
 import { styles } from './styles'
-import { View, Text } from 'react-native'
-import { inputSectionStyles } from '@shared/ui/InputSection/InputSectionStyles'
+import { Text, View } from 'react-native'
 import { TagsPicker } from '@shared/moduls/tagsPicker/TagsPicker'
 import { useState } from 'react'
 

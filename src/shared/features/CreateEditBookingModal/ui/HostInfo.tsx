@@ -1,7 +1,6 @@
-import { View, Text } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { Avatar } from '@shared/ui/Avatar'
 import { Tag } from '@shared/ui/Tag'
-import { StyleSheet } from 'react-native'
 
 export const HostInfo = () => {
   return (

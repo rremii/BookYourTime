@@ -3,7 +3,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { RootNavigationParam } from '@root/app/navigation/types'
 import { BtnFilled } from '@shared/ui/BtnFilled'
 import { BtnSimple } from '@shared/ui/BtnSimple'
-import { View, Text, StyleSheet } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
 export const Welcome = () => {
   const navigation = useNavigation<StackNavigationProp<RootNavigationParam>>()

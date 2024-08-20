@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react'
-import { TouchableOpacity, Text, StyleSheet } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 
 interface Props extends PropsWithChildren {
   onPress?: () => void

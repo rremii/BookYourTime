@@ -1,4 +1,4 @@
-import { View, TouchableOpacity } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import { useEffect, useState } from 'react'
 import { WorkingDay } from '@shared/ui/WorkingDay'
 import { weekDays } from './weekDays'

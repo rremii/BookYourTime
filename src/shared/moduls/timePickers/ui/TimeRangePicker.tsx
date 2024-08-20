@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {
   StyleProp,
+  StyleSheet,
+  Text,
   TextStyle,
   TouchableOpacity,
-  View,
   ViewStyle,
 } from 'react-native'
-import { Text, StyleSheet } from 'react-native'
 import { useModal } from '../../modals/useModal'
 import { TimeRangeModal } from './TimeRangeModal'
 import { TimeRange } from '../types'

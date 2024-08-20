@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Dimensions } from 'react-native'
+import { Dimensions, StyleSheet, View } from 'react-native'
 import { CalendarCell } from './CalendarCell'
 import { GetMonthDays } from '@host/shared/utils/GetMonthDays'
 import { SubHeader } from './SubHeader'

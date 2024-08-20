@@ -1,18 +1,15 @@
 import {
-  StyleProp,
-  TextStyle,
-  StyleSheet,
-  View,
-  ViewStyle,
   Animated,
-  LayoutChangeEvent,
   Dimensions,
+  LayoutChangeEvent,
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native'
 import { ModalProps } from '../../modals/types'
 import { Overlay } from '@shared/ui/Overlay'
 import { useModal } from '../../modals/useModal'
-import { Text } from 'react-native'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useAnimatedValue } from '@shared/utils/useAnimatedValue'
 import { inputSectionStyles } from '@shared/ui/InputSection/InputSectionStyles'
 import { TimePicker } from './TimePicker'

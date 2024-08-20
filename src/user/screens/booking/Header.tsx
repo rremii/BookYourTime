@@ -1,7 +1,5 @@
 import { PropsWithChildren } from 'react'
-import { View } from 'react-native'
-import { Text } from 'react-native'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
 export const Header = ({ children }: PropsWithChildren) => {
   return (

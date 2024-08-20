@@ -1,13 +1,5 @@
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  ScrollView,
-  Dimensions,
-  LayoutChangeEvent,
-} from 'react-native'
+import { Dimensions, FlatList, StyleSheet } from 'react-native'
 import { Calendar } from './ui/Calendar'
-import { useEffect, useRef } from 'react'
 import { useSliderIndexes } from './model/useSliderIndexes'
 import { timeGap } from '@host/shared/utils/TimeGap'
 

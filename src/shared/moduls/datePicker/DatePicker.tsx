@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import {
-  TouchableOpacity,
-  Text,
   StyleProp,
-  ViewStyle,
   StyleSheet,
+  Text,
   TextStyle,
-  Modal,
-  View,
+  TouchableOpacity,
+  ViewStyle,
 } from 'react-native'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 

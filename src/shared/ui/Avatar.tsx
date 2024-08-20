@@ -1,6 +1,6 @@
 import React from 'react'
 import ProfileIcon from '@icons/profile.svg'
-import { View, StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 interface Props {
   rounded?: boolean

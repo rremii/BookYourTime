@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react'
-import { Text, StyleSheet } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 
 interface Props extends PropsWithChildren {}
 

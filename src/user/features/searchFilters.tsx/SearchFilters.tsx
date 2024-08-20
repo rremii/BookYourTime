@@ -3,16 +3,13 @@ import { ModalProps } from '@shared/moduls/modals/types'
 import { useModal } from '@shared/moduls/modals/useModal'
 import { Overlay } from '@shared/ui/Overlay'
 import {
-  View,
-  StyleSheet,
-  Modal,
-  Dimensions,
   Animated,
-  Text,
-  TouchableOpacity,
+  Dimensions,
   LayoutChangeEvent,
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native'
-import RNDateTimePicker from '@react-native-community/datetimepicker'
 import React, { useState } from 'react'
 import { DatePicker } from '../../../shared/moduls/datePicker/DatePicker'
 import { TimePicker } from '@shared/moduls/timePickers/ui/TimePicker'

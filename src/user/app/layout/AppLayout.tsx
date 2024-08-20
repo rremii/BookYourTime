@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useEffect } from 'react'
+import { FC, PropsWithChildren } from 'react'
 import { View } from 'react-native'
 import { ModalProvider } from '@shared/moduls/modals/ModalProvider'
 

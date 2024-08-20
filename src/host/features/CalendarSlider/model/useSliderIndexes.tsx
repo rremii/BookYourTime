@@ -1,6 +1,4 @@
-import React from 'react'
 import { useEffect, useRef, useState } from 'react'
-import { set } from 'react-hook-form'
 import { FlatList } from 'react-native'
 
 export const useSliderIndexes = (initIndexes: number[]) => {

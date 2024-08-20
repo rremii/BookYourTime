@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity,
-} from 'react-native'
+import { Dimensions, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { EventPreview } from './EventPreview'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useModal } from '@shared/moduls/modals/useModal'

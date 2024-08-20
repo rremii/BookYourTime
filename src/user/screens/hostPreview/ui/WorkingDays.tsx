@@ -1,6 +1,6 @@
 import { WorkingDay } from '@shared/ui/WorkingDay'
 import { styles } from './styles'
-import { View, Text } from 'react-native'
+import { Text, View } from 'react-native'
 
 export const WorkingDays = () => {
   return (

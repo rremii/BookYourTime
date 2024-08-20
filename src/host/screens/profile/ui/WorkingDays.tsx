@@ -1,6 +1,6 @@
 import { WorkingDay } from '@shared/ui/WorkingDay'
 import { styles } from './styles'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { Text, View } from 'react-native'
 import { useState } from 'react'
 import { WeekDaysPicker } from '@shared/moduls/weekDaysPicker/WeekDaysPicker'
 

@@ -2,7 +2,7 @@ import { Avatar } from '@shared/ui/Avatar'
 import { BtnDanger } from '@shared/ui/BtnDanger'
 import { LabelWithEdit } from '@shared/ui/LabelWithEdit'
 import { ProfileStatus } from '@shared/ui/ProfileStatus'
-import { View, StyleSheet, Text } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
 export const Profile = () => {
   return (

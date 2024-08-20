@@ -1,6 +1,6 @@
 import { Tag } from '@shared/ui/Tag'
 import { styles } from './styles'
-import { View, Text } from 'react-native'
+import { Text, View } from 'react-native'
 
 export const TagsSection = () => {
   return (
