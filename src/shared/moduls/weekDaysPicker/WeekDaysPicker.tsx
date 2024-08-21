@@ -6,7 +6,7 @@ import { WeekDays } from './types'
 
 interface Props {
   initSelectedDays: WeekDays[]
-  onChange: (days: string[]) => void
+  onChange: (days: WeekDays[]) => void
 }
 
 export const WeekDaysPicker = ({ onChange, initSelectedDays }: Props) => {

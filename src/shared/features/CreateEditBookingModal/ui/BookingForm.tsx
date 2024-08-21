@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native'
-import { inputSectionStyles } from '@shared/ui/InputSection/InputSectionStyles'
+import { inputSectionStyles } from '@shared/ui/styles/InputSectionStyles'
 import { DatePicker } from '@shared/moduls/datePicker/DatePicker'
 import { TimePicker } from '@shared/moduls/timePickers/ui/TimePicker'
 import { useModal } from '@shared/moduls/modals/useModal'

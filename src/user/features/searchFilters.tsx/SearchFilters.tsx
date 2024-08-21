@@ -13,7 +13,7 @@ import {
 import React, { useState } from 'react'
 import { DatePicker } from '../../../shared/moduls/datePicker/DatePicker'
 import { TimePicker } from '@shared/moduls/timePickers/ui/TimePicker'
-import { inputSectionStyles } from '@shared/ui/InputSection/InputSectionStyles'
+import { inputSectionStyles } from '@shared/ui/styles/InputSectionStyles'
 import { TagsPicker } from '@shared/moduls/tagsPicker/TagsPicker'
 import { Header } from './ui/Header'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
