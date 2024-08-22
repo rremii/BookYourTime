@@ -1,24 +1,26 @@
 import { useEffect, useRef, useState } from 'react'
-import { Dimensions, FlatList } from 'react-native'
+import { FlatList } from 'react-native'
 
 export const useSliderIndexes = (initIndexes: number[]) => {
-  const middleIndex = Math.floor(initIndexes.length / 2)
-  const lastIndex = initIndexes.length - 1
-  const firstIndex = 0
-
   const [scrollIndexes, setScrollIndexes] = useState<number[]>(initIndexes)
   const scrollContRef = useRef<FlatList<{ dateFrom: Date; dateTo: Date }>>(null)
 
+  const [isCentered, setIsCentered] = useState(false)
+
   useEffect(() => {
-    if (!scrollContRef.current) return
+    if (!scrollContRef.current || isCentered) return
+    const middleIndex = Math.floor(initIndexes.length / 2)
+
     scrollContRef.current.scrollToIndex({
       index: middleIndex,
       animated: false,
     })
-  }, [middleIndex, scrollContRef])
+
+    setIsCentered(true)
+  }, [scrollContRef])
 
   const shiftRight = () => {
-    if (!scrollIndexes.length || !scrollContRef.current) return
+    if (!scrollIndexes.length || !scrollContRef.current || !isCentered) return
 
     const newIndexes = [...scrollIndexes]
 
@@ -27,10 +29,9 @@ export const useSliderIndexes = (initIndexes: number[]) => {
 
     setScrollIndexes(newIndexes)
   }
-  const calendarWidth = Dimensions.get('window').width
 
   const shiftLeft = () => {
-    if (!scrollIndexes.length || !scrollContRef.current) return
+    if (!scrollIndexes.length || !scrollContRef.current || !isCentered) return
 
     const newIndexes = [...scrollIndexes]
 

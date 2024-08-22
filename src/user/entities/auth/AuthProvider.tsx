@@ -1,18 +1,17 @@
-import { FC, PropsWithChildren, useReducer } from 'react'
 import {
-  AuthContext,
   AuthReducer,
+  ClientAuthContext,
   initialState,
-} from '../../entities/auth/authStore'
+} from '@shared/entities/auth/authStore'
+import { FC, PropsWithChildren, useReducer } from 'react'
 
 interface Props extends PropsWithChildren {}
 
 export const AuthProvider: FC<Props> = ({ children }) => {
   const [authState, dispatch] = useReducer(AuthReducer, initialState)
-
   return (
-    <AuthContext.Provider value={{ ...authState, dispatch }}>
+    <ClientAuthContext.Provider value={{ ...authState, dispatch }}>
       {children}
-    </AuthContext.Provider>
+    </ClientAuthContext.Provider>
   )
 }

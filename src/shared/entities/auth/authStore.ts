@@ -9,7 +9,11 @@ export const initialState: InitialState = {
   isLoggedIn: false,
 }
 
-export const AuthContext = createContext<
+export const ClientAuthContext = createContext<
+  InitialState & { dispatch: React.Dispatch<AuthAction> }
+>({ ...initialState, dispatch: (action: AuthAction) => {} })
+
+export const HostAuthContext = createContext<
   InitialState & { dispatch: React.Dispatch<AuthAction> }
 >({ ...initialState, dispatch: (action: AuthAction) => {} })
 

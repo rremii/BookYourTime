@@ -17,8 +17,8 @@ interface Props {
 }
 
 export const InputWithLabel = ({ label }: Props) => {
-  const [fieldHeight, setFieldHeight] = useState(0)
-  const [labelHeight, setLabelHeight] = useState(0)
+  const [fieldHeight, setFieldHeight] = useState(40)
+  const [labelHeight, setLabelHeight] = useState(20)
 
   const [isFocused, setIsFocused] = useState(false)
   const [inputValue, setInputValue] = useState('')
@@ -54,9 +54,7 @@ export const InputWithLabel = ({ label }: Props) => {
     },
   })
 
-  console.log(fieldHeight, labelHeight)
   const onLayout = (e: LayoutChangeEvent) => {
-    console.log('onLayout', e.nativeEvent.layout.height)
     if (e.nativeEvent.layout.height) setFieldHeight(e.nativeEvent.layout.height)
   }
   const onLabelLayout = (e: LayoutChangeEvent) => {

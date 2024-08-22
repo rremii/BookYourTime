@@ -1,7 +1,10 @@
 import { AuthNavigationParam } from '@host/app/navigation/types'
-import { AuthContext, setAuthSuccess } from '@host/entities/auth/authStore'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
+import {
+  HostAuthContext,
+  setAuthSuccess,
+} from '@shared/entities/auth/authStore'
 import { InputWithLabel } from '@shared/ui/InputWithLabel'
 import { authFormStyles } from '@shared/ui/styles/authFormStyles'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
@@ -17,7 +20,7 @@ import {
 export const SignUp = () => {
   const navigation = useNavigation<StackNavigationProp<AuthNavigationParam>>()
 
-  const { dispatch } = useContext(AuthContext)
+  const { dispatch } = useContext(HostAuthContext)
 
   const signUp = () => {
     dispatch(setAuthSuccess())

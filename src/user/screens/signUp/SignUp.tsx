@@ -2,7 +2,7 @@ import { AuthNavigationParam } from '@host/app/navigation/types'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import {
-  HostAuthContext,
+  ClientAuthContext,
   setAuthSuccess,
 } from '@shared/entities/auth/authStore'
 import { InputWithLabel } from '@shared/ui/InputWithLabel'
@@ -17,40 +17,40 @@ import {
   TouchableOpacity,
 } from 'react-native'
 
-export const SignIn = () => {
+export const SignUp = () => {
   const navigation = useNavigation<StackNavigationProp<AuthNavigationParam>>()
 
-  const { dispatch } = useContext(HostAuthContext)
+  const { dispatch } = useContext(ClientAuthContext)
 
-  const signIn = () => {
+  const signUp = () => {
     dispatch(setAuthSuccess())
   }
 
   const goToSignUp = () => {
-    navigation.push('SignUp')
+    navigation.push('SignIn')
   }
 
   return (
     <View style={styles.container}>
       <View style={authFormStyles.form}>
-        <Text style={authFormStyles.title}>Sign In</Text>
+        <Text style={authFormStyles.title}>Sign Up</Text>
 
         <InputWithLabel label="Email" />
         <InputWithLabel label="Password" />
 
         <View style={authFormStyles.btnContainer}>
           <UIButton
-            onPress={signIn}
+            onPress={signUp}
             btnStyles={authFormStyles.submitBtn}
             type="filled"
           >
-            Sign In
+            Sign Up
           </UIButton>
         </View>
 
         <TouchableOpacity onPress={goToSignUp}>
           <Text style={authFormStyles.additionalInfo}>
-            Don't have an account?
+            Already have an account?
           </Text>
         </TouchableOpacity>
       </View>

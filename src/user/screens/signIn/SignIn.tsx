@@ -2,7 +2,7 @@ import { AuthNavigationParam } from '@host/app/navigation/types'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import {
-  HostAuthContext,
+  ClientAuthContext,
   setAuthSuccess,
 } from '@shared/entities/auth/authStore'
 import { InputWithLabel } from '@shared/ui/InputWithLabel'
@@ -20,7 +20,7 @@ import {
 export const SignIn = () => {
   const navigation = useNavigation<StackNavigationProp<AuthNavigationParam>>()
 
-  const { dispatch } = useContext(HostAuthContext)
+  const { dispatch } = useContext(ClientAuthContext)
 
   const signIn = () => {
     dispatch(setAuthSuccess())

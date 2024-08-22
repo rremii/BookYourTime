@@ -1,19 +1,22 @@
-import { AuthNavigationParam, HostRootNavigationParam } from './types'
+import { AuthNavigationParam } from './types'
 import React, { useContext, useEffect } from 'react'
 import {
   createStackNavigator,
   StackNavigationOptions,
   TransitionPresets,
 } from '@react-navigation/stack'
-import { SignIn } from '@host/screens/signIn/SignIn'
-import { SignUp } from '@host/screens/signUp/SignUp'
 import RootNavigation from './RootNavigation'
-import { HostAuthContext } from '@shared/entities/auth/authStore'
+import {
+  ClientAuthContext,
+  HostAuthContext,
+} from '@shared/entities/auth/authStore'
+import { SignIn } from '@user/screens/signIn/SignIn'
+import { SignUp } from '@user/screens/signUp/SignUp'
 
 const AuthStack = createStackNavigator<AuthNavigationParam>()
 
 const AuthNavigation = () => {
-  const { isLoggedIn } = useContext(HostAuthContext)
+  const { isLoggedIn } = useContext(ClientAuthContext)
 
   const routes: {
     name: keyof AuthNavigationParam

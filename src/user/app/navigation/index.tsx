@@ -1,3 +1,4 @@
-import RootNavigation from './RootNavigation'
+import { withProviders } from '../providers/with-providers'
+import AuthNavigation from './AuthNavigation'
 
-export default RootNavigation
+export default AuthNavigation

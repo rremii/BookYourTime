@@ -10,7 +10,7 @@ export const AppLayout: FC<Props> = ({ children }) => {
         flex: 1,
       }}
     >
-      <ModalProvider>{children}</ModalProvider>
+      {children}
     </View>
   )
 }

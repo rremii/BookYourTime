@@ -19,8 +19,8 @@ export const CalendarCell = ({ dateFrom, dateTo }: Props) => {
     <TouchableOpacity onPress={openPreview} style={styles.container}>
       <Text style={styles.date}>{dateTo.getDate()}</Text>
 
-      <EventPreview title="Event qwe" time={new Date(2024, 8, 20, 15, 30)} />
-      <EventPreview title="Event qwe" time={new Date(2024, 8, 20, 15, 30)} />
+      {/* <EventPreview title="Event qwe" time={new Date(2024, 8, 20, 15, 30)} /> */}
+      {/* <EventPreview title="Event qwe" time={new Date(2024, 8, 20, 15, 30)} /> */}
 
       <LinearGradient colors={['transparent', 'white']} style={styles.shadow} />
     </TouchableOpacity>
