@@ -1,10 +1,13 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useModal } from '@shared/moduls/modals/useModal'
 import Cross from '@icons/cross.svg'
+import { useTheme } from '@shared/moduls/theme/useTheme'
 
 interface Props {}
 
 export const Header = ({}: Props) => {
+  const { colors } = useTheme()
+
   const { closeModal } = useModal()
 
   const close = () => {
@@ -13,9 +16,11 @@ export const Header = ({}: Props) => {
 
   return (
     <View style={styles.headerContainer}>
-      <Text style={styles.title}>Filters</Text>
+      <Text style={[styles.title, { color: colors.color_standart_text }]}>
+        Filters
+      </Text>
       <TouchableOpacity onPress={close}>
-        <Cross width={15} height={15} />
+        <Cross width={15} height={15} color={colors.color_cross} />
       </TouchableOpacity>
     </View>
   )

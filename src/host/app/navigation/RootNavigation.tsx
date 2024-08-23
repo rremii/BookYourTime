@@ -8,6 +8,7 @@ import ProfileIcon from '@icons/profile.svg'
 import BookingIcon from '@icons/calendar.svg'
 import { Booking } from '@host/screens/booking/Booking'
 import { Profile } from '@host/screens/profile/Profile'
+import { useTheme } from '@shared/moduls/theme/useTheme'
 
 interface BottomTabIconProps {
   focused: boolean
@@ -18,6 +19,8 @@ interface BottomTabIconProps {
 const RootBottomTabs = createBottomTabNavigator<HostRootNavigationParam>()
 
 const RootNavigation = () => {
+  const { colors } = useTheme()
+
   const routes: {
     name: keyof HostRootNavigationParam
     component: React.FC
@@ -41,7 +44,34 @@ const RootNavigation = () => {
 
   return (
     <RootBottomTabs.Navigator
-      screenOptions={BottomTabsOptions}
+      screenOptions={{
+        headerShown: false,
+
+        tabBarStyle: {
+          paddingBottom: 7,
+          paddingTop: 7,
+
+          height: 60,
+          backgroundColor: colors.bcColor_tabBar,
+          borderTopColor: colors.borderTopColor_tabBar,
+          borderTopWidth: 1,
+        },
+        tabBarItemStyle: {
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 0,
+        },
+        tabBarLabelStyle: {
+          fontSize: 13,
+        },
+        tabBarIconStyle: {
+          height: 10,
+          width: 10,
+        },
+
+        tabBarActiveTintColor: colors.color_tabBar_active,
+        tabBarInactiveTintColor: colors.color_tabBar_inactive,
+      }}
       initialRouteName="Booking"
     >
       {routes.map((route, index) => (
@@ -58,31 +88,3 @@ const RootNavigation = () => {
   )
 }
 export default RootNavigation
-const BottomTabsOptions: BottomTabNavigationOptions = {
-  headerShown: false,
-
-  tabBarStyle: {
-    paddingBottom: 7,
-    paddingTop: 7,
-
-    height: 60,
-    backgroundColor: '#fff',
-    borderTopColor: '#6e6e7731',
-    borderTopWidth: 1,
-  },
-  tabBarItemStyle: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 0,
-  },
-  tabBarLabelStyle: {
-    fontSize: 13,
-  },
-  tabBarIconStyle: {
-    height: 10,
-    width: 10,
-  },
-
-  tabBarActiveTintColor: '#0A8537',
-  tabBarInactiveTintColor: '#6E6E77',
-}

@@ -1,14 +1,23 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { Avatar } from '@shared/ui/Avatar'
 import { Tag } from '@shared/ui/Tag'
+import { useTheme } from '@shared/moduls/theme/useTheme'
 
 export const HostInfo = () => {
+  const { colors } = useTheme()
+
   return (
     <View style={{ alignItems: 'center', gap: 10 }}>
-      <Text style={styles.hostInfoTitle}>Host info:</Text>
-      <Avatar size={75} color={'#13d95c3d'} />
-      <Text style={styles.name}>Jon Doue</Text>
-      <Text style={styles.specialty}>Software Engineer</Text>
+      <Text
+        style={[styles.hostInfoTitle, { color: colors.color_standart_text }]}
+      >
+        Host info:
+      </Text>
+      <Avatar size={75} color={colors.color_standart_avatar} />
+      <Text style={[styles.name, { color: colors.color_name }]}>Jon Doue</Text>
+      <Text style={[styles.specialty, { color: colors.color_specialty }]}>
+        Software Engineer
+      </Text>
       <View style={styles.tagsContainer}>
         <Tag>Frontend</Tag>
         <Tag>Frontend</Tag>
@@ -37,13 +46,11 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 25,
     fontWeight: 'bold',
-    color: '#000',
   },
   specialty: {
     marginTop: 5,
     marginBottom: 5,
     fontSize: 18,
-    color: '#585455',
   },
   tagsContainer: {
     justifyContent: 'center',

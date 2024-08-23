@@ -1,3 +1,4 @@
+import { useTheme } from '@shared/moduls/theme/useTheme'
 import { StyleSheet, Text, View } from 'react-native'
 
 interface Props {
@@ -6,12 +7,20 @@ interface Props {
 }
 
 export const EventPreview = ({ time, title }: Props) => {
+  const { colors } = useTheme()
+
   return (
-    <View style={styles.event}>
-      <Text style={styles.eventText} numberOfLines={1}>
+    <View style={[styles.event, { backgroundColor: colors.bcColor_event }]}>
+      <Text
+        style={[styles.eventText, { color: colors.color_event }]}
+        numberOfLines={1}
+      >
         {title}
       </Text>
-      <Text style={styles.eventText} numberOfLines={1}>
+      <Text
+        style={[styles.eventText, { color: colors.color_event }]}
+        numberOfLines={1}
+      >
         {time.toTimeString().slice(0, 5)}
       </Text>
     </View>
@@ -19,13 +28,11 @@ export const EventPreview = ({ time, title }: Props) => {
 }
 const styles = StyleSheet.create({
   event: {
-    backgroundColor: '#0a8537',
     borderRadius: 7,
     padding: 3,
     width: '100%',
   },
   eventText: {
     fontSize: 12,
-    color: 'white',
   },
 })

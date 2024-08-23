@@ -13,11 +13,9 @@ export const styles = StyleSheet.create({
   name: {
     fontSize: 25,
     fontWeight: 'bold',
-    color: '#000',
   },
   specialty: {
     fontSize: 18,
-    color: '#585455',
   },
 
   sectionContainer: {
@@ -30,7 +28,6 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 7,
     fontSize: 15,
-    color: '#6c6c6c',
     fontWeight: '500',
   },
 })

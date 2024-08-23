@@ -10,8 +10,11 @@ import { WorkingDays } from './ui/WorkingDays'
 import { BreakTime } from './ui/BreakTime'
 import { TagsSection } from './ui/TagsSection'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
+import { useTheme } from '@shared/moduls/theme/useTheme'
 
 export const HostPreview = () => {
+  const { colors } = useTheme()
+
   const { openModal } = useModal()
 
   const openBookingModal = () => {
@@ -25,7 +28,12 @@ export const HostPreview = () => {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView
+      contentContainerStyle={[
+        styles.container,
+        { backgroundColor: colors.bcColor_standart_container },
+      ]}
+    >
       <HostProfile />
       <View style={{ width: '100%' }}>
         <WorkingHours />
@@ -37,7 +45,12 @@ export const HostPreview = () => {
         <TagsSection />
       </View>
       <View style={styles.btnContainer}>
-        <UIButton type="filled" onPress={openBookingModal}>
+        <UIButton
+          type="filled"
+          onPress={openBookingModal}
+          btnStyles={{ backgroundColor: colors.bcColor_btn_filled }}
+          textStyles={{ color: colors.color_btn_filled }}
+        >
           Book Appointment
         </UIButton>
       </View>
@@ -47,7 +60,6 @@ export const HostPreview = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
     padding: 20,
     paddingTop: 70,
     alignItems: 'center',

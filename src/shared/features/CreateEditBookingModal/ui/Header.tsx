@@ -2,12 +2,14 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useModal } from '@shared/moduls/modals/useModal'
 import { BookingModalType } from '../CreateEditBookingModal'
 import Cross from '@icons/cross.svg'
+import { useTheme } from '@shared/moduls/theme/useTheme'
 
 interface Props {
   type: BookingModalType
 }
 
 export const Header = ({ type }: Props) => {
+  const { colors } = useTheme()
   const { closeModal } = useModal()
 
   const close = () => {
@@ -16,7 +18,7 @@ export const Header = ({ type }: Props) => {
 
   return (
     <View style={styles.headerContainer}>
-      <Text style={styles.modalTitle}>
+      <Text style={[styles.modalTitle, { color: colors.color_standart_text }]}>
         {type === 'create' ? 'Book an appointment' : 'Edit appointment'}
       </Text>
       <TouchableOpacity onPress={close}>

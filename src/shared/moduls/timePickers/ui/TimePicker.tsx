@@ -1,3 +1,4 @@
+import { useTheme } from '@shared/moduls/theme/useTheme'
 import React, { useEffect, useState } from 'react'
 import {
   StyleProp,
@@ -22,6 +23,7 @@ export const TimePicker = ({
   btnStyles,
   textStyles,
 }: Props) => {
+  const { colors } = useTheme()
   const [date, setDate] = useState<Date | null>(initTime)
   const [isPicker, setIsPicker] = useState(false)
 
@@ -44,15 +46,28 @@ export const TimePicker = ({
   return (
     <>
       <DateTimePickerModal
-        accentColor="#0A8537"
+        accentColor={colors.color_accentPicker}
         date={date || new Date()}
         isVisible={isPicker}
         mode="time"
         onConfirm={handleChange}
         onCancel={closePicker}
       />
-      <TouchableOpacity style={[btnStyles, styles.btn]} onPress={openPicker}>
-        <Text style={[textStyles, styles.text]}>
+      <TouchableOpacity
+        style={[
+          btnStyles,
+          styles.btn,
+          { borderColor: colors.borderColor_date_picker },
+        ]}
+        onPress={openPicker}
+      >
+        <Text
+          style={[
+            textStyles,
+            styles.text,
+            { color: colors.color_standart_text },
+          ]}
+        >
           {date ? date.toTimeString().slice(0, 5) : '- : -'}
         </Text>
       </TouchableOpacity>
@@ -69,14 +84,11 @@ const styles = StyleSheet.create({
     paddingRight: 17,
     alignSelf: 'flex-start',
     borderRadius: 10,
-    borderColor: '#acacac',
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
     fontSize: 16,
-
-    color: 'black',
   },
 })

@@ -4,8 +4,11 @@ import SearchIcon from '@icons/search.svg'
 import FilterIcon from '@icons/filter.svg'
 import { useModal } from '@shared/moduls/modals/useModal'
 import { SearchFilters } from '../searchFilters.tsx/SearchFilters'
+import { useTheme } from '@shared/moduls/theme/useTheme'
 
 export const SearchHeader = () => {
+  const { colors } = useTheme()
+
   const { openModal } = useModal()
 
   const openFilters = () => {
@@ -13,18 +16,31 @@ export const SearchHeader = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: colors.bcColor_search,
+          borderColor: colors.borderColor_searchHeader,
+          shadowColor: colors.color_standart_shadow,
+        },
+      ]}
+    >
       <View style={styles.inputContainer}>
         <SearchIcon
           style={styles.searchIcon}
           width={24}
           height={24}
-          color={'black'}
+          color={colors.color_search_icon}
         />
-        <TextInput placeholder="Search for the host" style={styles.input} />
+        <TextInput
+          placeholderTextColor={'white'}
+          placeholder="Search for the host"
+          style={[styles.input, { color: colors.color_input }]}
+        />
       </View>
       <TouchableOpacity onPress={openFilters} style={styles.filterBtn}>
-        <FilterIcon width={24} height={24} color={'black'} />
+        <FilterIcon width={24} height={24} color={colors.color_filter_icon} />
       </TouchableOpacity>
     </View>
   )
@@ -38,15 +54,12 @@ const styles = StyleSheet.create({
     left: '2.5%',
     right: 0,
     height: 50,
-    backgroundColor: '#fff',
     paddingRight: 10,
 
-    borderColor: '#6e6e7728',
     borderWidth: 1,
     borderRadius: 50,
     width: '95%',
 
-    shadowColor: '#0A8537',
     elevation: 3,
   },
   inputContainer: {
@@ -58,7 +71,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     paddingLeft: 50,
-    color: 'black',
   },
   filterBtn: {
     width: 50,

@@ -10,6 +10,7 @@ import {
 import { useModal } from '../../modals/useModal'
 import { TimeRangeModal } from './TimeRangeModal'
 import { TimeRange } from '../types'
+import { useTheme } from '@shared/moduls/theme/useTheme'
 
 interface Props {
   onChange: (time: TimeRange) => void
@@ -26,6 +27,8 @@ export const TimeRangePicker = ({
 }: Props) => {
   const { openModal } = useModal()
 
+  const { colors } = useTheme()
+
   const openPicker = () => {
     openModal({
       name: 'TimeRangePicker',
@@ -37,8 +40,21 @@ export const TimeRangePicker = ({
   const { start: startTime, end: endTime } = initTime
   return (
     <>
-      <TouchableOpacity style={[btnStyles, styles.btn]} onPress={openPicker}>
-        <Text style={[textStyles, styles.text]}>
+      <TouchableOpacity
+        style={[
+          btnStyles,
+          styles.btn,
+          { borderColor: colors.borderColor_date_picker },
+        ]}
+        onPress={openPicker}
+      >
+        <Text
+          style={[
+            textStyles,
+            styles.text,
+            { color: colors.color_standart_text },
+          ]}
+        >
           {startTime ? startTime.toTimeString().slice(0, 5) : '00:00 AM'}{' '}
           {' - '}
           {endTime ? endTime.toTimeString().slice(0, 5) : '00:00 PM'}
@@ -57,14 +73,11 @@ const styles = StyleSheet.create({
     paddingRight: 17,
     alignSelf: 'flex-start',
     borderRadius: 10,
-    borderColor: '#acacac',
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
     fontSize: 16,
-
-    color: 'black',
   },
 })

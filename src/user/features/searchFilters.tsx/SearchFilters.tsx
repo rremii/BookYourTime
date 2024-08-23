@@ -17,6 +17,7 @@ import { inputSectionStyles } from '@shared/ui/styles/InputSectionStyles'
 import { TagsPicker } from '@shared/moduls/tagsPicker/TagsPicker'
 import { Header } from './ui/Header'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
+import { useTheme } from '@shared/moduls/theme/useTheme'
 
 interface Filters {
   date: Date | null
@@ -30,6 +31,7 @@ const initTags = ['Frontend', 'Backend']
 interface Props extends ModalProps {}
 
 export const SearchFilters = ({ isOpen }: Props) => {
+  const { colors } = useTheme()
   const [modalHeight, setModalHeight] = useState(
     Dimensions.get('screen').height * 0.6, // approximate
   )
@@ -80,34 +82,55 @@ export const SearchFilters = ({ isOpen }: Props) => {
   }
   return (
     <>
-      <Overlay onPress={close} isActive={isOpen} />
+      <Overlay
+        onPress={close}
+        isActive={isOpen}
+        backgroundColor={colors.bcColor_overlay}
+      />
       <Animated.View
         onLayout={onLayout}
         style={[
           styles.container,
           {
             transform: [{ translateY: slideAnim }],
+            backgroundColor: colors.bcColor_standart_container,
           },
         ]}
       >
         <Header />
 
         <View style={inputSectionStyles.sectionContainer}>
-          <Text style={inputSectionStyles.sectionTitle}>Date:</Text>
+          <Text
+            style={[
+              inputSectionStyles.sectionTitle,
+              { color: colors.color_standart_text },
+            ]}
+          >
+            Date:
+          </Text>
           <DatePicker
             initDate={filters.date}
             onChange={onFilterChange('date')}
           />
         </View>
         <View>
-          <Text style={inputSectionStyles.sectionTitle}>Time:</Text>
+          <Text
+            style={[
+              inputSectionStyles.sectionTitle,
+              { color: colors.color_standart_text },
+            ]}
+          >
+            Time:
+          </Text>
           <View
             style={[
               inputSectionStyles.sectionContainer,
               inputSectionStyles.withPadding,
             ]}
           >
-            <Text style={{ fontSize: 16 }}>Start</Text>
+            <Text style={{ fontSize: 16, color: colors.color_standart_text }}>
+              Start
+            </Text>
             <TimePicker
               initTime={filters.startTime}
               onChange={onFilterChange('startTime')}
@@ -119,7 +142,9 @@ export const SearchFilters = ({ isOpen }: Props) => {
               inputSectionStyles.withPadding,
             ]}
           >
-            <Text style={{ fontSize: 16 }}>End</Text>
+            <Text style={{ fontSize: 16, color: colors.color_standart_text }}>
+              End
+            </Text>
             <TimePicker
               initTime={filters.endTime}
               onChange={onFilterChange('endTime')}
@@ -127,17 +152,37 @@ export const SearchFilters = ({ isOpen }: Props) => {
           </View>
         </View>
         <View>
-          <Text style={inputSectionStyles.sectionTitle}>Tags:</Text>
+          <Text
+            style={[
+              inputSectionStyles.sectionTitle,
+              { color: colors.color_standart_text },
+            ]}
+          >
+            Tags:
+          </Text>
           <View style={[inputSectionStyles.withPadding, { marginTop: 5 }]}>
             <TagsPicker onChange={onFilterChange('tags')} tags={filters.tags} />
           </View>
         </View>
 
         <View style={styles.btnContainer}>
-          <UIButton type="simple" onPress={onReset}>
+          <UIButton
+            type="simple"
+            onPress={onReset}
+            btnStyles={{
+              backgroundColor: colors.bcColor_button,
+              borderColor: colors.borderColor_standart,
+            }}
+            textStyles={{ color: colors.color_standart_text }}
+          >
             Reset
           </UIButton>
-          <UIButton type="filled" onPress={onSubmit}>
+          <UIButton
+            type="filled"
+            onPress={onSubmit}
+            btnStyles={{ backgroundColor: colors.bcColor_btn_filled }}
+            textStyles={{ color: colors.color_btn_filled }}
+          >
             Apply
           </UIButton>
         </View>
@@ -157,7 +202,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     width: '100%',
-    backgroundColor: 'white',
     zIndex: 1,
     transform: [{ translateY: 0 }],
     borderTopEndRadius: 40,

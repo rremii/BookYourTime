@@ -18,7 +18,7 @@ interface Props {
 export const Overlay = ({
   isActive,
   onPress,
-  backgroundColor = 'rgba(0, 0, 0, 0.5)',
+  backgroundColor,
   startDuration = 300,
   endDuration = 300,
   zIndex = 1,

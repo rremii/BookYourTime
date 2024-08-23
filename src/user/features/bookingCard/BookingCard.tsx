@@ -6,8 +6,10 @@ import {
   BookingModalType,
   CreateEditBookingModal,
 } from '@shared/features/CreateEditBookingModal'
+import { useTheme } from '@shared/moduls/theme/useTheme'
 
 export const BookingCard = () => {
+  const { colors } = useTheme()
   const { openModal } = useModal()
 
   const editBooking = () => {
@@ -24,11 +26,22 @@ export const BookingCard = () => {
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={editBooking}
-      style={styles.container}
+      style={[
+        styles.container,
+        {
+          borderColor: colors.borderColor_shadow,
+          backgroundColor: colors.bcColor_card,
+          shadowColor: colors.color_standart_shadow,
+        },
+      ]}
     >
-      <Text style={styles.title}>Some cool damn title</Text>
+      <Text style={[styles.title, { color: colors.color_standart_text }]}>
+        Some cool damn title
+      </Text>
 
-      <Text style={styles.subHeader}>Host:</Text>
+      <Text style={[styles.subHeader, { color: colors.color_standart_text }]}>
+        Host:
+      </Text>
       <View
         style={[
           {
@@ -37,21 +50,43 @@ export const BookingCard = () => {
           styles.withPadding,
         ]}
       >
-        <Avatar size={50} color={'#13d95c3d'} />
+        <Avatar size={50} color={colors.color_standart_avatar} />
         <View style={styles.textInfoContainer}>
-          <Text style={styles.name}>Jon Doue</Text>
-          <Text style={styles.specialty}>Software Engineer</Text>
+          <Text style={[styles.name, { color: colors.color_name }]}>
+            Jon Doue
+          </Text>
+          <Text style={[styles.specialty, { color: colors.color_specialty }]}>
+            Software Engineer
+          </Text>
         </View>
       </View>
-      <Text style={styles.subHeader}>info:</Text>
+      <Text style={[styles.subHeader, { color: colors.color_standart_text }]}>
+        info:
+      </Text>
       <View style={[styles.sectionContainer, styles.withPadding]}>
-        <Text style={styles.sectionTitle}>date:</Text>
-        <Text style={styles.sectionContent}>Monday, 12 Feb 2023</Text>
+        <Text
+          style={[styles.sectionTitle, { color: colors.color_standart_text }]}
+        >
+          date:
+        </Text>
+        <Text
+          style={[styles.sectionContent, { color: colors.color_standart_text }]}
+        >
+          Monday, 12 Feb 2023
+        </Text>
       </View>
 
       <View style={[styles.sectionContainer, styles.withPadding]}>
-        <Text style={styles.sectionTitle}>time:</Text>
-        <Text style={styles.sectionContent}>12 AM - 1PM</Text>
+        <Text
+          style={[styles.sectionTitle, { color: colors.color_standart_text }]}
+        >
+          time:
+        </Text>
+        <Text
+          style={[styles.sectionContent, { color: colors.color_standart_text }]}
+        >
+          12 AM - 1PM
+        </Text>
       </View>
     </TouchableOpacity>
   )
@@ -60,14 +95,11 @@ export const BookingCard = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 15,
-    borderColor: '#0000002c',
     borderRadius: 10,
     borderWidth: 1,
     width: '90%',
     marginLeft: '5%',
-    backgroundColor: '#FFFFFF',
 
-    shadowColor: '#0A8537',
     elevation: 5,
   },
   title: {
@@ -88,7 +120,6 @@ const styles = StyleSheet.create({
   },
   specialty: {
     fontSize: 15,
-    color: '#8E898A',
   },
   subHeader: {
     fontSize: 16,

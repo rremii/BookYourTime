@@ -10,12 +10,15 @@ import {
 } from 'react-native'
 import { Tag } from '@shared/ui/Tag'
 import Cross from '@icons/cross.svg'
+import { useTheme } from '../theme/useTheme'
 
 interface Props {
   tags: string[]
   onChange?: (tags: string[]) => void
 }
 export const TagsPicker = ({ onChange, tags = [] }: Props) => {
+  const { colors } = useTheme()
+
   const [isAdding, setIsAdding] = useState(false)
 
   const onSubmit = (
@@ -44,7 +47,7 @@ export const TagsPicker = ({ onChange, tags = [] }: Props) => {
       {tags.map((tag) => (
         <TouchableOpacity key={tag} onPress={() => onRemove(tag)}>
           <Tag>
-            {tag} <Cross width={10} height={10} color="black" />
+            {tag} <Cross width={10} height={10} color={colors.color_cross} />
           </Tag>
         </TouchableOpacity>
       ))}
@@ -53,11 +56,16 @@ export const TagsPicker = ({ onChange, tags = [] }: Props) => {
         <TextInput
           autoFocus={true}
           onSubmitEditing={onSubmit}
-          style={styles.input}
+          style={[styles.input, { borderColor: colors.borderColor_tags }]}
         />
       ) : (
-        <TouchableOpacity style={styles.btn} onPress={startAdding}>
-          <Text style={styles.text}>+</Text>
+        <TouchableOpacity
+          style={[styles.btn, { borderColor: colors.borderColor_tags }]}
+          onPress={startAdding}
+        >
+          <Text style={[styles.text, { color: colors.color_standart_text }]}>
+            +
+          </Text>
         </TouchableOpacity>
       )}
     </View>
@@ -77,7 +85,7 @@ const styles = StyleSheet.create({
     paddingRight: 7,
     paddingTop: 3,
     paddingBottom: 3,
-    borderColor: '#0a853760',
+    borderColor: '#0a853760', //colors.borderColor_tags
     borderWidth: 1,
   },
   input: {
@@ -87,7 +95,6 @@ const styles = StyleSheet.create({
     paddingRight: 7,
     paddingTop: 3,
     paddingBottom: 3,
-    borderColor: '#0a853760',
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -100,7 +107,6 @@ const styles = StyleSheet.create({
     paddingRight: 7,
     paddingTop: 3,
     paddingBottom: 3,
-    borderColor: '#0a853760',
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -109,7 +115,6 @@ const styles = StyleSheet.create({
     width: 35,
     height: 35,
     textAlign: 'center',
-    color: '#000000',
     fontSize: 25,
   },
 })

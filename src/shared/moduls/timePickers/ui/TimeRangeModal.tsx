@@ -15,6 +15,7 @@ import { inputSectionStyles } from '@shared/ui/styles/InputSectionStyles'
 import { TimePicker } from './TimePicker'
 import { TimeRange } from '../types'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
+import { useTheme } from '@shared/moduls/theme/useTheme'
 
 interface Props extends ModalProps {
   onChange: (time: TimeRange) => void
@@ -22,6 +23,7 @@ interface Props extends ModalProps {
 }
 
 export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
+  const { colors } = useTheme()
   const [timeRange, setTimeRange] = useState<TimeRange>(initTime)
 
   const handleChange = (type: keyof TimeRange) => (newTime: Date | null) => {
@@ -68,13 +70,18 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
   const styles = getStyles(modalSizes.width, modalSizes.height)
   return (
     <>
-      <Overlay onPress={close} isActive={isOpen} />
+      <Overlay
+        onPress={close}
+        isActive={isOpen}
+        backgroundColor={colors.bcColor_overlay}
+      />
       <Animated.View
         onLayout={onLayout}
         style={[
           styles.container,
           {
             opacity: fadeAnim,
+            backgroundColor: colors.bcColor_standart_container,
           },
         ]}
       >
@@ -104,10 +111,23 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
         </View>
 
         <View style={styles.btnContainer}>
-          <UIButton type="simple" onPress={reset}>
+          <UIButton
+            type="simple"
+            onPress={reset}
+            btnStyles={{
+              backgroundColor: colors.bcColor_button,
+              borderColor: colors.borderColor_standart,
+            }}
+            textStyles={{ color: colors.color_standart_text }}
+          >
             Reset
           </UIButton>
-          <UIButton type="filled" onPress={apply}>
+          <UIButton
+            type="filled"
+            onPress={apply}
+            btnStyles={{ backgroundColor: colors.bcColor_btn_filled }}
+            textStyles={{ color: colors.color_btn_filled }}
+          >
             Apply
           </UIButton>
         </View>
@@ -125,7 +145,6 @@ const getStyles = (width: number, height: number) => {
       position: 'absolute',
       transform: [{ translateY: -height / 2 }, { translateX: -width / 2 }],
       zIndex: 100,
-      backgroundColor: 'white',
       padding: 20,
       borderRadius: 10,
     },

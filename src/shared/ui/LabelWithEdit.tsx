@@ -13,6 +13,7 @@ import {
 import EditIcon from '@icons/edit.svg'
 import { SvgProps } from 'react-native-svg'
 import { set } from 'react-hook-form'
+import { useTheme } from '@shared/moduls/theme/useTheme'
 
 interface Props {
   onChange?: (value: string) => void
@@ -29,6 +30,7 @@ export const LabelWithEdit = ({
   labelStyle,
   ...props
 }: Props) => {
+  const { colors } = useTheme()
   const [isEditing, setIsEditing] = useState(false)
   const [curLabel, setCurLabel] = useState(label)
 
@@ -50,7 +52,11 @@ export const LabelWithEdit = ({
           value={curLabel}
           onSubmitEditing={onSubmit}
           autoFocus={true}
-          style={[styles.input, inputStyle]}
+          style={[
+            styles.input,
+            inputStyle,
+            { borderColor: colors.borderColor_standart },
+          ]}
         />
       ) : (
         <TouchableOpacity
@@ -61,7 +67,7 @@ export const LabelWithEdit = ({
           <View style={styles.editIcon}>
             <EditIcon
               {...editIconStyle}
-              color={'#0A8537'}
+              color={colors.color_edit_icon}
               width={24}
               height={24}
             />
@@ -89,7 +95,6 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     paddingBottom: 0,
     borderRadius: 7,
-    borderColor: 'black',
     borderWidth: 1,
     fontSize: 16,
     alignSelf: 'flex-start',

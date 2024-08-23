@@ -1,3 +1,4 @@
+import { useTheme } from '@shared/moduls/theme/useTheme'
 import { PropsWithChildren } from 'react'
 import { StyleSheet, Text } from 'react-native'
 
@@ -6,18 +7,25 @@ interface Props extends PropsWithChildren {
 }
 
 export const WorkingDay = ({ children, rounded = false }: Props) => {
-  const workDayStyle = rounded ? styles.roundedWorkingDay : styles.workingDay
+  const { colors } = useTheme()
+  const workDayStyle = rounded
+    ? [
+        styles.roundedWorkingDay,
+        {
+          color: colors.color_rounded_work,
+          borderColor: colors.borderColor_standart,
+        },
+      ]
+    : { color: colors.color_standart_work }
 
-  return <Text style={workDayStyle}>{children}</Text>
+  return (
+    <Text style={[workDayStyle, { color: colors.color_standart_text }]}>
+      {children}
+    </Text>
+  )
 }
 const styles = StyleSheet.create({
-  workingDay: {
-    color: '#6E6E77',
-  },
-
   roundedWorkingDay: {
-    borderColor: '#000000',
-    color: '#000000',
     borderWidth: 1,
     padding: 7,
     borderRadius: 15,

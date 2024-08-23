@@ -1,3 +1,4 @@
+import { useTheme } from '@shared/moduls/theme/useTheme'
 import { useAnimatedValue } from '@shared/utils/useAnimatedValue'
 import { useRef, useState } from 'react'
 import {
@@ -17,6 +18,8 @@ interface Props {
 }
 
 export const InputWithLabel = ({ label }: Props) => {
+  const { colors } = useTheme()
+
   const [fieldHeight, setFieldHeight] = useState(40)
   const [labelHeight, setLabelHeight] = useState(20)
 
@@ -66,7 +69,7 @@ export const InputWithLabel = ({ label }: Props) => {
       <View
         style={{
           pointerEvents: 'none',
-          backgroundColor: 'transparent',
+          backgroundColor: colors.bcColor_layout,
           zIndex: 1,
         }}
         onLayout={onLayout}
@@ -77,6 +80,7 @@ export const InputWithLabel = ({ label }: Props) => {
             styles.label,
             {
               transform: [{ translateY: slideY }, { translateX: slideX }],
+              backgroundColor: colors.bcColor_label,
             },
           ]}
         >
@@ -89,7 +93,13 @@ export const InputWithLabel = ({ label }: Props) => {
         ref={inputRef}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        style={styles.field}
+        style={[
+          styles.field,
+          {
+            backgroundColor: colors.bcColor_input,
+            borderColor: colors.borderColor_standart,
+          },
+        ]}
       />
     </View>
   )
@@ -110,7 +120,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     marginBottom: 5,
-    backgroundColor: 'white',
     zIndex: 1,
     paddingLeft: 7,
     paddingRight: 7,
@@ -118,8 +127,6 @@ const styles = StyleSheet.create({
 
   field: {
     fontSize: 15,
-    backgroundColor: 'white',
-    borderColor: 'black',
     borderWidth: 1,
     // padding: 5,
     height: '100%',

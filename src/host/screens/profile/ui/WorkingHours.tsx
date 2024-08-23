@@ -4,12 +4,15 @@ import { Text, View } from 'react-native'
 import { TimeRangePicker } from '@shared/moduls/timePickers/ui/TimeRangePicker'
 import { TimeRange } from '@shared/moduls/timePickers/types'
 import { useState } from 'react'
+import { useTheme } from '@shared/moduls/theme/useTheme'
 
 interface Props {
   isEditing?: boolean
 }
 
 export const WorkingHours = ({ isEditing }: Props) => {
+  const { colors } = useTheme()
+
   const [time, setTime] = useState<TimeRange>({
     start: null,
     end: null,
@@ -21,7 +24,9 @@ export const WorkingHours = ({ isEditing }: Props) => {
 
   return (
     <>
-      <Text style={styles.sectionTitle}>
+      <Text
+        style={[styles.sectionTitle, { color: colors.color_section_title }]}
+      >
         {isEditing ? 'Choose working hours' : 'Working hours'}
       </Text>
       <View style={styles.paddingSection}>

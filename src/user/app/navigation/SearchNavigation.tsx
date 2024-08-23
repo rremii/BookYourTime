@@ -2,10 +2,13 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { SearchNavigationParam } from './types'
 import { Search } from '@user/screens/search/Search'
 import { HostPreview } from '@user/screens/hostPreview/HostPreview'
+import { useTheme } from '@shared/moduls/theme/useTheme'
 
 const SearchStack = createStackNavigator<SearchNavigationParam>()
 
 export const SearchNavigation = () => {
+  const { colors } = useTheme()
+
   return (
     <SearchStack.Navigator initialRouteName="Root">
       <SearchStack.Screen
@@ -16,6 +19,12 @@ export const SearchNavigation = () => {
       <SearchStack.Screen
         options={{
           headerTitle: 'Host Preview',
+          headerStyle: {
+            backgroundColor: colors.bcColor_standart_container,
+          },
+          headerTitleStyle: {
+            color: colors.color_standart_text,
+          },
         }}
         name="HostPreview"
         component={HostPreview}

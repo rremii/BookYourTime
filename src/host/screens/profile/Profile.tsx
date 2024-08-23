@@ -8,8 +8,10 @@ import { BreakTime } from './ui/BreakTime'
 import { TagsSection } from './ui/TagsSection'
 import { useState } from 'react'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
+import { useTheme } from '@shared/moduls/theme/useTheme'
 
 export const Profile = () => {
+  const { colors } = useTheme()
   const [isEditing, setIsEditing] = useState(false)
 
   const startEditing = () => {
@@ -21,24 +23,52 @@ export const Profile = () => {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.subContainer}>
+    <ScrollView
+      contentContainerStyle={[
+        styles.container,
+        { backgroundColor: colors.bcColor_standart_container },
+      ]}
+    >
+      <View
+        style={[
+          styles.subContainer,
+          { backgroundColor: colors.bcColor_standart_container },
+        ]}
+      >
         <View style={{ width: '100%' }}>
           <ProfileStatus status="host" />
         </View>
 
         <View style={{ marginTop: 20, marginBottom: 30 }}>
-          <Avatar borderWidth={3} size={150} color={'#0a853777'} />
+          <Avatar
+            borderWidth={3}
+            size={150}
+            color={colors.color_standart_avatar}
+          />
         </View>
 
         <View style={styles.textContainer}>
-          <Text style={styles.textLabel}>Name:</Text>
-          <LabelWithEdit label={'Artem'} />
+          <Text
+            style={[styles.textLabel, { color: colors.color_standart_text }]}
+          >
+            Name:
+          </Text>
+          <LabelWithEdit
+            label={'Artem'}
+            labelStyle={{ color: colors.color_standart_text }}
+          />
         </View>
 
         <View style={styles.textContainer}>
-          <Text style={styles.textLabel}>Last name:</Text>
-          <LabelWithEdit label={'Romanov'} />
+          <Text
+            style={[styles.textLabel, { color: colors.color_standart_text }]}
+          >
+            Last name:
+          </Text>
+          <LabelWithEdit
+            label={'Romanov'}
+            labelStyle={{ color: colors.color_standart_text }}
+          />
         </View>
         <View style={{ width: '100%' }}>
           <WorkingHours isEditing={isEditing} />
@@ -51,17 +81,41 @@ export const Profile = () => {
         </View>
       </View>
 
-      <View style={styles.btnContainer}>
+      <View
+        style={[
+          styles.btnContainer,
+          { backgroundColor: colors.bcColor_standart_container },
+        ]}
+      >
         {isEditing ? (
           <>
-            <UIButton type="filled" onPress={submitEditing}>
+            <UIButton
+              type="filled"
+              onPress={submitEditing}
+              btnStyles={{ backgroundColor: colors.bcColor_btn_filled }}
+              textStyles={{ color: colors.color_btn_filled }}
+            >
               Save
             </UIButton>
           </>
         ) : (
           <>
-            <UIButton type="danger">Delete account</UIButton>
-            <UIButton type="simple" onPress={startEditing}>
+            <UIButton
+              type="danger"
+              btnStyles={{ backgroundColor: colors.bcColor_btn_danger }}
+              textStyles={{ color: colors.color_btn_danger }}
+            >
+              Delete account
+            </UIButton>
+            <UIButton
+              type="simple"
+              onPress={startEditing}
+              btnStyles={{
+                backgroundColor: colors.bcColor_button,
+                borderColor: colors.borderColor_standart,
+              }}
+              textStyles={{ color: colors.color_standart_text }}
+            >
               Edit
             </UIButton>
           </>
@@ -72,10 +126,11 @@ export const Profile = () => {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    height: '100%',
+  },
   subContainer: {
     padding: 20,
-    backgroundColor: '#fff',
     flex: 1,
     alignItems: 'center',
   },
@@ -90,7 +145,6 @@ const styles = StyleSheet.create({
   textLabel: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#000',
   },
   btnContainer: {
     width: '100%',

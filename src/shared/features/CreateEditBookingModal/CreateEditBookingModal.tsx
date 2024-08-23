@@ -15,6 +15,7 @@ import { HostInfo } from './ui/HostInfo'
 import { BookingForm } from './ui/BookingForm'
 import { Header } from './ui/Header'
 import { ClientInfo } from './ui/ClientInfo'
+import { useTheme } from '@shared/moduls/theme/useTheme'
 
 export type BookingModalType = 'create' | 'edit'
 export type UserType = 'client' | 'host'
@@ -25,6 +26,7 @@ interface Props extends ModalProps {
 }
 
 export const CreateEditBookingModal = ({ isOpen, type, userType }: Props) => {
+  const { colors } = useTheme()
   const { closeModal } = useModal()
 
   const [modalHeight, setModalHeight] = useState(
@@ -50,10 +52,18 @@ export const CreateEditBookingModal = ({ isOpen, type, userType }: Props) => {
   }
   return (
     <>
-      <Overlay onPress={close} isActive={isOpen} />
+      <Overlay
+        onPress={close}
+        isActive={isOpen}
+        backgroundColor={colors.bcColor_overlay}
+      />
       <Animated.View
         onLayout={onLayout}
-        style={[styles.container, { transform: [{ translateY: slideAnim }] }]}
+        style={[
+          styles.container,
+          { backgroundColor: colors.bcColor_standart_container },
+          { transform: [{ translateY: slideAnim }] },
+        ]}
       >
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <Header type={type} />
@@ -74,7 +84,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     width: '100%',
-    backgroundColor: 'white',
     zIndex: 1,
     transform: [{ translateY: 0 }],
     borderTopEndRadius: 40,

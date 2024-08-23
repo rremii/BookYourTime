@@ -4,10 +4,12 @@ import { Overlay } from '@shared/ui/Overlay'
 import { useAnimatedValue } from '@shared/utils/useAnimatedValue'
 import { Animated, Dimensions, StyleSheet } from 'react-native'
 import { BookingCard } from './BookingCard'
+import { useTheme } from '@shared/moduls/theme/useTheme'
 
 interface Props extends ModalProps {}
 
 export const BookingPreviewModal = ({ isOpen, name }: Props) => {
+  const { colors } = useTheme()
   const modalWidth = Dimensions.get('screen').width * 0.8
   const slideAnim = useAnimatedValue({
     isActive: isOpen,
@@ -28,13 +30,20 @@ export const BookingPreviewModal = ({ isOpen, name }: Props) => {
 
   return (
     <>
-      <Overlay onPress={close} isActive={isOpen} />
+      <Overlay
+        onPress={close}
+        isActive={isOpen}
+        backgroundColor={colors.bcColor_overlay}
+      />
       <Animated.View
         style={[
           {
             transform: [{ translateX: slideAnim }],
           },
           styles.modal,
+          {
+            backgroundColor: colors.bcColor_standart_container,
+          },
         ]}
       >
         <BookingCard />
@@ -52,7 +61,6 @@ const styles = StyleSheet.create({
     height: '100%',
     right: 0,
     top: 0,
-    backgroundColor: 'white',
     zIndex: 1,
     gap: 10,
     padding: 5,

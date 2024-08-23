@@ -8,6 +8,7 @@ import {
   ViewStyle,
 } from 'react-native'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
+import { useTheme } from '../theme/useTheme'
 
 interface Props {
   onChange?: (date: Date | null) => void
@@ -17,6 +18,8 @@ interface Props {
 }
 
 export const DatePicker = ({ initDate, onChange, ...props }: Props) => {
+  const { colors } = useTheme()
+
   const [date, setDate] = useState<Date | null>(initDate)
   const [isPicker, setIsPicker] = useState(false)
 
@@ -44,12 +47,26 @@ export const DatePicker = ({ initDate, onChange, ...props }: Props) => {
         date={date || new Date()}
         isVisible={isPicker}
         mode="date"
-        accentColor="#0A8537"
+        accentColor={colors.color_accentPicker}
         onConfirm={handleChange}
         onCancel={closePicker}
+        isDarkModeEnabled={true}
       />
-      <TouchableOpacity style={[btnStyles, styles.btn]} onPress={openPicker}>
-        <Text style={[textStyles, styles.text]}>
+      <TouchableOpacity
+        style={[
+          btnStyles,
+          styles.btn,
+          { borderColor: colors.borderColor_date_picker },
+        ]}
+        onPress={openPicker}
+      >
+        <Text
+          style={[
+            textStyles,
+            styles.text,
+            { color: colors.color_standart_text },
+          ]}
+        >
           {date ? date.toDateString() : '- - -'}
         </Text>
       </TouchableOpacity>
@@ -66,14 +83,11 @@ const styles = StyleSheet.create({
     paddingRight: 17,
     alignSelf: 'flex-start',
     borderRadius: 10,
-    borderColor: '#acacac',
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
     fontSize: 16,
-
-    color: 'black',
   },
 })

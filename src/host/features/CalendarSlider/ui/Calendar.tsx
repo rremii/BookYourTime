@@ -10,6 +10,7 @@ import { GetMonthDays } from '@host/shared/utils/GetMonthDays'
 import { SubHeader } from './SubHeader'
 import { Header } from './Header'
 import { memo, useEffect, useRef, useState } from 'react'
+import { useTheme } from '@shared/moduls/theme/useTheme'
 
 interface Props {
   calendarId: number
@@ -18,6 +19,8 @@ interface Props {
 }
 
 export const Calendar = memo(({ calendarId, dateFrom, dateTo }: Props) => {
+  const { colors } = useTheme()
+
   const { days, weekDayShift } = GetMonthDays(dateFrom)
 
   const [active, setActive] = useState(false)
@@ -26,12 +29,25 @@ export const Calendar = memo(({ calendarId, dateFrom, dateTo }: Props) => {
     setActive(true)
   }, [])
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: colors.bcColor_standart_container,
+          borderColor: colors.borderColor_standart,
+        },
+      ]}
+    >
       {active ? (
         <>
           <Header date={new Date(dateFrom)} />
           <SubHeader />
-          <View style={styles.monthDaysContainer}>
+          <View
+            style={[
+              styles.monthDaysContainer,
+              { backgroundColor: colors.bcColor_standart_container },
+            ]}
+          >
             {/* +1 due to we start at sunday */}
             {weekDayShift + 1 < 6
               ? new Array(weekDayShift + 1)
@@ -63,13 +79,10 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
 
-    borderColor: 'black',
     borderWidth: 1,
-    backgroundColor: 'white',
   },
   monthDaysContainer: {
     flex: 1,
-    backgroundColor: 'white',
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'flex-start',

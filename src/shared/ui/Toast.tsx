@@ -4,6 +4,7 @@ import { useAnimatedValue } from '@shared/utils/useAnimatedValue'
 import { ModalProps } from '@shared/moduls/modals/types'
 import React, { FC, ReactNode, useState } from 'react'
 import { Animated, LayoutChangeEvent, StyleSheet, Text } from 'react-native'
+import { useTheme } from '@shared/moduls/theme/useTheme'
 
 export type ToastType = 'error' | 'warn'
 
@@ -13,6 +14,7 @@ interface Props extends ModalProps {
 }
 
 export const Toast: FC<Props> = ({ children, type, isOpen }) => {
+  const { colors } = useTheme()
   const [toastWidth, setToastWidth] = useState<number>(0)
 
   const slideAnim = useAnimatedValue({
@@ -36,7 +38,10 @@ export const Toast: FC<Props> = ({ children, type, isOpen }) => {
       style={[
         styles.toast,
         {
-          backgroundColor: type === 'error' ? '#ed1245' : 'black',
+          backgroundColor:
+            type === 'error'
+              ? colors.bcColor_toast_error
+              : colors.bcColor_toast,
           transform: [
             { translateY: slideAnim },
             { translateX: -toastWidth / 2 },
@@ -45,11 +50,13 @@ export const Toast: FC<Props> = ({ children, type, isOpen }) => {
       ]}
     >
       {type === 'error' ? (
-        <WarnIcon color={'#fff'} width={25} height={25} />
+        <WarnIcon color={colors.color_warn_icon} width={25} height={25} />
       ) : (
-        <CheckMarkIcon fill={'black'} width={25} height={25} />
+        <CheckMarkIcon fill={colors.color_fill_icon} width={25} height={25} />
       )}
-      <Text style={styles.text}>{children}</Text>
+      <Text style={[styles.text, { color: colors.color_toast_text }]}>
+        {children}
+      </Text>
     </Animated.View>
   )
 }
@@ -68,7 +75,6 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: 'white',
     paddingLeft: 10,
     paddingRight: 10,
     fontSize: 16,

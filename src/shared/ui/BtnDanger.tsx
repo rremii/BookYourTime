@@ -1,3 +1,4 @@
+import { useTheme } from '@shared/moduls/theme/useTheme'
 import { PropsWithChildren } from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 
@@ -6,16 +7,22 @@ interface Props extends PropsWithChildren {
 }
 
 export const BtnDanger = ({ onPress, children }: Props) => {
+  const { colors } = useTheme()
+
   return (
-    <TouchableOpacity style={styles.btn} onPress={onPress}>
-      <Text style={styles.text}>{children}</Text>
+    <TouchableOpacity
+      style={[styles.btn, { backgroundColor: colors.bcColor_btn_danger }]}
+      onPress={onPress}
+    >
+      <Text style={[styles.text, { color: colors.color_btn_danger }]}>
+        {children}
+      </Text>
     </TouchableOpacity>
   )
 }
 
 const styles = StyleSheet.create({
   btn: {
-    backgroundColor: '#850a0a',
     borderRadius: 10,
     padding: 25,
     paddingTop: 7,
@@ -24,6 +31,5 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 15,
     fontWeight: '500',
-    color: 'white',
   },
 })
