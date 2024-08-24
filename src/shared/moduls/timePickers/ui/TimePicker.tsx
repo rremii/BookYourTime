@@ -1,4 +1,4 @@
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 import React, { useEffect, useState } from 'react'
 import {
   StyleProp,

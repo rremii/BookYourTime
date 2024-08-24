@@ -8,7 +8,7 @@ import {
   ViewStyle,
 } from 'react-native'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
-import { useTheme } from '../theme/useTheme'
+import { useTheme } from '../theme'
 
 interface Props {
   onChange?: (date: Date | null) => void

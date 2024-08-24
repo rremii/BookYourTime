@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useModal } from '@shared/moduls/modals/useModal'
 import Cross from '@icons/cross.svg'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 interface Props {}
 

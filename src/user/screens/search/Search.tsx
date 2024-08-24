@@ -2,7 +2,7 @@ import { FlatList, StyleSheet, View } from 'react-native'
 import React from 'react'
 import { SearchHeader } from '@user/features/searchHeader/SearchHeader'
 import { HostCard } from '@user/features/hostCard/HostCard'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 export const Search = () => {
   const { colors } = useTheme()

@@ -1,4 +1,4 @@
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 import { StyleSheet, Text, View } from 'react-native'
 
 interface Props {

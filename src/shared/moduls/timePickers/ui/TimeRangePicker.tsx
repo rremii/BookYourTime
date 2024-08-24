@@ -10,7 +10,7 @@ import {
 import { useModal } from '../../modals/useModal'
 import { TimeRangeModal } from './TimeRangeModal'
 import { TimeRange } from '../types'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 interface Props {
   onChange: (time: TimeRange) => void

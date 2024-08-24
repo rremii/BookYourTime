@@ -4,7 +4,7 @@ import { Text } from 'react-native'
 import { useState } from 'react'
 import { TimeRange } from '@shared/moduls/timePickers/types'
 import { TimeRangePicker } from '@shared/moduls/timePickers'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 interface Props {
   isEditing?: boolean

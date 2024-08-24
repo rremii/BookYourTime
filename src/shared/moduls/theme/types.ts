@@ -1,10 +1,13 @@
+export type ThemeType = 'light' | 'dark' | 'system'
+
 type Action<T, P> = {
   type: T
   payload: P
 }
 
-export type ThemeAction = Action<'change', ThemeType>
-export type ThemeType = 'light' | 'dark'
+export type ThemeAction = ChangeTheme
+
+export type ChangeTheme = Action<'change', ThemeType>
 
 export type ThemeKeys =
   | 'color_name'
@@ -59,4 +62,5 @@ export type ThemeKeys =
   | 'color_search_icon'
   | 'bcColor_card'
   | 'color_linearGradient'
-export type ThemeObject = Record<ThemeKeys, string>
+
+export type Theme = Record<ThemeKeys, string>

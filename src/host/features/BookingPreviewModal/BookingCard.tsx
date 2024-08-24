@@ -3,7 +3,7 @@ import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useModal } from '@shared/moduls/modals/useModal'
 import { CreateEditBookingModal } from '@shared/features/CreateEditBookingModal'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 export const BookingCard = () => {
   const { openModal } = useModal()

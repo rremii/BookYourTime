@@ -7,7 +7,7 @@ import ProfileIcon from '@icons/profile.svg'
 import BookingIcon from '@icons/calendar.svg'
 import { SearchNavigation } from './SearchNavigation'
 import { ClientRootNavigationParam } from './types'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 interface BottomTabIconProps {
   focused: boolean

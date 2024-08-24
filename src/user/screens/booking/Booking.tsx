@@ -1,7 +1,7 @@
 import { FlatList, StyleSheet, View } from 'react-native'
 import { Header } from './Header'
 import { BookingCard } from '@user/features/bookingCard/BookingCard'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 export const Booking = () => {
   const { colors } = useTheme()

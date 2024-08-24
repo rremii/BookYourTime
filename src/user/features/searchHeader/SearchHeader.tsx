@@ -4,7 +4,7 @@ import SearchIcon from '@icons/search.svg'
 import FilterIcon from '@icons/filter.svg'
 import { useModal } from '@shared/moduls/modals/useModal'
 import { SearchFilters } from '../searchFilters.tsx/SearchFilters'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 export const SearchHeader = () => {
   const { colors } = useTheme()

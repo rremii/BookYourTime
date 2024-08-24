@@ -13,7 +13,7 @@ import {
 import EditIcon from '@icons/edit.svg'
 import { SvgProps } from 'react-native-svg'
 import { set } from 'react-hook-form'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 interface Props {
   onChange?: (value: string) => void

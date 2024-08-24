@@ -1,12 +1,12 @@
 import { createContext } from 'react'
-import { ThemeAction, ThemeType } from './types'
+import { ChangeTheme, ThemeAction, ThemeType } from '../types'
 
 interface InitialState {
   theme: ThemeType
 }
 
 export const initialState: InitialState = {
-  theme: 'dark',
+  theme: 'light',
 }
 
 export const ThemeContext = createContext<
@@ -29,7 +29,7 @@ export const ThemeReducer = (
   }
 }
 
-export const changeMainTheme = (payload: ThemeType): ThemeAction => ({
+export const changeTheme = (payload: ThemeType): ChangeTheme => ({
   type: 'change',
   payload,
 })

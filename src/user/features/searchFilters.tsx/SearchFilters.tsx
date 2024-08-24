@@ -17,7 +17,7 @@ import { inputSectionStyles } from '@shared/ui/styles/InputSectionStyles'
 import { TagsPicker } from '@shared/moduls/tagsPicker/TagsPicker'
 import { Header } from './ui/Header'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 interface Filters {
   date: Date | null

@@ -1,4 +1,4 @@
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
 
 export const SubHeader = () => {

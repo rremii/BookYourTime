@@ -15,7 +15,7 @@ import { HostInfo } from './ui/HostInfo'
 import { BookingForm } from './ui/BookingForm'
 import { Header } from './ui/Header'
 import { ClientInfo } from './ui/ClientInfo'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 export type BookingModalType = 'create' | 'edit'
 export type UserType = 'client' | 'host'

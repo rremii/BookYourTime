@@ -1,7 +1,7 @@
 import { Tag } from '@shared/ui/Tag'
 import { styles } from './styles'
 import { Text, View } from 'react-native'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 export const TagsSection = () => {
   const { colors } = useTheme()

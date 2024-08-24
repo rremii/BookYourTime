@@ -1,7 +1,7 @@
 import { Avatar } from '@shared/ui/Avatar'
 import { styles } from './styles'
 import { Text, View } from 'react-native'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 export const HostProfile = () => {
   const { colors } = useTheme()

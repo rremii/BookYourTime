@@ -7,7 +7,7 @@ import { ReactNode, useState } from 'react'
 import { Toast, ToastType } from '@shared/ui/Toast'
 import { BookingModalType } from '../CreateEditBookingModal'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 interface FormValues {
   date: Date | null

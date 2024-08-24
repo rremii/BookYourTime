@@ -4,7 +4,7 @@ import { useAnimatedValue } from '@shared/utils/useAnimatedValue'
 import { ModalProps } from '@shared/moduls/modals/types'
 import React, { FC, ReactNode, useState } from 'react'
 import { Animated, LayoutChangeEvent, StyleSheet, Text } from 'react-native'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 export type ToastType = 'error' | 'warn'
 

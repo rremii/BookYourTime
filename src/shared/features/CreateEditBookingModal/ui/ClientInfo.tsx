@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { Avatar } from '@shared/ui/Avatar'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 export const ClientInfo = () => {
   const { colors } = useTheme()

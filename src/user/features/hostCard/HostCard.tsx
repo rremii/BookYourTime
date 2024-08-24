@@ -8,7 +8,7 @@ import { Tag } from '@shared/ui/Tag'
 import { SearchNavigationParam } from '@user/app/navigation/types'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { useNavigation } from '@react-navigation/native'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 export const HostCard = () => {
   const { colors } = useTheme()

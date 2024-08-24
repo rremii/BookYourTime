@@ -10,7 +10,7 @@ import { WorkingDays } from './ui/WorkingDays'
 import { BreakTime } from './ui/BreakTime'
 import { TagsSection } from './ui/TagsSection'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 export const HostPreview = () => {
   const { colors } = useTheme()

@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { Tag } from '@shared/ui/Tag'
 import Cross from '@icons/cross.svg'
-import { useTheme } from '../theme/useTheme'
+import { useTheme } from '../theme'
 
 interface Props {
   tags: string[]

@@ -4,7 +4,7 @@ import { Text, View } from 'react-native'
 import { useState } from 'react'
 import { WeekDaysPicker } from '@shared/moduls/weekDaysPicker/WeekDaysPicker'
 import { WeekDays } from '@shared/moduls/weekDaysPicker/types'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 interface Props {
   isEditing?: boolean

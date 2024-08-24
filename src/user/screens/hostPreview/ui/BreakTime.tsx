@@ -1,7 +1,7 @@
 import { WorkingTime } from '@shared/ui/WorkingTime'
 import { styles } from './styles'
 import { Text, View } from 'react-native'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 export const BreakTime = () => {
   const { colors } = useTheme()

@@ -6,7 +6,7 @@ import {
   BookingModalType,
   CreateEditBookingModal,
 } from '@shared/features/CreateEditBookingModal'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 export const BookingCard = () => {
   const { colors } = useTheme()

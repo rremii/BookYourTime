@@ -8,7 +8,8 @@ import ProfileIcon from '@icons/profile.svg'
 import BookingIcon from '@icons/calendar.svg'
 import { Booking } from '@host/screens/booking/Booking'
 import { Profile } from '@host/screens/profile/Profile'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
+import { ThemeObject } from '@shared/moduls/theme/types'
 
 interface BottomTabIconProps {
   focused: boolean
@@ -42,36 +43,10 @@ const RootNavigation = () => {
     },
   ]
 
+  const options = getRootBottomTabsOptions(colors)
   return (
     <RootBottomTabs.Navigator
-      screenOptions={{
-        headerShown: false,
-
-        tabBarStyle: {
-          paddingBottom: 7,
-          paddingTop: 7,
-
-          height: 60,
-          backgroundColor: colors.bcColor_tabBar,
-          borderTopColor: colors.borderTopColor_tabBar,
-          borderTopWidth: 1,
-        },
-        tabBarItemStyle: {
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 0,
-        },
-        tabBarLabelStyle: {
-          fontSize: 13,
-        },
-        tabBarIconStyle: {
-          height: 10,
-          width: 10,
-        },
-
-        tabBarActiveTintColor: colors.color_tabBar_active,
-        tabBarInactiveTintColor: colors.color_tabBar_inactive,
-      }}
+      screenOptions={options}
       initialRouteName="Booking"
     >
       {routes.map((route, index) => (
@@ -88,3 +63,34 @@ const RootNavigation = () => {
   )
 }
 export default RootNavigation
+
+const getRootBottomTabsOptions = (
+  colors: ThemeObject, //TODO we can recieve specific theme colors but i think its not necessary
+): BottomTabNavigationOptions => ({
+  headerShown: false,
+
+  tabBarStyle: {
+    paddingBottom: 7,
+    paddingTop: 7,
+
+    height: 60,
+    backgroundColor: colors.bcColor_tabBar,
+    borderTopColor: colors.borderTopColor_tabBar,
+    borderTopWidth: 1,
+  },
+  tabBarItemStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 0,
+  },
+  tabBarLabelStyle: {
+    fontSize: 13,
+  },
+  tabBarIconStyle: {
+    height: 10,
+    width: 10,
+  },
+
+  tabBarActiveTintColor: colors.color_tabBar_active,
+  tabBarInactiveTintColor: colors.color_tabBar_inactive,
+})

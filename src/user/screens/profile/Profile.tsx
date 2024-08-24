@@ -1,4 +1,4 @@
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 import { Avatar } from '@shared/ui/Avatar'
 import { LabelWithEdit } from '@shared/ui/LabelWithEdit'
 import { ProfileStatus } from '@shared/ui/ProfileStatus'

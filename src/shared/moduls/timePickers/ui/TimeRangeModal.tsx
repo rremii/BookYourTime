@@ -15,7 +15,7 @@ import { inputSectionStyles } from '@shared/ui/styles/InputSectionStyles'
 import { TimePicker } from './TimePicker'
 import { TimeRange } from '../types'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 interface Props extends ModalProps {
   onChange: (time: TimeRange) => void
@@ -85,7 +85,12 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
           },
         ]}
       >
-        <Text style={[inputSectionStyles.sectionTitle, { marginBottom: 10 }]}>
+        <Text
+          style={[
+            inputSectionStyles.sectionTitle,
+            { marginBottom: 10, color: colors.color_standart_text },
+          ]}
+        >
           Time:
         </Text>
         <View
@@ -94,7 +99,11 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
             inputSectionStyles.withPadding,
           ]}
         >
-          <Text style={{ fontSize: 16 }}>Start</Text>
+          <Text
+            style={[styles.optionTitle, { color: colors.color_standart_text }]}
+          >
+            Start
+          </Text>
           <TimePicker
             initTime={timeRange.start}
             onChange={handleChange('start')}
@@ -106,7 +115,11 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
             inputSectionStyles.withPadding,
           ]}
         >
-          <Text style={{ fontSize: 16 }}>End</Text>
+          <Text
+            style={[styles.optionTitle, { color: colors.color_standart_text }]}
+          >
+            End
+          </Text>
           <TimePicker initTime={timeRange.end} onChange={handleChange('end')} />
         </View>
 
@@ -154,6 +167,9 @@ const getStyles = (width: number, height: number) => {
       justifyContent: 'flex-end',
       alignItems: 'center',
       gap: 10,
+    },
+    optionTitle: {
+      fontSize: 16,
     },
   })
 }

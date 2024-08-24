@@ -1,4 +1,4 @@
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 import { useAnimatedValue } from '@shared/utils/useAnimatedValue'
 import { useRef, useState } from 'react'
 import {
@@ -11,13 +11,26 @@ import {
   TouchableOpacity,
   Touchable,
   TouchableHighlight,
+  StyleProp,
+  TextStyle,
+  ViewStyle,
 } from 'react-native'
 
 interface Props {
   label: string
+  inputStyles?: StyleProp<TextStyle>
+  contStyles?: StyleProp<ViewStyle>
+  labelStyles?: StyleProp<TextStyle>
+  labelContStyles?: StyleProp<ViewStyle>
 }
 
-export const InputWithLabel = ({ label }: Props) => {
+export const InputWithLabel = ({
+  label,
+  contStyles,
+  labelContStyles,
+  inputStyles,
+  labelStyles,
+}: Props) => {
   const { colors } = useTheme()
 
   const [fieldHeight, setFieldHeight] = useState(40)
@@ -65,22 +78,25 @@ export const InputWithLabel = ({ label }: Props) => {
   }
 
   return (
-    <View onLayout={onLayout} style={styles.fieldContainer}>
+    <View onLayout={onLayout} style={[styles.fieldContainer, contStyles]}>
       <View
-        style={{
-          pointerEvents: 'none',
-          backgroundColor: colors.bcColor_layout,
-          zIndex: 1,
-        }}
+        style={[
+          {
+            pointerEvents: 'none',
+            zIndex: 1,
+            // backgroundColor: colors.bcColor_layout,
+          },
+          labelContStyles,
+        ]}
         onLayout={onLayout}
       >
         <Animated.Text
           onLayout={onLabelLayout}
           style={[
             styles.label,
+            labelStyles,
             {
               transform: [{ translateY: slideY }, { translateX: slideX }],
-              backgroundColor: colors.bcColor_label,
             },
           ]}
         >
@@ -95,10 +111,11 @@ export const InputWithLabel = ({ label }: Props) => {
         onBlur={() => setIsFocused(false)}
         style={[
           styles.field,
-          {
-            backgroundColor: colors.bcColor_input,
-            borderColor: colors.borderColor_standart,
-          },
+          inputStyles,
+          // {
+          //   backgroundColor: colors.bcColor_input,
+          //   borderColor: colors.borderColor_standart,
+          // },
         ]}
       />
     </View>
@@ -136,131 +153,3 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 })
-
-// import { useAnimatedValue } from '@shared/utils/useAnimatedValue'
-// import { useRef, useState } from 'react'
-// import {
-//   TextInput,
-//   View,
-//   Text,
-//   StyleSheet,
-//   LayoutChangeEvent,
-//   Animated,
-//   TouchableOpacity,
-//   Touchable,
-//   TouchableHighlight,
-// } from 'react-native'
-
-// interface Props {
-//   label: string
-// }
-
-// //TODO
-// /**
-// how does the layout work?
-// slide optimization
-// the animations are not working
-
-// */
-
-// export const InputWithLabel = ({ label }: Props) => {
-//   const [fieldHeight, setFieldHeight] = useState(0)
-//   const [labelHeight, setLabelHeight] = useState(0)
-
-//   const [isFocused, setIsFocused] = useState(false)
-//   const inputRef = useRef<TextInput | null>(null)
-
-//   const slideX = useAnimatedValue({
-//     isActive: isFocused,
-//     initValue: 20,
-//     active: {
-//       duration: 100,
-//       value: 15,
-//     },
-//     inactive: {
-//       duration: 100,
-//       value: 20,
-//     },
-//   })
-
-//   const slideY = useAnimatedValue({
-//     isActive: isFocused,
-//     initValue: fieldHeight / 2 - labelHeight / 2,
-//     active: {
-//       duration: 100,
-//       value: -labelHeight / 2,
-//     },
-//     inactive: {
-//       duration: 100,
-//       value: fieldHeight / 2 - labelHeight / 2,
-//     },
-//   })
-
-//   const handleFocus = () => {
-//     if (!inputRef.current) return
-
-//     if (!isFocused) inputRef.current.focus()
-//     setIsFocused(!isFocused)
-//   }
-
-//   const onLayout = (e: LayoutChangeEvent) => {
-//     setFieldHeight(e.nativeEvent.layout.height)
-//   }
-//   const onLabelLayout = (e: LayoutChangeEvent) => {
-//     setLabelHeight(e.nativeEvent.layout.height)
-//   }
-
-//   return (
-//     <TouchableOpacity
-//       activeOpacity={1}
-//       //   onPress={handleFocus}
-//       onLayout={onLayout}
-//       style={styles.fieldContainer}
-//     >
-//       <Animated.Text
-//         pointerEvents="none"
-//         onLayout={onLabelLayout}
-//         style={[
-//           styles.label,
-//           {
-//             transform: [{ translateY: slideY }, { translateX: slideX }],
-//           },
-//         ]}
-//       >
-//         {label}
-//       </Animated.Text>
-//       <TextInput ref={inputRef} onBlur={handleFocus} style={styles.field} />
-//     </TouchableOpacity>
-//   )
-// }
-
-// const styles = StyleSheet.create({
-//   fieldContainer: {
-//     position: 'relative',
-//     marginBottom: 15,
-//   },
-//   label: {
-//     position: 'absolute',
-//     top: 0,
-//     left: 0,
-//     fontSize: 16,
-//     fontWeight: '500',
-//     marginBottom: 5,
-//     backgroundColor: 'white',
-//     zIndex: 1,
-//     paddingLeft: 7,
-//     paddingRight: 7,
-//     pointerEvents: 'none',
-//   },
-
-//   field: {
-//     backgroundColor: 'white',
-//     borderColor: 'black',
-//     borderWidth: 1,
-//     padding: 3,
-//     paddingLeft: 15,
-//     paddingRight: 15,
-//     borderRadius: 10,
-//     width: '100%',
-//   },
-// })

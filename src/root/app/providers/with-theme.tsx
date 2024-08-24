@@ -1,4 +1,4 @@
-import { ThemeProvider } from '@shared/moduls/theme/themeProvider'
+import { ThemeProvider } from '@shared/moduls/theme/model/themeProvider'
 import { FC } from 'react'
 
 export const withTheme = (Component: FC): FC => {

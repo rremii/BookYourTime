@@ -2,7 +2,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { SearchNavigationParam } from './types'
 import { Search } from '@user/screens/search/Search'
 import { HostPreview } from '@user/screens/hostPreview/HostPreview'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 const SearchStack = createStackNavigator<SearchNavigationParam>()
 

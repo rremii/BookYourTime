@@ -10,7 +10,7 @@ import { GetMonthDays } from '@host/shared/utils/GetMonthDays'
 import { SubHeader } from './SubHeader'
 import { Header } from './Header'
 import { memo, useEffect, useRef, useState } from 'react'
-import { useTheme } from '@shared/moduls/theme/useTheme'
+import { useTheme } from '@shared/moduls/theme'
 
 interface Props {
   calendarId: number
@@ -67,7 +67,11 @@ export const Calendar = memo(({ calendarId, dateFrom, dateTo }: Props) => {
         </>
       ) : (
         <View style={styles.loader}>
-          <Text style={styles.loaderText}>LOADING</Text>
+          <Text
+            style={[styles.loaderText, { color: colors.color_standart_text }]}
+          >
+            LOADING
+          </Text>
         </View>
       )}
     </View>
