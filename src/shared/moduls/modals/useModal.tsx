@@ -1,11 +1,17 @@
-import { useContext } from 'react'
-import { addModal, closeModal, ModalContext, removeModal } from './modalStore'
+import { useCallback, useContext, useEffect } from 'react'
+import {
+  addModal,
+  closeModal,
+  ModalContext,
+  ModalDispatchContext,
+  removeModal,
+} from './modalStore'
 import { ModalNames, RegisterModal } from './types'
 
 export const useModal = () => {
-  const { dispatch, modals } = useContext(ModalContext)
+  const dispatch = useContext(ModalDispatchContext)
 
-  function openModal<PropsType>({
+  const openModal = function openModal<PropsType>({
     name,
     modal,
     props,
@@ -30,5 +36,5 @@ export const useModal = () => {
     }, removeDelay)
   }
 
-  return { openModal, closeModal: close, modals }
+  return { openModal, closeModal: close }
 }

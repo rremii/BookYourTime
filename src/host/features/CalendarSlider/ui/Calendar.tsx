@@ -1,16 +1,11 @@
-import {
-  Dimensions,
-  StyleSheet,
-  View,
-  Text,
-} from 'react-native'
-import { CalendarCell } from './CalendarCell'
+import { Dimensions, StyleSheet, View, Text } from 'react-native'
 import { GetMonthDays } from '@host/shared/utils/GetMonthDays'
 import { SubHeader } from './SubHeader'
 import { Header } from './Header'
 import { memo, useEffect, useState } from 'react'
 import { useTheme } from '@shared/moduls/theme'
 import { Theme } from '@shared/moduls/theme/types'
+import { CalendarCell } from './CalendarCell'
 
 interface Props {
   calendarId: number
@@ -47,54 +42,53 @@ export const Calendar = memo(({ calendarId, dateFrom, dateTo }: Props) => {
             {days.map(({ dateFrom, dateTo }) => (
               <CalendarCell
                 key={dateFrom.toUTCString()}
-                dateFrom={dateFrom}
-                dateTo={dateTo}
+                dateFrom={dateFrom.toUTCString()}
+                dateTo={dateTo.toUTCString()}
               />
             ))}
           </View>
         </>
       ) : (
         <View style={styles.loader}>
-          <Text style={styles.loaderText}>
-            LOADING
-          </Text>
+          <Text style={styles.loaderText}>LOADING</Text>
         </View>
       )}
     </View>
   )
 })
 
-const getStyles = (colors: Theme) => StyleSheet.create({
-  container: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+const getStyles = (colors: Theme) =>
+  StyleSheet.create({
+    container: {
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height,
 
-    backgroundColor: colors.bcColor_standart_container,
-    borderColor: colors.borderColor_standart,
+      backgroundColor: colors.bcColor_standart_container,
+      borderColor: colors.borderColor_standart,
 
-    borderWidth: 1,
-  },
-  monthDaysContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    backgroundColor: colors.bcColor_standart_container
-  },
-  emptyCell: {
-    maxWidth: Math.floor(Dimensions.get('screen').width / 7) - 1, // width - / daysAmount
-    width: '100%',
-    height: '15%',
-  },
-  loader: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loaderText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: colors.color_standart_text
-  },
-})
+      borderWidth: 1,
+    },
+    monthDaysContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      alignItems: 'flex-start',
+      justifyContent: 'flex-start',
+      backgroundColor: colors.bcColor_standart_container,
+    },
+    emptyCell: {
+      maxWidth: Math.floor(Dimensions.get('screen').width / 7) - 1, // width - / daysAmount
+      width: '100%',
+      height: '15%',
+    },
+    loader: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    loaderText: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: colors.color_standart_text,
+    },
+  })

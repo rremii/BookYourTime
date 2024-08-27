@@ -17,6 +17,9 @@ export const initialState: InitialState = {
   modals: [],
 }
 
+export const ModalDispatchContext = createContext<React.Dispatch<ModalAction>>(
+  () => {},
+)
 export const ModalContext = createContext<
   InitialState & { dispatch: React.Dispatch<ModalAction> }
 >({ modals: [], dispatch: (action: ModalAction) => {} })
