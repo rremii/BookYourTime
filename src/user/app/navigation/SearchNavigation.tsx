@@ -20,6 +20,7 @@ export const SearchNavigation = () => {
         options={{
           headerTitle: 'Host Preview',
           headerStyle: {
+            //FIX THE HEIGHT
             backgroundColor: colors.bcColor_standart_container,
           },
           headerTitleStyle: {

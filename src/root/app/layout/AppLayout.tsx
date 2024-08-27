@@ -2,6 +2,7 @@ import { FC, PropsWithChildren } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { ModalProvider } from '@shared/moduls/modals/ModalProvider'
+import { useAuth } from '@user/entities/auth/model/useAuth'
 
 interface Props extends PropsWithChildren {}
 

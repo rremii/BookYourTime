@@ -1,22 +1,24 @@
+import { OpenSettings } from '@shared/features/ProfileSettingsModal/ui/OpenSettings'
 import { useTheme } from '@shared/moduls/theme'
 import { Theme } from '@shared/moduls/theme/types'
 import { Avatar } from '@shared/ui/Avatar'
 import { LabelWithEdit } from '@shared/ui/LabelWithEdit'
-import { ProfileHeader } from '@shared/ui/ProfileHeader'
 import { ProfileStatus } from '@shared/ui/ProfileStatus'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
 import { StyleSheet, Text, View } from 'react-native'
-
+//TODO FOR LISA
+// add pressed colors to all btns
+// remove precents
 export const Profile = () => {
   const { colors } = useTheme()
   const styles = getStyles(colors)
 
   return (
     <View style={styles.container}>
-      <ProfileHeader />
       <View style={styles.subContainer}>
-        <View style={styles.entireWidth}>
+        <View style={styles.headerContainer}>
           <ProfileStatus status="user" />
+          <OpenSettings />
         </View>
 
         <View style={styles.marginAvatar}>
@@ -64,8 +66,11 @@ const getStyles = (colors: Theme) =>
       backgroundColor: colors.bcColor_standart_container,
     },
 
-    entireWidth: {
+    headerContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
       width: '100%',
+      alignItems: 'center',
     },
 
     textContainer: {

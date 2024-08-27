@@ -32,7 +32,7 @@ const RootNavigation = () => {
   return (
     <RootStack.Navigator
       screenOptions={StackOptions}
-      initialRouteName="Welcome"
+      initialRouteName={'Welcome'}
     >
       {routes.map((route, index) => (
         <RootStack.Screen

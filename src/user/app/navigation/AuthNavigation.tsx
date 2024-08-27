@@ -6,16 +6,17 @@ import {
   TransitionPresets,
 } from '@react-navigation/stack'
 import RootNavigation from './RootNavigation'
-import {
-  ClientAuthContext,
-  HostAuthContext,
-} from '@shared/entities/auth/authStore'
 import { SignIn } from '@user/screens/signIn/SignIn'
 import { SignUp } from '@user/screens/signUp/SignUp'
+import { ClientAuthContext } from '@user/entities/auth/model/authStore'
+import { useAuth } from '@user/entities/auth/model/useAuth'
+import * as SecureStore from 'expo-secure-store'
 
 const AuthStack = createStackNavigator<AuthNavigationParam>()
 
 const AuthNavigation = () => {
+  useAuth()
+
   const { isLoggedIn } = useContext(ClientAuthContext)
 
   const routes: {
