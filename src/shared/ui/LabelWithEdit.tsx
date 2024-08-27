@@ -91,6 +91,7 @@ const getStyles = (colors: Theme) => StyleSheet.create({
   label: {
     position: 'relative',
     fontSize: 18,
+    color: colors.color_standart_text
   },
   input: {
     padding: 12,
@@ -100,7 +101,8 @@ const getStyles = (colors: Theme) => StyleSheet.create({
     borderWidth: 1,
     fontSize: 16,
     alignSelf: 'flex-start',
-    borderColor: colors.borderColor_standart
+    borderColor: colors.borderColor_standart,
+    color: colors.color_standart_text
   },
   editIcon: {
     transform: [{ translateY: -10 }, { translateX: 5 }],

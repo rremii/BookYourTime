@@ -56,7 +56,6 @@ const getStyles = (colors: Theme, btnSize: number) =>
       justifyContent: 'center',
       alignItems: 'center',
       transform: [{ translateY: -btnSize / 2 }],
-      borderWidth: 1,
       zIndex: 1,
     },
   })

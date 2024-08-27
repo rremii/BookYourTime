@@ -8,8 +8,8 @@ import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
   useWindowDimensions,
+  FlatList,
 } from 'react-native'
 import { useEffect, useState } from 'react'
 import { Theme } from '@shared/moduls/theme/types'
@@ -74,22 +74,22 @@ export const PickerModal = ({
           styles.animContainer,
         ]}
       >
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
-          {initialValue.map((item) => {
-            return (
-              <Pressable key={item} onPress={() => handleChoice(item)}>
-                <View style={styles.itemContainer}>
-                  {checked === item ? (
-                    <FillCircleIcon color={colors.color_fill_icon} />
-                  ) : (
-                    <CircleIcon color={colors.color_fill_icon} />
-                  )}
-                  <Text style={styles.text}>{item}</Text>
-                </View>
-              </Pressable>
-            )
-          })}
-        </ScrollView>
+        <FlatList
+          data={initialValue}
+          renderItem={({ item }) => (
+            <Pressable key={item} onPress={() => handleChoice(item)}>
+              <View style={styles.itemContainer}>
+                {checked === item ? (
+                  <FillCircleIcon color={colors.color_fill_icon} />
+                ) : (
+                  <CircleIcon color={colors.color_fill_icon} />
+                )}
+                <Text style={styles.text}>{item}</Text>
+              </View>
+            </Pressable>
+          )}
+          contentContainerStyle={styles.flat}
+        />
       </Animated.View>
     </View>
   )
@@ -114,7 +114,7 @@ const getStyle = (colors: Theme) =>
       paddingTop: 30,
       paddingBottom: 30,
     },
-    scrollContainer: {
+    flat: {
       gap: 20,
       backgroundColor: colors.bcColor_standart_container,
     },
