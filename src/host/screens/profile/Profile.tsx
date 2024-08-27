@@ -14,7 +14,7 @@ import { Theme } from '@shared/moduls/theme/types'
 
 export const Profile = () => {
   const { colors } = useTheme()
-  const styles = getStyles(colors);
+  const styles = getStyles(colors)
 
   const [isEditing, setIsEditing] = useState(false)
 
@@ -28,13 +28,13 @@ export const Profile = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <ProfileHeader/>
+      <ProfileHeader />
       <View style={styles.subContainer}>
-        <View style={{ width: '100%' }}>
+        <View style={styles.widthEntire}>
           <ProfileStatus status="host" />
         </View>
 
-        <View style={{ marginTop: 20, marginBottom: 30 }}>
+        <View style={styles.avatar}>
           <Avatar
             borderWidth={3}
             size={150}
@@ -43,25 +43,15 @@ export const Profile = () => {
         </View>
 
         <View style={styles.textContainer}>
-          <Text style={styles.textLabel}>
-            Name:
-          </Text>
-          <LabelWithEdit
-            label={'Artem'}
-            labelStyle={{ color: colors.color_standart_text }}
-          />
+          <Text style={styles.textLabel}>Name:</Text>
+          <LabelWithEdit label={'Artem'} labelStyle={styles.label} />
         </View>
 
         <View style={styles.textContainer}>
-          <Text style={styles.textLabel}>
-            Last name:
-          </Text>
-          <LabelWithEdit
-            label={'Romanov'}
-            labelStyle={{ color: colors.color_standart_text }}
-          />
+          <Text style={styles.textLabel}>Last name:</Text>
+          <LabelWithEdit label={'Romanov'} labelStyle={styles.label} />
         </View>
-        <View style={{ width: '100%' }}>
+        <View style={styles.widthEntire}>
           <WorkingHours isEditing={isEditing} />
 
           <WorkingDays isEditing={isEditing} />
@@ -108,42 +98,55 @@ export const Profile = () => {
   )
 }
 
-const getStyles = (colors: Theme) => StyleSheet.create({
-  container: {
-    height: '100%',
-    backgroundColor: colors.bcColor_standart_container
-  },
-  subContainer: {
-    padding: 20,
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: colors.bcColor_standart_container
-  },
+const getStyles = (colors: Theme) =>
+  StyleSheet.create({
+    container: {
+      height: '100%',
+      backgroundColor: colors.bcColor_standart_container,
+    },
+    subContainer: {
+      padding: 20,
+      flex: 1,
+      alignItems: 'center',
+      backgroundColor: colors.bcColor_standart_container,
+    },
 
-  textContainer: {
-    flexDirection: 'row',
-    gap: 20,
-    width: '100%',
-    paddingLeft: 40,
-    marginBottom: 10,
-  },
-  textLabel: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: colors.color_standart_text
-  },
-  btnContainer: {
-    width: '100%',
-    gap: 10,
-    flexDirection: 'row',
-    marginTop: 10,
-    padding: 10,
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
-    backgroundColor: colors.bcColor_standart_container
-  },
-  btnSimple: {
-    backgroundColor: colors.bcColor_button,
-    borderColor: colors.borderColor_standart,
-  }
-})
+    widthEntire: {
+      width: '100%',
+    },
+
+    avatar: {
+      marginTop: 20,
+      marginBottom: 30,
+    },
+
+    textContainer: {
+      flexDirection: 'row',
+      gap: 20,
+      width: '100%',
+      paddingLeft: 40,
+      marginBottom: 10,
+    },
+    textLabel: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: colors.color_standart_text,
+    },
+    btnContainer: {
+      width: '100%',
+      gap: 10,
+      flexDirection: 'row',
+      marginTop: 10,
+      padding: 10,
+      alignItems: 'flex-end',
+      justifyContent: 'flex-end',
+      backgroundColor: colors.bcColor_standart_container,
+    },
+    btnSimple: {
+      backgroundColor: colors.bcColor_button,
+      borderColor: colors.borderColor_standart,
+    },
+    label: {
+      color: colors.color_standart_text,
+    },
+  })

@@ -32,7 +32,7 @@ export const HostPreview = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <HostProfile />
-      <View style={{ width: '100%' }}>
+      <View style={styles.workContainer}>
         <WorkingHours />
 
         <WorkingDays />
@@ -55,16 +55,20 @@ export const HostPreview = () => {
   )
 }
 
-const getStyles = (colors: Theme) => StyleSheet.create({
-  container: {
-    padding: 20,
-    paddingTop: 70,
-    alignItems: 'center',
-    backgroundColor: colors.bcColor_standart_container
-  },
-  btnContainer: {
-    width: '100%',
-    marginTop: 30,
-    alignItems: 'flex-end',
-  },
-})
+const getStyles = (colors: Theme) =>
+  StyleSheet.create({
+    container: {
+      padding: 20,
+      paddingTop: 70,
+      alignItems: 'center',
+      backgroundColor: colors.bcColor_standart_container,
+    },
+    workContainer: {
+      width: '100%',
+    },
+    btnContainer: {
+      width: '100%',
+      marginTop: 30,
+      alignItems: 'flex-end',
+    },
+  })
