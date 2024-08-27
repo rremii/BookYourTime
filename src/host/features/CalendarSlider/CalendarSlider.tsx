@@ -8,7 +8,7 @@ import {
 import { Calendar } from './ui/Calendar'
 import { useSliderIndexes } from './model/useSliderIndexes'
 import { timeGap } from '@host/shared/utils/TimeGap'
-import React, { useMemo, useRef } from 'react'
+import React from 'react'
 
 const initialScrollIndexes: number[] = [-3, -2, -1, 0, 1, 2, 3]
 
