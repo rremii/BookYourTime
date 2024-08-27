@@ -10,6 +10,7 @@ import {
   StyleSheet,
   ScrollView,
   useWindowDimensions,
+  TouchableOpacity,
 } from 'react-native'
 import { useEffect, useState } from 'react'
 import { Theme } from '@shared/moduls/theme/types'
@@ -18,7 +19,7 @@ import FillCircleIcon from '@icons/fill-circle.svg'
 import { useModal } from '../modals/useModal'
 
 interface Props extends ModalProps {
-  initialValue: string[]
+  initItems: string[]
   currentItem: string
   onChange: (chosenItem: string) => void
 }
@@ -26,7 +27,7 @@ interface Props extends ModalProps {
 export const PickerModal = ({
   isOpen,
   onChange,
-  initialValue,
+  initItems,
   currentItem,
   name,
 }: Props) => {
@@ -75,9 +76,13 @@ export const PickerModal = ({
         ]}
       >
         <ScrollView contentContainerStyle={styles.scrollContainer}>
-          {initialValue.map((item) => {
+          {initItems.map((item) => {
             return (
-              <Pressable key={item} onPress={() => handleChoice(item)}>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                key={item}
+                onPress={() => handleChoice(item)}
+              >
                 <View style={styles.itemContainer}>
                   {checked === item ? (
                     <FillCircleIcon color={colors.color_fill_icon} />
@@ -86,7 +91,7 @@ export const PickerModal = ({
                   )}
                   <Text style={styles.text}>{item}</Text>
                 </View>
-              </Pressable>
+              </TouchableOpacity>
             )
           })}
         </ScrollView>

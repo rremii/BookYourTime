@@ -19,7 +19,7 @@ export const OpenThemePicker = () => {
 
   const openPicker = () => {
     openModal<{
-      initialValue: ThemeType[]
+      initItems: ThemeType[]
       currentItem: ThemeType
       onChange: (chosenItem: ThemeType) => void
     }>({
@@ -27,7 +27,7 @@ export const OpenThemePicker = () => {
       modal: PickerModal,
       props: {
         onChange,
-        initialValue: Themes,
+        initItems: Themes,
         currentItem: theme,
       },
     })

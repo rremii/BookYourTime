@@ -1,4 +1,4 @@
-import { AuthProvider } from '@user/entities/auth/AuthProvider'
+import { AuthProvider } from '@user/entities/auth/model/AuthProvider'
 import { FC, PropsWithChildren, useReducer } from 'react'
 
 export const withClientAuth =

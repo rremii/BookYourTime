@@ -1,21 +1,21 @@
+import {
+  AuthAction,
+  SetAuthReject,
+  SetAuthSuccess,
+} from '@shared/entities/auth/types'
 import { createContext } from 'react'
-import { AuthAction, SetAuthReject, SetAuthSuccess } from './types'
 
 interface InitialState {
   isLoggedIn: boolean
 }
 
-export const initialState: InitialState = {
+export const authInitialState: InitialState = {
   isLoggedIn: false,
 }
 
-export const ClientAuthContext = createContext<
-  InitialState & { dispatch: React.Dispatch<AuthAction> }
->({ ...initialState, dispatch: (action: AuthAction) => {} })
-
 export const HostAuthContext = createContext<
   InitialState & { dispatch: React.Dispatch<AuthAction> }
->({ ...initialState, dispatch: (action: AuthAction) => {} })
+>({ ...authInitialState, dispatch: (action: AuthAction) => {} })
 
 export const AuthReducer = (
   state: InitialState,

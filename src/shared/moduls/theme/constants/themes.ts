@@ -15,7 +15,7 @@ export const LightTheme: Theme = {
   bcColor_label: '#fff',
   bcColor_button: '#fff',
   bcColor_btn_filled: '#0A8537',
-  bcColor_btn_danger: '#850a0a',
+  bcColor_btn_danger: '#bc1736',
   bcColor_standart_container: '#fff',
   bcColor_tabBar: '#fff',
   bcColor_event: '#0a8537',
@@ -72,7 +72,7 @@ export const DarkTheme: Theme = {
   bcColor_layout: 'transparent',
   bcColor_button: '#191d20',
   bcColor_btn_filled: '#A6B2EC',
-  bcColor_btn_danger: '#DA0038',
+  bcColor_btn_danger: '#bc1736',
   bcColor_tabBar: '#191d20',
   bcColor_event: '#a6b1ec99',
 

@@ -9,8 +9,8 @@ import { TagsSection } from './ui/TagsSection'
 import { useState } from 'react'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
 import { useTheme } from '@shared/moduls/theme'
-import { ProfileHeader } from '@shared/ui/ProfileHeader'
 import { Theme } from '@shared/moduls/theme/types'
+import { OpenSettings } from '@shared/features/ProfileSettingsModal/ui/OpenSettings'
 
 export const Profile = () => {
   const { colors } = useTheme()
@@ -28,10 +28,10 @@ export const Profile = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <ProfileHeader />
       <View style={styles.subContainer}>
-        <View style={styles.widthEntire}>
+        <View style={styles.headerContainer}>
           <ProfileStatus status="host" />
+          <OpenSettings />
         </View>
 
         <View style={styles.avatar}>
@@ -110,8 +110,13 @@ const getStyles = (colors: Theme) =>
       alignItems: 'center',
       backgroundColor: colors.bcColor_standart_container,
     },
-
     widthEntire: {
+      width: '100%',
+    },
+    headerContainer: {
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      flexDirection: 'row',
       width: '100%',
     },
 
