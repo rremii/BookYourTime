@@ -8,6 +8,7 @@ import { Toast, ToastType } from '@shared/ui/Toast'
 import { BookingModalType } from '../CreateEditBookingModal'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
 import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 
 interface FormValues {
   date: Date | null
@@ -22,6 +23,7 @@ interface Props {
 
 export const BookingForm = ({ type }: Props) => {
   const { colors } = useTheme()
+  const styles = getStyles(colors)
 
   const { closeModal, openModal } = useModal()
 
@@ -96,13 +98,7 @@ export const BookingForm = ({ type }: Props) => {
         <TextInput
           value={formValues.title}
           onChangeText={onFilterChange('title')}
-          style={[
-            styles.titleInput,
-            {
-              borderColor: colors.borderColor_titleInput,
-              color: colors.color_titleInput,
-            },
-          ]}
+          style={styles.titleInput}
         />
       </View>
       <View style={inputSectionStyles.sectionContainer}>
@@ -134,7 +130,7 @@ export const BookingForm = ({ type }: Props) => {
             inputSectionStyles.withPadding,
           ]}
         >
-          <Text style={{ fontSize: 16, color: colors.color_standart_text }}>
+          <Text style={styles.text}>
             Start
           </Text>
           <TimePicker
@@ -148,7 +144,7 @@ export const BookingForm = ({ type }: Props) => {
             inputSectionStyles.withPadding,
           ]}
         >
-          <Text style={{ fontSize: 16, color: colors.color_standart_text }}>
+          <Text style={styles.text}>
             End
           </Text>
           <TimePicker
@@ -163,10 +159,7 @@ export const BookingForm = ({ type }: Props) => {
             <UIButton
               type="simple"
               onPress={onReset}
-              btnStyles={{
-                backgroundColor: colors.bcColor_button,
-                borderColor: colors.borderColor_standart,
-              }}
+              btnStyles={styles.btnSimple}
               textStyles={{ color: colors.color_standart_text }}
             >
               Reset
@@ -193,10 +186,7 @@ export const BookingForm = ({ type }: Props) => {
             <UIButton
               type="simple"
               onPress={onCancel}
-              btnStyles={{
-                backgroundColor: colors.bcColor_button,
-                borderColor: colors.borderColor_standart,
-              }}
+              btnStyles={styles.btnSimple}
               textStyles={{ color: colors.color_standart_text }}
             >
               Cancel
@@ -215,7 +205,7 @@ export const BookingForm = ({ type }: Props) => {
     </>
   )
 }
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   titleInput: {
     fontSize: 16,
     flex: 1,
@@ -225,6 +215,8 @@ const styles = StyleSheet.create({
     padding: 12,
     paddingTop: 3,
     paddingBottom: 3,
+    borderColor: colors.borderColor_titleInput,
+    color: colors.color_titleInput,
   },
 
   btnContainer: {
@@ -233,5 +225,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 10,
     marginTop: 15,
+  },
+
+  btnSimple: {
+    backgroundColor: colors.bcColor_button,
+    borderColor: colors.borderColor_standart,
+  },
+  text: {
+    fontSize: 16,
+    color: colors.color_standart_text
   },
 })

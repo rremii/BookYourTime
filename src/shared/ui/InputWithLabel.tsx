@@ -112,10 +112,6 @@ export const InputWithLabel = ({
         style={[
           styles.field,
           inputStyles,
-          // {
-          //   backgroundColor: colors.bcColor_input,
-          //   borderColor: colors.borderColor_standart,
-          // },
         ]}
       />
     </View>
@@ -151,5 +147,7 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     borderRadius: 10,
     width: '100%',
+    // backgroundColor: colors.bcColor_input,
+    //   borderColor: colors.borderColor_standart,
   },
 })

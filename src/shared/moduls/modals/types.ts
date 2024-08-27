@@ -6,6 +6,8 @@ export type ModalNames =
   | 'Toast'
   | 'TimeRangePicker'
   | 'BookingPreview'
+  | 'ProfileSettings'
+  | 'ThemePicker'
 
 export interface IModal {
   isOpen: boolean

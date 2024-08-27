@@ -1,4 +1,5 @@
 import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 import { PropsWithChildren } from 'react'
 import {
   StyleProp,
@@ -22,34 +23,31 @@ export const BtnFilled = ({
   textStyles,
 }: Props) => {
   const { colors } = useTheme()
+  const styles = getStyles(colors)
 
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[
-        styles.btn,
-        btnStyles,
-        { backgroundColor: colors.bcColor_btn_filled },
-      ]}
+      style={[styles.btn, btnStyles]}
     >
-      <Text
-        style={[styles.text, textStyles, { color: colors.color_btn_filled }]}
-      >
+      <Text style={[styles.text, textStyles]} >
         {children}
       </Text>
     </TouchableOpacity>
   )
 }
 
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   btn: {
     borderRadius: 10,
     padding: 25,
     paddingTop: 7,
     paddingBottom: 7,
+    backgroundColor: colors.bcColor_btn_filled
   },
   text: {
     fontSize: 16,
     fontWeight: '500',
+    color: colors.color_btn_filled
   },
 })

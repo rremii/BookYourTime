@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { useModal } from '@shared/moduls/modals/useModal'
 import { BookingPreviewModal } from '@host/features/BookingPreviewModal/BookingPreviewModal'
 import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 
 interface Props {
   dateFrom: Date
@@ -12,6 +13,7 @@ interface Props {
 
 export const CalendarCell = ({ dateFrom, dateTo }: Props) => {
   const { colors } = useTheme()
+  const styles = getStyles(colors)
 
   const { openModal } = useModal()
 
@@ -22,7 +24,7 @@ export const CalendarCell = ({ dateFrom, dateTo }: Props) => {
   const gradientColors = ['transparent', colors.color_linearGradient]
   return (
     <TouchableOpacity onPress={openPreview} style={styles.container}>
-      <Text style={[styles.date, { color: colors.color_standart_text }]}>
+      <Text style={styles.date}>
         {dateTo.getDate()}
       </Text>
 
@@ -34,7 +36,7 @@ export const CalendarCell = ({ dateFrom, dateTo }: Props) => {
   )
 }
 
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   container: {
     paddingTop: 10,
     paddingBottom: 10,
@@ -51,6 +53,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: colors.color_standart_text 
   },
   shadow: {
     position: 'absolute',

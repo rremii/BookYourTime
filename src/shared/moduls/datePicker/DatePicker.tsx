@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 import { useTheme } from '../theme'
+import { Theme } from '../theme/types'
 
 interface Props {
   onChange?: (date: Date | null) => void
@@ -19,6 +20,7 @@ interface Props {
 
 export const DatePicker = ({ initDate, onChange, ...props }: Props) => {
   const { colors } = useTheme()
+  const styles = getStyles(colors)
 
   const [date, setDate] = useState<Date | null>(initDate)
   const [isPicker, setIsPicker] = useState(false)
@@ -56,7 +58,6 @@ export const DatePicker = ({ initDate, onChange, ...props }: Props) => {
         style={[
           btnStyles,
           styles.btn,
-          { borderColor: colors.borderColor_date_picker },
         ]}
         onPress={openPicker}
       >
@@ -64,7 +65,6 @@ export const DatePicker = ({ initDate, onChange, ...props }: Props) => {
           style={[
             textStyles,
             styles.text,
-            { color: colors.color_standart_text },
           ]}
         >
           {date ? date.toDateString() : '- - -'}
@@ -74,7 +74,7 @@ export const DatePicker = ({ initDate, onChange, ...props }: Props) => {
   )
 }
 
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   btn: {
     zIndex: 10,
     paddingTop: 5,
@@ -86,8 +86,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    borderColor: colors.borderColor_date_picker
   },
   text: {
     fontSize: 16,
+    color: colors.color_standart_text
   },
 })

@@ -9,9 +9,13 @@ import { TagsSection } from './ui/TagsSection'
 import { useState } from 'react'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
 import { useTheme } from '@shared/moduls/theme'
+import { ProfileHeader } from '@shared/ui/ProfileHeader'
+import { Theme } from '@shared/moduls/theme/types'
 
 export const Profile = () => {
   const { colors } = useTheme()
+  const styles = getStyles(colors);
+
   const [isEditing, setIsEditing] = useState(false)
 
   const startEditing = () => {
@@ -23,18 +27,9 @@ export const Profile = () => {
   }
 
   return (
-    <ScrollView
-      contentContainerStyle={[
-        styles.container,
-        { backgroundColor: colors.bcColor_standart_container },
-      ]}
-    >
-      <View
-        style={[
-          styles.subContainer,
-          { backgroundColor: colors.bcColor_standart_container },
-        ]}
-      >
+    <ScrollView contentContainerStyle={styles.container}>
+      <ProfileHeader/>
+      <View style={styles.subContainer}>
         <View style={{ width: '100%' }}>
           <ProfileStatus status="host" />
         </View>
@@ -48,9 +43,7 @@ export const Profile = () => {
         </View>
 
         <View style={styles.textContainer}>
-          <Text
-            style={[styles.textLabel, { color: colors.color_standart_text }]}
-          >
+          <Text style={styles.textLabel}>
             Name:
           </Text>
           <LabelWithEdit
@@ -60,9 +53,7 @@ export const Profile = () => {
         </View>
 
         <View style={styles.textContainer}>
-          <Text
-            style={[styles.textLabel, { color: colors.color_standart_text }]}
-          >
+          <Text style={styles.textLabel}>
             Last name:
           </Text>
           <LabelWithEdit
@@ -81,12 +72,7 @@ export const Profile = () => {
         </View>
       </View>
 
-      <View
-        style={[
-          styles.btnContainer,
-          { backgroundColor: colors.bcColor_standart_container },
-        ]}
-      >
+      <View style={styles.btnContainer}>
         {isEditing ? (
           <>
             <UIButton
@@ -110,10 +96,7 @@ export const Profile = () => {
             <UIButton
               type="simple"
               onPress={startEditing}
-              btnStyles={{
-                backgroundColor: colors.bcColor_button,
-                borderColor: colors.borderColor_standart,
-              }}
+              btnStyles={styles.btnSimple}
               textStyles={{ color: colors.color_standart_text }}
             >
               Edit
@@ -125,14 +108,16 @@ export const Profile = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   container: {
     height: '100%',
+    backgroundColor: colors.bcColor_standart_container
   },
   subContainer: {
     padding: 20,
     flex: 1,
     alignItems: 'center',
+    backgroundColor: colors.bcColor_standart_container
   },
 
   textContainer: {
@@ -145,6 +130,7 @@ const styles = StyleSheet.create({
   textLabel: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: colors.color_standart_text
   },
   btnContainer: {
     width: '100%',
@@ -154,5 +140,10 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
+    backgroundColor: colors.bcColor_standart_container
   },
+  btnSimple: {
+    backgroundColor: colors.bcColor_button,
+    borderColor: colors.borderColor_standart,
+  }
 })

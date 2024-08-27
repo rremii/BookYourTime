@@ -1,6 +1,5 @@
 import {
   Dimensions,
-  LayoutChangeEvent,
   StyleSheet,
   View,
   Text,
@@ -9,8 +8,9 @@ import { CalendarCell } from './CalendarCell'
 import { GetMonthDays } from '@host/shared/utils/GetMonthDays'
 import { SubHeader } from './SubHeader'
 import { Header } from './Header'
-import { memo, useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 
 interface Props {
   calendarId: number
@@ -20,6 +20,7 @@ interface Props {
 
 export const Calendar = memo(({ calendarId, dateFrom, dateTo }: Props) => {
   const { colors } = useTheme()
+  const styles = getStyles(colors)
 
   const { days, weekDayShift } = GetMonthDays(dateFrom)
 
@@ -29,25 +30,12 @@ export const Calendar = memo(({ calendarId, dateFrom, dateTo }: Props) => {
     setActive(true)
   }, [])
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: colors.bcColor_standart_container,
-          borderColor: colors.borderColor_standart,
-        },
-      ]}
-    >
+    <View style={styles.container}>
       {active ? (
         <>
           <Header date={new Date(dateFrom)} />
           <SubHeader />
-          <View
-            style={[
-              styles.monthDaysContainer,
-              { backgroundColor: colors.bcColor_standart_container },
-            ]}
-          >
+          <View style={styles.monthDaysContainer}>
             {/* +1 due to we start at sunday */}
             {weekDayShift + 1 < 6
               ? new Array(weekDayShift + 1)
@@ -67,9 +55,7 @@ export const Calendar = memo(({ calendarId, dateFrom, dateTo }: Props) => {
         </>
       ) : (
         <View style={styles.loader}>
-          <Text
-            style={[styles.loaderText, { color: colors.color_standart_text }]}
-          >
+          <Text style={styles.loaderText}>
             LOADING
           </Text>
         </View>
@@ -78,10 +64,13 @@ export const Calendar = memo(({ calendarId, dateFrom, dateTo }: Props) => {
   )
 })
 
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   container: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
+
+    backgroundColor: colors.bcColor_standart_container,
+    borderColor: colors.borderColor_standart,
 
     borderWidth: 1,
   },
@@ -91,6 +80,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
+    backgroundColor: colors.bcColor_standart_container
   },
   emptyCell: {
     maxWidth: Math.floor(Dimensions.get('screen').width / 7) - 1, // width - / daysAmount
@@ -105,5 +95,6 @@ const styles = StyleSheet.create({
   loaderText: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: colors.color_standart_text
   },
 })

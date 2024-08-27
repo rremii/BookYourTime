@@ -9,7 +9,7 @@ import BookingIcon from '@icons/calendar.svg'
 import { Booking } from '@host/screens/booking/Booking'
 import { Profile } from '@host/screens/profile/Profile'
 import { useTheme } from '@shared/moduls/theme'
-import { ThemeObject } from '@shared/moduls/theme/types'
+import { Theme } from '@shared/moduls/theme/types'
 
 interface BottomTabIconProps {
   focused: boolean
@@ -65,7 +65,7 @@ const RootNavigation = () => {
 export default RootNavigation
 
 const getRootBottomTabsOptions = (
-  colors: ThemeObject, //TODO we can recieve specific theme colors but i think its not necessary
+  colors: Theme, //TODO we can recieve specific theme colors but i think its not necessary
 ): BottomTabNavigationOptions => ({
   headerShown: false,
 

@@ -5,9 +5,11 @@ import FilterIcon from '@icons/filter.svg'
 import { useModal } from '@shared/moduls/modals/useModal'
 import { SearchFilters } from '../searchFilters.tsx/SearchFilters'
 import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 
 export const SearchHeader = () => {
   const { colors } = useTheme()
+  const styles = getStyles(colors)
 
   const { openModal } = useModal()
 
@@ -16,16 +18,7 @@ export const SearchHeader = () => {
   }
 
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: colors.bcColor_search,
-          borderColor: colors.borderColor_searchHeader,
-          shadowColor: colors.color_standart_shadow,
-        },
-      ]}
-    >
+    <View style={styles.container}>
       <View style={styles.inputContainer}>
         <SearchIcon
           style={styles.searchIcon}
@@ -36,7 +29,7 @@ export const SearchHeader = () => {
         <TextInput
           placeholderTextColor={'white'}
           placeholder="Search for the host"
-          style={[styles.input, { color: colors.color_input }]}
+          style={styles.input}
         />
       </View>
       <TouchableOpacity onPress={openFilters} style={styles.filterBtn}>
@@ -45,7 +38,7 @@ export const SearchHeader = () => {
     </View>
   )
 }
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   container: {
     flexDirection: 'row',
     zIndex: 1,
@@ -59,7 +52,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 50,
     width: '95%',
+    backgroundColor: colors.bcColor_search,
+    borderColor: colors.borderColor_searchHeader,
 
+    shadowColor: colors.color_standart_shadow,
     elevation: 3,
   },
   inputContainer: {
@@ -71,6 +67,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     paddingLeft: 50,
+    color: colors.color_input
   },
   filterBtn: {
     width: 50,

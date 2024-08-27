@@ -3,6 +3,7 @@ import { useModal } from '@shared/moduls/modals/useModal'
 import { BookingModalType } from '../CreateEditBookingModal'
 import Cross from '@icons/cross.svg'
 import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 
 interface Props {
   type: BookingModalType
@@ -10,6 +11,8 @@ interface Props {
 
 export const Header = ({ type }: Props) => {
   const { colors } = useTheme()
+  const styles = getStyles(colors)
+
   const { closeModal } = useModal()
 
   const close = () => {
@@ -18,7 +21,7 @@ export const Header = ({ type }: Props) => {
 
   return (
     <View style={styles.headerContainer}>
-      <Text style={[styles.modalTitle, { color: colors.color_standart_text }]}>
+      <Text style={styles.modalTitle}>
         {type === 'create' ? 'Book an appointment' : 'Edit appointment'}
       </Text>
       <TouchableOpacity onPress={close}>
@@ -28,10 +31,11 @@ export const Header = ({ type }: Props) => {
   )
 }
 
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   modalTitle: {
     fontSize: 18,
     marginBottom: 10,
+    color: colors.color_standart_text
   },
   headerContainer: {
     flexDirection: 'row',

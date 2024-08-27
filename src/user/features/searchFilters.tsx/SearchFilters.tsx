@@ -18,6 +18,7 @@ import { TagsPicker } from '@shared/moduls/tagsPicker/TagsPicker'
 import { Header } from './ui/Header'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
 import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 
 interface Filters {
   date: Date | null
@@ -32,6 +33,8 @@ interface Props extends ModalProps {}
 
 export const SearchFilters = ({ isOpen }: Props) => {
   const { colors } = useTheme()
+  const styles = getStyles(colors)
+
   const [modalHeight, setModalHeight] = useState(
     Dimensions.get('screen').height * 0.6, // approximate
   )
@@ -92,8 +95,7 @@ export const SearchFilters = ({ isOpen }: Props) => {
         style={[
           styles.container,
           {
-            transform: [{ translateY: slideAnim }],
-            backgroundColor: colors.bcColor_standart_container,
+            transform: [{ translateY: slideAnim }]
           },
         ]}
       >
@@ -128,7 +130,7 @@ export const SearchFilters = ({ isOpen }: Props) => {
               inputSectionStyles.withPadding,
             ]}
           >
-            <Text style={{ fontSize: 16, color: colors.color_standart_text }}>
+            <Text style={styles.text}>
               Start
             </Text>
             <TimePicker
@@ -142,7 +144,7 @@ export const SearchFilters = ({ isOpen }: Props) => {
               inputSectionStyles.withPadding,
             ]}
           >
-            <Text style={{ fontSize: 16, color: colors.color_standart_text }}>
+            <Text style={styles.text}>
               End
             </Text>
             <TimePicker
@@ -169,10 +171,7 @@ export const SearchFilters = ({ isOpen }: Props) => {
           <UIButton
             type="simple"
             onPress={onReset}
-            btnStyles={{
-              backgroundColor: colors.bcColor_button,
-              borderColor: colors.borderColor_standart,
-            }}
+            btnStyles={styles.btnSimple}
             textStyles={{ color: colors.color_standart_text }}
           >
             Reset
@@ -191,7 +190,7 @@ export const SearchFilters = ({ isOpen }: Props) => {
   )
 }
 
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   container: {
     paddingTop: 20,
     paddingLeft: 50,
@@ -206,6 +205,7 @@ const styles = StyleSheet.create({
     transform: [{ translateY: 0 }],
     borderTopEndRadius: 40,
     borderTopStartRadius: 40,
+    backgroundColor: colors.bcColor_standart_container,
   },
 
   btnContainer: {
@@ -214,5 +214,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 15,
     marginTop: 15,
+  },
+
+  text: {
+    fontSize: 16,
+    color: colors.color_standart_text
+  },
+
+  btnSimple: {
+    backgroundColor: colors.bcColor_button,
+    borderColor: colors.borderColor_standart,
   },
 })

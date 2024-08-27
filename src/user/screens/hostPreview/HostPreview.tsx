@@ -11,9 +11,11 @@ import { BreakTime } from './ui/BreakTime'
 import { TagsSection } from './ui/TagsSection'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
 import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 
 export const HostPreview = () => {
   const { colors } = useTheme()
+  const styles = getStyles(colors)
 
   const { openModal } = useModal()
 
@@ -28,12 +30,7 @@ export const HostPreview = () => {
   }
 
   return (
-    <ScrollView
-      contentContainerStyle={[
-        styles.container,
-        { backgroundColor: colors.bcColor_standart_container },
-      ]}
-    >
+    <ScrollView contentContainerStyle={styles.container}>
       <HostProfile />
       <View style={{ width: '100%' }}>
         <WorkingHours />
@@ -58,11 +55,12 @@ export const HostPreview = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   container: {
     padding: 20,
     paddingTop: 70,
     alignItems: 'center',
+    backgroundColor: colors.bcColor_standart_container
   },
   btnContainer: {
     width: '100%',

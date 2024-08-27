@@ -6,6 +6,7 @@ import {
   setAuthSuccess,
 } from '@shared/entities/auth/authStore'
 import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 import { InputWithLabel } from '@shared/ui/InputWithLabel'
 import { getAuthFormStyles } from '@shared/ui/styles/authFormStyles'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
@@ -14,12 +15,12 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
 } from 'react-native'
 
 export const SignIn = () => {
   const { colors } = useTheme()
+  const styles = getStyles(colors)
 
   const navigation = useNavigation<StackNavigationProp<AuthNavigationParam>>()
 
@@ -40,28 +41,19 @@ export const SignIn = () => {
   })
   return (
     <View
-      style={[
-        styles.container,
-        { backgroundColor: colors.bcColor_standart_container },
-      ]}
+      style={styles.container}
     >
       <View style={authFormStyles.form}>
         <Text style={authFormStyles.title}>Sign In</Text>
 
         <InputWithLabel
-          labelContStyles={{ backgroundColor: colors.bcColor_layout }}
-          inputStyles={{
-            backgroundColor: colors.bcColor_input,
-            borderColor: colors.borderColor_standart,
-          }}
+          labelContStyles={styles.label}
+          inputStyles={styles.input}
           label="Email"
         />
         <InputWithLabel
-          labelContStyles={{ backgroundColor: colors.bcColor_layout }}
-          inputStyles={{
-            backgroundColor: colors.bcColor_input,
-            borderColor: colors.borderColor_standart,
-          }}
+          labelContStyles={styles.label}
+          inputStyles={styles.input}
           label="Password"
         />
 
@@ -86,10 +78,18 @@ export const SignIn = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: colors.bcColor_standart_container
   },
+  label: {
+    backgroundColor: colors.bcColor_layout
+  },
+  input: {
+    backgroundColor: colors.bcColor_input,
+    borderColor: colors.borderColor_standart,
+  }
 })

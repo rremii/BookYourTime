@@ -9,9 +9,12 @@ import { SearchNavigationParam } from '@user/app/navigation/types'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { useNavigation } from '@react-navigation/native'
 import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 
 export const HostCard = () => {
   const { colors } = useTheme()
+  const styles = getStyles(colors)
+
   const navigation = useNavigation<StackNavigationProp<SearchNavigationParam>>()
 
   const goToHostPreview = () => {
@@ -21,14 +24,7 @@ export const HostCard = () => {
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={goToHostPreview}
-      style={[
-        styles.container,
-        {
-          borderColor: colors.borderColor_shadow,
-          backgroundColor: colors.bcColor_card,
-          shadowColor: colors.color_standart_shadow,
-        },
-      ]}
+      style={styles.container}
     >
       <View
         style={{
@@ -37,10 +33,10 @@ export const HostCard = () => {
       >
         <Avatar size={50} color={colors.color_standart_avatar} />
         <View style={styles.textInfoContainer}>
-          <Text style={[styles.name, { color: colors.color_name }]}>
+          <Text style={styles.name}>
             Jon Doue
           </Text>
-          <Text style={[styles.specialty, { color: colors.color_specialty }]}>
+          <Text style={styles.specialty}>
             Software Engineer
           </Text>
         </View>
@@ -65,14 +61,17 @@ export const HostCard = () => {
   )
 }
 
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   container: {
     padding: 15,
     borderRadius: 10,
     borderWidth: 1,
     width: '90%',
     marginLeft: '5%',
+    borderColor: colors.borderColor_shadow,
+    backgroundColor: colors.bcColor_card,
 
+    shadowColor: colors.color_standart_shadow,
     elevation: 5,
   },
   textInfoContainer: {
@@ -81,9 +80,11 @@ const styles = StyleSheet.create({
   name: {
     fontWeight: 'bold',
     fontSize: 18,
+    color: colors.color_name 
   },
   specialty: {
     fontSize: 15,
+    color: colors.color_specialty
   },
 
   workingDaysContainer: {
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   tag: {
-    backgroundColor: '#F4F4F5', //colors.bcColor_tag
+    backgroundColor: colors.bcColor_tag,
     borderRadius: 5,
     padding: 5,
   },

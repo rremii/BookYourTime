@@ -16,6 +16,7 @@ import { BookingForm } from './ui/BookingForm'
 import { Header } from './ui/Header'
 import { ClientInfo } from './ui/ClientInfo'
 import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 
 export type BookingModalType = 'create' | 'edit'
 export type UserType = 'client' | 'host'
@@ -27,6 +28,8 @@ interface Props extends ModalProps {
 
 export const CreateEditBookingModal = ({ isOpen, type, userType }: Props) => {
   const { colors } = useTheme()
+  const styles = getStyles(colors)
+
   const { closeModal } = useModal()
 
   const [modalHeight, setModalHeight] = useState(
@@ -61,7 +64,6 @@ export const CreateEditBookingModal = ({ isOpen, type, userType }: Props) => {
         onLayout={onLayout}
         style={[
           styles.container,
-          { backgroundColor: colors.bcColor_standart_container },
           { transform: [{ translateY: slideAnim }] },
         ]}
       >
@@ -77,7 +79,7 @@ export const CreateEditBookingModal = ({ isOpen, type, userType }: Props) => {
   )
 }
 
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   container: {
     padding: 20,
     position: 'absolute',
@@ -88,6 +90,7 @@ const styles = StyleSheet.create({
     transform: [{ translateY: 0 }],
     borderTopEndRadius: 40,
     borderTopStartRadius: 40,
+    backgroundColor: colors.bcColor_standart_container
   },
   scrollContainer: {
     gap: 15,

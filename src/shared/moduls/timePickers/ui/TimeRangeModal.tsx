@@ -16,6 +16,7 @@ import { TimePicker } from './TimePicker'
 import { TimeRange } from '../types'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
 import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 
 interface Props extends ModalProps {
   onChange: (time: TimeRange) => void
@@ -67,7 +68,7 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
       height: e.nativeEvent.layout.height,
     })
   }
-  const styles = getStyles(modalSizes.width, modalSizes.height)
+  const styles = getStyles(modalSizes.width, modalSizes.height, colors)
   return (
     <>
       <Overlay
@@ -81,14 +82,13 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
           styles.container,
           {
             opacity: fadeAnim,
-            backgroundColor: colors.bcColor_standart_container,
           },
         ]}
       >
         <Text
           style={[
             inputSectionStyles.sectionTitle,
-            { marginBottom: 10, color: colors.color_standart_text },
+            styles.sectionTitle,
           ]}
         >
           Time:
@@ -99,9 +99,7 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
             inputSectionStyles.withPadding,
           ]}
         >
-          <Text
-            style={[styles.optionTitle, { color: colors.color_standart_text }]}
-          >
+          <Text style={styles.optionTitle}>
             Start
           </Text>
           <TimePicker
@@ -115,9 +113,7 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
             inputSectionStyles.withPadding,
           ]}
         >
-          <Text
-            style={[styles.optionTitle, { color: colors.color_standart_text }]}
-          >
+          <Text style={styles.optionTitle}>
             End
           </Text>
           <TimePicker initTime={timeRange.end} onChange={handleChange('end')} />
@@ -127,10 +123,7 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
           <UIButton
             type="simple"
             onPress={reset}
-            btnStyles={{
-              backgroundColor: colors.bcColor_button,
-              borderColor: colors.borderColor_standart,
-            }}
+            btnStyles={styles.btnSimple}
             textStyles={{ color: colors.color_standart_text }}
           >
             Reset
@@ -148,7 +141,7 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
     </>
   )
 }
-const getStyles = (width: number, height: number) => {
+const getStyles = (width: number, height: number, colors: Theme) => {
   return StyleSheet.create({
     container: {
       width: '90%',
@@ -160,6 +153,7 @@ const getStyles = (width: number, height: number) => {
       zIndex: 100,
       padding: 20,
       borderRadius: 10,
+      backgroundColor: colors.bcColor_standart_container,
     },
     btnContainer: {
       marginTop: 20,
@@ -170,6 +164,15 @@ const getStyles = (width: number, height: number) => {
     },
     optionTitle: {
       fontSize: 16,
+      color: colors.color_standart_text
     },
+    sectionTitle: {
+      marginBottom: 10,
+      color: colors.color_standart_text
+    },
+    btnSimple: {
+      backgroundColor: colors.bcColor_button,
+      borderColor: colors.borderColor_standart,
+    }
   })
 }

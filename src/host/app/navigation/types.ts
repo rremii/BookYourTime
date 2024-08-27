@@ -3,6 +3,12 @@ export type HostRootNavigationParam = {
   Booking: undefined
   Profile: undefined
 }
+
+export type SettingsNavigationParam = {
+  Profile: undefined
+  Settings: undefined
+}
+
 export type AuthNavigationParam = {
   SignUp: undefined
   SignIn: undefined

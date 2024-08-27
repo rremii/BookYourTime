@@ -14,6 +14,7 @@ import EditIcon from '@icons/edit.svg'
 import { SvgProps } from 'react-native-svg'
 import { set } from 'react-hook-form'
 import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 
 interface Props {
   onChange?: (value: string) => void
@@ -31,6 +32,8 @@ export const LabelWithEdit = ({
   ...props
 }: Props) => {
   const { colors } = useTheme()
+  const styles = getStyles(colors)
+
   const [isEditing, setIsEditing] = useState(false)
   const [curLabel, setCurLabel] = useState(label)
 
@@ -55,7 +58,6 @@ export const LabelWithEdit = ({
           style={[
             styles.input,
             inputStyle,
-            { borderColor: colors.borderColor_standart },
           ]}
         />
       ) : (
@@ -77,7 +79,7 @@ export const LabelWithEdit = ({
     </View>
   )
 }
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   container: {
     position: 'relative',
   },
@@ -98,6 +100,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     fontSize: 16,
     alignSelf: 'flex-start',
+    borderColor: colors.borderColor_standart
   },
   editIcon: {
     transform: [{ translateY: -10 }, { translateX: 5 }],

@@ -1,4 +1,5 @@
 import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 import React, { useEffect, useState } from 'react'
 import {
   StyleProp,
@@ -24,6 +25,8 @@ export const TimePicker = ({
   textStyles,
 }: Props) => {
   const { colors } = useTheme()
+  const styles = getStyles(colors)
+
   const [date, setDate] = useState<Date | null>(initTime)
   const [isPicker, setIsPicker] = useState(false)
 
@@ -53,21 +56,8 @@ export const TimePicker = ({
         onConfirm={handleChange}
         onCancel={closePicker}
       />
-      <TouchableOpacity
-        style={[
-          btnStyles,
-          styles.btn,
-          { borderColor: colors.borderColor_date_picker },
-        ]}
-        onPress={openPicker}
-      >
-        <Text
-          style={[
-            textStyles,
-            styles.text,
-            { color: colors.color_standart_text },
-          ]}
-        >
+      <TouchableOpacity style={[btnStyles, styles.btn]} onPress={openPicker}>
+        <Text style={[textStyles, styles.text]}>
           {date ? date.toTimeString().slice(0, 5) : '- : -'}
         </Text>
       </TouchableOpacity>
@@ -75,20 +65,23 @@ export const TimePicker = ({
   )
 }
 
-const styles = StyleSheet.create({
-  btn: {
-    zIndex: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 17,
-    paddingRight: 17,
-    alignSelf: 'flex-start',
-    borderRadius: 10,
-    borderWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 16,
-  },
-})
+const getStyles = (colors: Theme) =>
+  StyleSheet.create({
+    btn: {
+      zIndex: 10,
+      paddingTop: 5,
+      paddingBottom: 5,
+      paddingLeft: 17,
+      paddingRight: 17,
+      alignSelf: 'flex-start',
+      borderRadius: 10,
+      borderWidth: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderColor: colors.borderColor_date_picker,
+    },
+    text: {
+      fontSize: 16,
+      color: colors.color_standart_text,
+    },
+  })

@@ -6,6 +6,7 @@ import {
   setAuthSuccess,
 } from '@shared/entities/auth/authStore'
 import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 import { InputWithLabel } from '@shared/ui/InputWithLabel'
 import { getAuthFormStyles } from '@shared/ui/styles/authFormStyles'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
@@ -14,12 +15,12 @@ import {
   View,
   Text,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
 } from 'react-native'
 
 export const SignUp = () => {
   const { colors } = useTheme()
+  const styles = getStyles(colors)
 
   const navigation = useNavigation<StackNavigationProp<AuthNavigationParam>>()
 
@@ -39,12 +40,7 @@ export const SignUp = () => {
     btnBgColor: colors.bcColor_btn_filled,
   })
   return (
-    <View
-      style={[
-        styles.container,
-        { backgroundColor: colors.bcColor_standart_container },
-      ]}
-    >
+    <View style={styles.container}>
       <View style={authFormStyles.form}>
         <Text style={authFormStyles.title}>Sign Up</Text>
 
@@ -85,10 +81,11 @@ export const SignUp = () => {
     </View>
   )
 }
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: colors.bcColor_standart_container
   },
 })
