@@ -1,4 +1,4 @@
-import { AuthProvider } from '@host/entities/auth/AuthProvider'
+import { AuthProvider } from '@host/entities/auth/model/AuthProvider'
 import { FC, PropsWithChildren, useReducer } from 'react'
 
 export const withHostAuth =

@@ -1,57 +1,64 @@
 import { StyleSheet } from 'react-native'
 
-export const dangerBtnStyles = StyleSheet.create({
-  btn: {
-    backgroundColor: '#850a0a',
-    borderRadius: 10,
-    padding: 25,
-    paddingTop: 7,
-    justifyContent: 'center',
+export interface BtnStylesParams {
+  pressed?: boolean
+}
 
-    paddingBottom: 7,
-  },
-  text: {
-    textAlign: 'center',
-    fontSize: 15,
-    fontWeight: '500',
-    color: 'white',
-  },
-})
+export const getDangerBtnStyles = ({ pressed }: BtnStylesParams) =>
+  StyleSheet.create({
+    btn: {
+      backgroundColor: '#850a0a',
+      borderRadius: 10,
+      padding: 25,
+      paddingTop: 7,
+      justifyContent: 'center',
 
-export const filledBtnStyles = StyleSheet.create({
-  btn: {
-    backgroundColor: '#0A8537',
-    borderRadius: 10,
-    padding: 25,
-    paddingTop: 7,
-    paddingBottom: 7,
-    justifyContent: 'center',
-  },
-  text: {
-    textAlign: 'center',
+      paddingBottom: 7,
+    },
+    text: {
+      textAlign: 'center',
+      fontSize: 15,
+      fontWeight: '500',
+      color: 'white',
+    },
+  })
 
-    fontSize: 16,
-    fontWeight: '500',
-    color: 'white',
-  },
-})
+export const getFilledBtnStyles = ({ pressed }: BtnStylesParams) =>
+  StyleSheet.create({
+    btn: {
+      backgroundColor: pressed ? '#0A8537' : '#0A8537',
+      borderRadius: 10,
+      padding: 25,
+      paddingTop: 7,
+      paddingBottom: 7,
+      justifyContent: 'center',
+    },
+    text: {
+      textAlign: 'center',
 
-export const simpleBtnStyles = StyleSheet.create({
-  btn: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    justifyContent: 'center',
+      fontSize: 16,
+      fontWeight: '500',
+      color: 'white',
+    },
+  })
 
-    padding: 23,
-    paddingTop: 6,
-    paddingBottom: 6,
-    borderColor: 'black',
-    borderWidth: 1,
-  },
-  text: {
-    textAlign: 'center',
+export const getSimpleBtnStyles = ({ pressed }: BtnStylesParams) =>
+  StyleSheet.create({
+    btn: {
+      backgroundColor: 'white',
+      borderRadius: 10,
+      justifyContent: 'center',
 
-    fontSize: 16,
-    fontWeight: '500',
-  },
-})
+      padding: 23,
+      paddingTop: 6,
+      paddingBottom: 6,
+      borderColor: 'black',
+      borderWidth: 1,
+    },
+    text: {
+      textAlign: 'center',
+
+      fontSize: 16,
+      fontWeight: '500',
+    },
+  })

@@ -8,7 +8,9 @@ import {
 import { InputWithLabel } from '@shared/ui/InputWithLabel'
 import { authFormStyles } from '@shared/ui/styles/authFormStyles'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
+import { useLogin } from '@user/entities/auth/model/useLogin'
 import { useContext } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 import {
   View,
   Text,
@@ -16,44 +18,18 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native'
+import { emailRegex } from '../../features/SignInForm/emailRegex'
+import { SignInForm } from '@user/features/SignInForm/SignInForm'
+
+interface FormValues {
+  email: string
+  password: string
+}
 
 export const SignIn = () => {
-  const navigation = useNavigation<StackNavigationProp<AuthNavigationParam>>()
-
-  const { dispatch } = useContext(ClientAuthContext)
-
-  const signIn = () => {
-    dispatch(setAuthSuccess())
-  }
-
-  const goToSignUp = () => {
-    navigation.push('SignUp')
-  }
-
   return (
     <View style={styles.container}>
-      <View style={authFormStyles.form}>
-        <Text style={authFormStyles.title}>Sign In</Text>
-
-        <InputWithLabel label="Email" />
-        <InputWithLabel label="Password" />
-
-        <View style={authFormStyles.btnContainer}>
-          <UIButton
-            onPress={signIn}
-            btnStyles={authFormStyles.submitBtn}
-            type="filled"
-          >
-            Sign In
-          </UIButton>
-        </View>
-
-        <TouchableOpacity onPress={goToSignUp}>
-          <Text style={authFormStyles.additionalInfo}>
-            Don't have an account?
-          </Text>
-        </TouchableOpacity>
-      </View>
+      <SignInForm />
     </View>
   )
 }

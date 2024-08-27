@@ -1,15 +1,20 @@
-import { dangerBtnStyles, filledBtnStyles, simpleBtnStyles } from './styles'
+import {
+  BtnStylesParams,
+  getDangerBtnStyles,
+  getFilledBtnStyles,
+  getSimpleBtnStyles,
+} from './styles'
 import { BtnType } from './types'
 
-export const getStyles = (type: BtnType) => {
+export const getStyles = (type: BtnType, styleParams: BtnStylesParams) => {
   switch (type) {
     case 'simple':
-      return simpleBtnStyles
+      return getSimpleBtnStyles(styleParams)
     case 'danger':
-      return dangerBtnStyles
+      return getDangerBtnStyles(styleParams)
     case 'filled':
-      return filledBtnStyles
+      return getFilledBtnStyles(styleParams)
     default:
-      return simpleBtnStyles
+      return getSimpleBtnStyles(styleParams)
   }
 }

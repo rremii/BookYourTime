@@ -1,43 +1,44 @@
+import { AuthNavigationParam } from '@host/app/navigation/types'
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { RootNavigationParam } from '@root/app/navigation/types'
+import { navigateToWelcome } from '@root/app/providers/with-navigation'
+import { Roles } from '@shared/entities/auth/types'
+import { getTokenNameByRole } from '@shared/utils/getTokenNameByRole'
 import axios, {
   AxiosError,
   AxiosInstance,
+  AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios'
 import * as SecureStore from 'expo-secure-store'
 
-export const createAuthRefreshInterceptor =
-  (api: AxiosInstance, baseUrl: string) =>
-  async (error: AxiosError<unknown>) => {
-    const originalRequest = error.config
-    if (
-      error.response?.status === 401 &&
-      error.config &&
-      !error.config._isRetry &&
-      originalRequest
-    ) {
-      originalRequest._isRetry = true
-      try {
-        const response = await axios.get<{ accessToken: string }>(
-          baseUrl + 'auth/refresh',
-          { withCredentials: true },
-        )
+export const createWithNewTokenInterceptor =
+  (role: Roles) => (config: AxiosResponse) => {
+    if (config.headers && config.headers['new-token']) {
+      const newToken = config.headers['new-token'] as string
 
-        SecureStore.setItem('accessToken', response.data.accessToken)
-        return await api.request(originalRequest)
-      } catch (e) {
-        SecureStore.deleteItemAsync('accessToken').catch(() =>
-          console.log('could not delete accessToken'),
-        )
-      }
+      SecureStore.setItem(getTokenNameByRole(role), newToken)
+      config.headers.Authorization = `Bearer ${newToken}`
+    }
+    return config
+  }
+
+export const createAuthRefreshInterceptor =
+  (role: Roles) => async (error: AxiosError<unknown>) => {
+    if (error.response?.status === 401) {
+      SecureStore.deleteItemAsync(getTokenNameByRole(role)).finally(
+        navigateToWelcome,
+      )
     }
     throw error
   }
 
 export const createWithTokenInterceptor =
-  () => (config: InternalAxiosRequestConfig) => {
+  (role: Roles) => (config: InternalAxiosRequestConfig) => {
     if (config.headers !== null) {
       config.headers.Authorization = `Bearer ${SecureStore.getItem(
-        'accessToken',
+        getTokenNameByRole(role),
       )}`
     }
     return config
