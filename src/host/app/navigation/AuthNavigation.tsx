@@ -8,11 +8,14 @@ import {
 import { SignIn } from '@host/screens/signIn/SignIn'
 import { SignUp } from '@host/screens/signUp/SignUp'
 import RootNavigation from './RootNavigation'
-import { HostAuthContext } from '@shared/entities/auth/authStore'
+import { HostAuthContext } from '@host/entities/auth/model/authStore'
+import { useAuth } from '@host/entities/auth/model/useAuth'
 
 const AuthStack = createStackNavigator<AuthNavigationParam>()
 
 const AuthNavigation = () => {
+  useAuth()
+
   const { isLoggedIn } = useContext(HostAuthContext)
 
   const routes: {

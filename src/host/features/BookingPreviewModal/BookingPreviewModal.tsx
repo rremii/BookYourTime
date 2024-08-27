@@ -4,6 +4,7 @@ import { Overlay } from '@shared/ui/Overlay'
 import { useAnimatedValue } from '@shared/utils/useAnimatedValue'
 import { Animated, Dimensions, StyleSheet } from 'react-native'
 import { BookingCard } from './BookingCard'
+import { memo } from 'react'
 import { useTheme } from '@shared/moduls/theme'
 import { Theme } from '@shared/moduls/theme/types'
 
@@ -54,16 +55,17 @@ export const BookingPreviewModal = ({ isOpen, name }: Props) => {
   )
 }
 
-const getStyles = (colors: Theme) => StyleSheet.create({
-  modal: {
-    position: 'absolute',
-    width: '80%',
-    height: '100%',
-    right: 0,
-    top: 0,
-    zIndex: 1,
-    gap: 10,
-    padding: 5,
-    backgroundColor: colors.bcColor_standart_container,
-  },
-})
+const getStyles = (colors: Theme) =>
+  StyleSheet.create({
+    modal: {
+      position: 'absolute',
+      width: '80%',
+      height: '100%',
+      right: 0,
+      top: 0,
+      zIndex: 1,
+      gap: 10,
+      padding: 5,
+      backgroundColor: colors.bcColor_standart_container,
+    },
+  })

@@ -1,6 +1,7 @@
 import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 import { useAnimatedValue } from '@shared/utils/useAnimatedValue'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   TextInput,
   View,
@@ -11,21 +12,33 @@ import {
   TouchableOpacity,
   Touchable,
   TouchableHighlight,
+  KeyboardTypeOptions,
   StyleProp,
   TextStyle,
   ViewStyle,
 } from 'react-native'
 
 interface Props {
+  isError?: boolean
   label: string
+  onChangeText: (text: string) => void
+  onBlur?: () => void
+  keyboardType?: KeyboardTypeOptions
+  value?: string
   inputStyles?: StyleProp<TextStyle>
   contStyles?: StyleProp<ViewStyle>
   labelStyles?: StyleProp<TextStyle>
   labelContStyles?: StyleProp<ViewStyle>
 }
 
+//FOLLOWS THE LOGIC OF NATIVE TEXT INPUT
 export const InputWithLabel = ({
+  isError = false,
   label,
+  onBlur: handleBlur,
+  onChangeText: handleChangeText,
+  value,
+  keyboardType,
   contStyles,
   labelContStyles,
   inputStyles,
@@ -37,11 +50,26 @@ export const InputWithLabel = ({
   const [labelHeight, setLabelHeight] = useState(20)
 
   const [isFocused, setIsFocused] = useState(false)
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState(value || '')
   const inputRef = useRef<TextInput | null>(null)
 
+  useEffect(() => {
+    if (value || value === '') setInputValue(value)
+  }, [value])
+
   const onTextChange = (text: string) => {
-    setInputValue(text)
+    if (value || value === '') handleChangeText(text)
+    else {
+      handleChangeText(text)
+      setInputValue(text)
+    }
+  }
+  const onBlur = () => {
+    if (handleBlur) handleBlur()
+    setIsFocused(false)
+  }
+  const onFocus = () => {
+    setIsFocused(true)
   }
 
   const isAnimated = isFocused || inputValue.length > 0
@@ -77,19 +105,10 @@ export const InputWithLabel = ({
     if (e.nativeEvent.layout.height) setLabelHeight(e.nativeEvent.layout.height)
   }
 
+  const styles = getStyles(isError, colors)
   return (
-    <View onLayout={onLayout} style={[styles.fieldContainer, contStyles]}>
-      <View
-        style={[
-          {
-            pointerEvents: 'none',
-            zIndex: 1,
-            // backgroundColor: colors.bcColor_layout,
-          },
-          labelContStyles,
-        ]}
-        onLayout={onLayout}
-      >
+    <View onLayout={onLayout} style={styles.fieldContainer}>
+      <View style={styles.labelContainer} onLayout={onLayout}>
         <Animated.Text
           onLayout={onLabelLayout}
           style={[
@@ -104,50 +123,58 @@ export const InputWithLabel = ({
         </Animated.Text>
       </View>
       <TextInput
+        keyboardType={keyboardType}
         onChangeText={onTextChange}
         value={inputValue}
         ref={inputRef}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        style={[
-          styles.field,
-          inputStyles,
-        ]}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        style={[styles.field, inputStyles]}
       />
     </View>
   )
 }
 
-const styles = StyleSheet.create({
-  fieldContainer: {
-    position: 'relative',
-    marginBottom: 15,
-    justifyContent: 'center',
-    height: 40,
-  },
-  label: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    borderRadius: 20,
-    fontSize: 14,
-    fontWeight: '500',
-    marginBottom: 5,
-    zIndex: 1,
-    paddingLeft: 7,
-    paddingRight: 7,
-  },
+const getStyles = (isError: boolean, colors: Theme) =>
+  StyleSheet.create({
+    fieldContainer: {
+      position: 'relative',
+      marginBottom: 15,
+      justifyContent: 'center',
+      height: 40,
+    },
+    labelContainer: {
+      pointerEvents: 'none',
+      backgroundColor: 'transparent',
+      zIndex: 1,
+    },
+    label: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      borderRadius: 20,
+      fontSize: 14,
+      fontWeight: '500',
+      marginBottom: 5,
+      backgroundColor: 'white',
+      zIndex: 1,
+      paddingLeft: 7,
+      paddingRight: 7,
+      color: isError ? colors.bcColor_btn_danger : colors.color_standart_text,
+    },
 
-  field: {
-    fontSize: 15,
-    borderWidth: 1,
-    // padding: 5,
-    height: '100%',
-    paddingLeft: 15,
-    paddingRight: 15,
-    borderRadius: 10,
-    width: '100%',
-    // backgroundColor: colors.bcColor_input,
-    //   borderColor: colors.borderColor_standart,
-  },
-})
+    field: {
+      fontSize: 15,
+      backgroundColor: 'white',
+      borderColor: isError
+        ? colors.bcColor_btn_danger
+        : colors.borderColor_standart,
+      borderWidth: 1,
+      // padding: 5,
+      height: '100%',
+      paddingLeft: 15,
+      paddingRight: 15,
+      borderRadius: 10,
+      width: '100%',
+    },
+  })
