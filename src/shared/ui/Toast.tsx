@@ -2,11 +2,8 @@ import CheckMarkIcon from '@icons/check-mark.svg'
 import WarnIcon from '@icons/warn.svg'
 import { useAnimatedValue } from '@shared/utils/useAnimatedValue'
 import { ModalProps } from '@shared/moduls/modals/types'
-import React from 'react'
-import { FC, ReactNode, useState } from 'react'
-import { Animated, LayoutChangeEvent, View } from 'react-native'
-import { StyleSheet } from 'react-native'
-import { Text } from 'react-native'
+import React, { FC, ReactNode, useState } from 'react'
+import { Animated, LayoutChangeEvent, StyleSheet, Text } from 'react-native'
 
 export type ToastType = 'error' | 'warn'
 

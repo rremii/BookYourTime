@@ -1,7 +1,5 @@
-import React from 'react'
 import { useEffect, useRef, useState } from 'react'
-import { set } from 'react-hook-form'
-import { FlatList } from 'react-native'
+import { Dimensions, FlatList } from 'react-native'
 
 export const useSliderIndexes = (initIndexes: number[]) => {
   const middleIndex = Math.floor(initIndexes.length / 2)
@@ -9,7 +7,7 @@ export const useSliderIndexes = (initIndexes: number[]) => {
   const firstIndex = 0
 
   const [scrollIndexes, setScrollIndexes] = useState<number[]>(initIndexes)
-  const scrollContRef = useRef<FlatList<number[]> | null>(null)
+  const scrollContRef = useRef<FlatList<{ dateFrom: Date; dateTo: Date }>>(null)
 
   useEffect(() => {
     if (!scrollContRef.current) return
@@ -20,27 +18,29 @@ export const useSliderIndexes = (initIndexes: number[]) => {
   }, [middleIndex, scrollContRef])
 
   const shiftRight = () => {
-    if (!scrollContRef.current || !scrollIndexes.length) return
+    if (!scrollIndexes.length || !scrollContRef.current) return
 
-    const newIndexes = [...scrollIndexes].slice(1)
-    newIndexes.push(newIndexes[newIndexes.length - 1] + 1)
+    const newIndexes = [...scrollIndexes]
+
+    const lastIndex = newIndexes[newIndexes.length - 1]
+    newIndexes.push(lastIndex + 1)
+
     setScrollIndexes(newIndexes)
-
-    scrollContRef.current.scrollToIndex({
-      index: lastIndex - 1,
-      animated: false,
-    })
   }
+  const calendarWidth = Dimensions.get('window').width
 
   const shiftLeft = () => {
-    if (!scrollContRef.current || !scrollIndexes.length) return
+    if (!scrollIndexes.length || !scrollContRef.current) return
 
-    const newIndexes = [...scrollIndexes].slice(0, -1)
-    newIndexes.unshift(newIndexes[0] - 1)
+    const newIndexes = [...scrollIndexes]
+
+    const firstIndex = newIndexes[0]
+    newIndexes.unshift(firstIndex - 1)
+
     setScrollIndexes(newIndexes)
 
     scrollContRef.current.scrollToIndex({
-      index: firstIndex + 1,
+      index: 1,
       animated: false,
     })
   }

@@ -1,21 +1,11 @@
-import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
-import { useNavigation } from '@react-navigation/native'
 import { Avatar } from '@shared/ui/Avatar'
-import { Tag } from '@shared/ui/Tag'
-import { WorkingDay } from '@shared/ui/WorkingDay'
-import { RootNavigationParam } from '@user/app/navigation/types'
 import React from 'react'
-import { TouchableOpacity, View } from 'react-native'
-import CalendarIcon from '@icons/calendar.svg'
-import TagIcon from '@icons/tag.svg'
-import { StyleSheet } from 'react-native'
-import { Text } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useModal } from '@shared/moduls/modals/useModal'
 import {
   BookingModalType,
   CreateEditBookingModal,
 } from '@shared/features/CreateEditBookingModal'
-import { inputSectionStyles } from '@shared/ui/InputSection/InputSectionStyles'
 
 export const BookingCard = () => {
   const { openModal } = useModal()

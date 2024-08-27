@@ -1,6 +1,6 @@
 import { WorkingTime } from '@shared/ui/WorkingTime'
 import { styles } from './styles'
-import { View, Text } from 'react-native'
+import { Text } from 'react-native'
 import { useState } from 'react'
 import { TimeRange } from '@shared/moduls/timePickers/types'
 import { TimeRangePicker } from '@shared/moduls/timePickers'

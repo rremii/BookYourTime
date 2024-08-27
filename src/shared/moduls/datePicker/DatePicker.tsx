@@ -1,36 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import {
-  TouchableOpacity,
-  Text,
   StyleProp,
-  ViewStyle,
   StyleSheet,
+  Text,
   TextStyle,
-  Modal,
-  View,
+  TouchableOpacity,
+  ViewStyle,
 } from 'react-native'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
 
 interface Props {
   onChange?: (date: Date | null) => void
   initDate: Date | null
-  styles?: {
-    btn?: StyleProp<ViewStyle>
-    Text?: StyleProp<TextStyle>
-  }
+  btnStyles?: StyleProp<ViewStyle>
+  textStyles?: StyleProp<TextStyle>
 }
 
 export const DatePicker = ({ initDate, onChange, ...props }: Props) => {
-  const [date, setDate] = useState<Date | null>(null)
+  const [date, setDate] = useState<Date | null>(initDate)
   const [isPicker, setIsPicker] = useState(false)
 
   useEffect(() => {
     setDate(initDate)
   }, [initDate])
-
-  useEffect(() => {
-    if (onChange) onChange(date)
-  }, [date])
 
   const openPicker = () => {
     setIsPicker(true)
@@ -41,6 +33,7 @@ export const DatePicker = ({ initDate, onChange, ...props }: Props) => {
   const handleChange = (date: Date) => {
     closePicker()
     setDate(date)
+    if (onChange) onChange(date)
   }
 
   const btnStyles = props.styles?.btn || {}

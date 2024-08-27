@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useModal } from '@shared/moduls/modals/useModal'
 import { BookingModalType } from '../CreateEditBookingModal'
 import Cross from '@icons/cross.svg'

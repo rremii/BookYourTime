@@ -1,5 +1,4 @@
-import { FC, useContext, useEffect } from 'react'
-import { Modal, ModalProps } from 'react-native'
+import { useContext } from 'react'
 import { addModal, closeModal, ModalContext, removeModal } from './modalStore'
 import { ModalNames, RegisterModal } from './types'
 

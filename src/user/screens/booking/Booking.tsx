@@ -1,7 +1,5 @@
-import { HostCard } from '@user/features/hostCard/HostCard'
-import { View, Text, FlatList } from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
 import { Header } from './Header'
-import { StyleSheet } from 'react-native'
 import { BookingCard } from '@user/features/bookingCard/BookingCard'
 
 export const Booking = () => {
@@ -21,7 +19,7 @@ export const Booking = () => {
 }
 const styles = StyleSheet.create({
   listContainer: {
-    paddingBottom: 20,
+    paddingBottom: 70,
     paddingTop: 20,
     gap: 10,
   },

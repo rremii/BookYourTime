@@ -1,8 +1,8 @@
 import { useAnimatedValue } from '@shared/utils/useAnimatedValue'
 import {
-  StyleSheet,
-  Dimensions,
   Animated,
+  Dimensions,
+  StyleSheet,
   TouchableOpacity,
 } from 'react-native'
 

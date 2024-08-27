@@ -1,4 +1,4 @@
 import compose from 'compose-function'
-import { withNavigation } from './with-navigation'
+import { withAuth } from './with-auth'
 
-export const withProviders = compose(withNavigation)
+export const withProviders = compose(withAuth)

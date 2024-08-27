@@ -1,8 +1,8 @@
+import { RootApp } from '@root/app'
 import React from 'react'
-import Root from 'src/root'
 
 function App() {
-  return <Root />
+  return <RootApp />
 }
 
 export default App

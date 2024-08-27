@@ -3,13 +3,13 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs'
 import { Profile } from '../../screens/profile/Profile'
-import { RootNavigationParam, SearchNavigationParam } from './types'
 import { Booking } from '../../screens/booking/Booking'
 import React from 'react'
 import SearchIcon from '@icons/search.svg'
 import ProfileIcon from '@icons/profile.svg'
 import BookingIcon from '@icons/calendar.svg'
 import { SearchNavigation } from './SearchNavigation'
+import { ClientRootNavigationParam } from './types'
 
 interface BottomTabIconProps {
   focused: boolean
@@ -17,11 +17,11 @@ interface BottomTabIconProps {
   size: number
 }
 
-const RootBottomTabs = createBottomTabNavigator<RootNavigationParam>()
+const RootBottomTabs = createBottomTabNavigator<ClientRootNavigationParam>()
 
 const RootNavigation = () => {
   const routes: {
-    name: keyof RootNavigationParam
+    name: keyof ClientRootNavigationParam
     component: React.FC
     icon: (props: BottomTabIconProps) => JSX.Element
   }[] = [

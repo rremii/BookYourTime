@@ -1,22 +1,33 @@
 import { WorkingDay } from '@shared/ui/WorkingDay'
 import { styles } from './styles'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { Text, View } from 'react-native'
 import { useState } from 'react'
 import { WeekDaysPicker } from '@shared/moduls/weekDaysPicker/WeekDaysPicker'
+import { WeekDays } from '@shared/moduls/weekDaysPicker/types'
 
 interface Props {
   isEditing?: boolean
 }
 
 export const WorkingDays = ({ isEditing }: Props) => {
-  const [selectedDays, setSelectedDays] = useState<string[]>([])
+  const [selectedDays, setSelectedDays] = useState<WeekDays[]>([
+    'Friday',
+    'Saturday',
+  ])
+
+  const setWorkingDays = (days: WeekDays[]) => {
+    setSelectedDays(days)
+  }
 
   return (
     <>
       {isEditing ? (
         <>
           <Text style={styles.sectionTitle}>Choose working days</Text>
-          <WeekDaysPicker onChange={setSelectedDays} />
+          <WeekDaysPicker
+            initSelectedDays={selectedDays}
+            onChange={setWorkingDays}
+          />
         </>
       ) : (
         <>

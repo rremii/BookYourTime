@@ -1,28 +1,18 @@
-import { DatePicker } from '@shared/moduls/datePicker/DatePicker'
 import { ModalProps } from '@shared/moduls/modals/types'
 import { useModal } from '@shared/moduls/modals/useModal'
-import { TimePicker } from '@shared/moduls/timePickers/ui/TimePicker'
-import { Avatar } from '@shared/ui/Avatar'
-import { BtnFilled } from '@shared/ui/BtnFilled'
-import { BtnSimple } from '@shared/ui/BtnSimple'
 import { Overlay } from '@shared/ui/Overlay'
 import { useAnimatedValue } from '@shared/utils/useAnimatedValue'
 import React, { useState } from 'react'
 import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
   Animated,
-  TextInput,
-  ScrollView,
+  Dimensions,
   LayoutChangeEvent,
-  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
 } from 'react-native'
 
 import { HostInfo } from './ui/HostInfo'
 import { BookingForm } from './ui/BookingForm'
-import Cross from '@icons/cross.svg'
 import { Header } from './ui/Header'
 import { ClientInfo } from './ui/ClientInfo'
 

@@ -1,11 +1,4 @@
-import { BaseNavigationContainer } from '@react-navigation/native'
-import { Tag } from '@shared/ui/Tag'
-import { Avatar } from '@shared/ui/Avatar'
-import { BtnFilled } from '@shared/ui/BtnFilled'
-import { WorkingDay } from '@shared/ui/WorkingDay'
-import { WorkingTime } from '@shared/ui/WorkingTime'
-import { ScrollView, View } from 'react-native'
-import { Text, StyleSheet } from 'react-native'
+import { ScrollView, StyleSheet, View } from 'react-native'
 import { useModal } from '@shared/moduls/modals/useModal'
 import {
   BookingModalType,
@@ -16,6 +9,7 @@ import { WorkingHours } from './ui/WorkingHours'
 import { WorkingDays } from './ui/WorkingDays'
 import { BreakTime } from './ui/BreakTime'
 import { TagsSection } from './ui/TagsSection'
+import { UIButton } from '@shared/ui/UIButton/UIButton'
 
 export const HostPreview = () => {
   const { openModal } = useModal()
@@ -43,7 +37,9 @@ export const HostPreview = () => {
         <TagsSection />
       </View>
       <View style={styles.btnContainer}>
-        <BtnFilled onPress={openBookingModal}>Book Appointment</BtnFilled>
+        <UIButton type="filled" onPress={openBookingModal}>
+          Book Appointment
+        </UIButton>
       </View>
     </ScrollView>
   )

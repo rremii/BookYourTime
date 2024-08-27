@@ -1,5 +1,4 @@
-import { TextInput, TouchableOpacity, View } from 'react-native'
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import SearchIcon from '@icons/search.svg'
 import FilterIcon from '@icons/filter.svg'

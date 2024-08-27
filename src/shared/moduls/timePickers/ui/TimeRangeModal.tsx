@@ -1,24 +1,20 @@
 import {
-  StyleProp,
-  TextStyle,
-  StyleSheet,
-  View,
-  ViewStyle,
   Animated,
-  LayoutChangeEvent,
   Dimensions,
+  LayoutChangeEvent,
+  StyleSheet,
+  Text,
+  View,
 } from 'react-native'
 import { ModalProps } from '../../modals/types'
 import { Overlay } from '@shared/ui/Overlay'
 import { useModal } from '../../modals/useModal'
-import { Text } from 'react-native'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useAnimatedValue } from '@shared/utils/useAnimatedValue'
-import { inputSectionStyles } from '@shared/ui/InputSection/InputSectionStyles'
+import { inputSectionStyles } from '@shared/ui/styles/InputSectionStyles'
 import { TimePicker } from './TimePicker'
 import { TimeRange } from '../types'
-import { BtnFilled } from '@shared/ui/BtnFilled'
-import { BtnSimple } from '@shared/ui/BtnSimple'
+import { UIButton } from '@shared/ui/UIButton/UIButton'
 
 interface Props extends ModalProps {
   onChange: (time: TimeRange) => void
@@ -108,8 +104,12 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
         </View>
 
         <View style={styles.btnContainer}>
-          <BtnSimple onPress={reset}>Reset</BtnSimple>
-          <BtnFilled onPress={apply}>Apply</BtnFilled>
+          <UIButton type="simple" onPress={reset}>
+            Reset
+          </UIButton>
+          <UIButton type="filled" onPress={apply}>
+            Apply
+          </UIButton>
         </View>
       </Animated.View>
     </>

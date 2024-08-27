@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Dimensions } from 'react-native'
+import { Dimensions, StyleSheet, Text, View } from 'react-native'
 
 export const SubHeader = () => {
   return (
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   weekDay: {
-    maxWidth: Math.floor(Dimensions.get('screen').width / 7), // (width - padding) / daysAmount
+    maxWidth: Math.floor(Dimensions.get('screen').width / 7), // width / daysAmount
     width: '100%',
     fontSize: 16,
     color: '#6E6E77',

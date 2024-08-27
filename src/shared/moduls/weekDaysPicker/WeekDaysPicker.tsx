@@ -1,26 +1,29 @@
-import { View, TouchableOpacity } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import { useEffect, useState } from 'react'
 import { WorkingDay } from '@shared/ui/WorkingDay'
 import { weekDays } from './weekDays'
+import { WeekDays } from './types'
 
 interface Props {
-  onChange: (days: string[]) => void
+  initSelectedDays: WeekDays[]
+  onChange: (days: WeekDays[]) => void
 }
 
-export const WeekDaysPicker = ({ onChange }: Props) => {
-  const [selectedDays, setSelectedDays] = useState<string[]>([])
-
-  const selectDay = (day: string) => {
-    setSelectedDays(
-      selectedDays.includes(day)
-        ? selectedDays.filter((d) => d !== day)
-        : [...selectedDays, day],
-    )
-  }
+export const WeekDaysPicker = ({ onChange, initSelectedDays }: Props) => {
+  const [selectedDays, setSelectedDays] = useState<WeekDays[]>(initSelectedDays)
 
   useEffect(() => {
-    onChange(selectedDays)
-  }, [selectedDays])
+    setSelectedDays(initSelectedDays)
+  }, [initSelectedDays])
+
+  const selectDay = (day: WeekDays) => {
+    const newSelectedDays = selectedDays.includes(day)
+      ? selectedDays.filter((selectedDay) => selectedDay !== day)
+      : [...selectedDays, day]
+
+    onChange(newSelectedDays)
+    setSelectedDays(newSelectedDays)
+  }
 
   return (
     <View

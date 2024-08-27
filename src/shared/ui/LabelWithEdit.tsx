@@ -1,17 +1,18 @@
-import { PropsWithChildren, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  TextInput,
-  Touchable,
-  TouchableOpacity,
-  TextStyle,
+  NativeSyntheticEvent,
   StyleProp,
+  StyleSheet,
+  Text,
+  TextInput,
+  TextInputSubmitEditingEventData,
+  TextStyle,
+  TouchableOpacity,
+  View,
 } from 'react-native'
 import EditIcon from '@icons/edit.svg'
 import { SvgProps } from 'react-native-svg'
+import { set } from 'react-hook-form'
 
 interface Props {
   onChange?: (value: string) => void
@@ -28,32 +29,27 @@ export const LabelWithEdit = ({
   labelStyle,
   ...props
 }: Props) => {
-  const [value, setValue] = useState(label)
   const [isEditing, setIsEditing] = useState(false)
-
-  useEffect(() => {
-    setValue(label)
-  }, [label])
-
-  useEffect(() => {
-    if (isEditing) inputRef.current?.focus()
-  }, [isEditing])
+  const [curLabel, setCurLabel] = useState(label)
 
   const onSubmit = () => {
-    if (onChange) onChange(value)
+    if (onChange) onChange(curLabel)
     setIsEditing(false)
   }
 
-  const inputRef = useRef<TextInput | null>(null)
-  const editIconStyle = props.editIconStyle || {}
+  const onTextChange = (newLabel: string) => {
+    setCurLabel(newLabel)
+  }
+
+  const editIconStyle = (props.editIconStyle || {}) as SvgProps
   return (
     <View style={styles.container}>
       {isEditing ? (
         <TextInput
-          value={value}
-          onChangeText={setValue}
-          onBlur={onSubmit}
-          ref={inputRef}
+          onChangeText={onTextChange}
+          value={curLabel}
+          onSubmitEditing={onSubmit}
+          autoFocus={true}
           style={[styles.input, inputStyle]}
         />
       ) : (
@@ -61,10 +57,10 @@ export const LabelWithEdit = ({
           style={styles.labelContainer}
           onPress={() => setIsEditing(true)}
         >
-          <Text style={[styles.label, labelStyle]}>{value}</Text>
+          <Text style={[styles.label, labelStyle]}>{curLabel}</Text>
           <View style={styles.editIcon}>
             <EditIcon
-              {...(editIconStyle as SvgProps)}
+              {...editIconStyle}
               color={'#0A8537'}
               width={24}
               height={24}

@@ -1,3 +1,3 @@
-import RootNavigation from './RootNavigation'
+import AuthNavigation from './AuthNavigation'
 
-export default RootNavigation
+export default AuthNavigation

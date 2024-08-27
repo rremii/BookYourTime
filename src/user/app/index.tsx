@@ -1,6 +1,5 @@
 import { AppLayout } from './layout/AppLayout'
 import Navigation from './navigation'
-import { withProviders } from './providers/with-providers'
 
 function App() {
   return (
@@ -10,4 +9,4 @@ function App() {
   )
 }
 
-export const UserApp = withProviders(App)
+export const ClientApp = App

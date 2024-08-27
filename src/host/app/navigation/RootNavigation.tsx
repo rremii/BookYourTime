@@ -2,14 +2,12 @@ import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs'
-import { RootNavigationParam } from './types'
+import { HostRootNavigationParam } from './types'
 import React from 'react'
-import SearchIcon from '@icons/search.svg'
 import ProfileIcon from '@icons/profile.svg'
 import BookingIcon from '@icons/calendar.svg'
 import { Booking } from '@host/screens/booking/Booking'
 import { Profile } from '@host/screens/profile/Profile'
-import { HostPreview } from '@user/screens/hostPreview/HostPreview'
 
 interface BottomTabIconProps {
   focused: boolean
@@ -17,11 +15,11 @@ interface BottomTabIconProps {
   size: number
 }
 
-const RootBottomTabs = createBottomTabNavigator<RootNavigationParam>()
+const RootBottomTabs = createBottomTabNavigator<HostRootNavigationParam>()
 
 const RootNavigation = () => {
   const routes: {
-    name: keyof RootNavigationParam
+    name: keyof HostRootNavigationParam
     component: React.FC
     icon: (props: BottomTabIconProps) => JSX.Element
   }[] = [

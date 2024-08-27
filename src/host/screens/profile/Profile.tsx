@@ -1,18 +1,16 @@
 import { Avatar } from '@shared/ui/Avatar'
-import { BtnDanger } from '@shared/ui/BtnDanger'
 import { LabelWithEdit } from '@shared/ui/LabelWithEdit'
 import { ProfileStatus } from '@shared/ui/ProfileStatus'
-import { View, StyleSheet, Text, ScrollView } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import { WorkingHours } from './ui/WorkingHours'
 import { WorkingDays } from './ui/WorkingDays'
 import { BreakTime } from './ui/BreakTime'
 import { TagsSection } from './ui/TagsSection'
 import { useState } from 'react'
-import { BtnSimple } from '@shared/ui/BtnSimple'
-import { BtnFilled } from '@shared/ui/BtnFilled'
+import { UIButton } from '@shared/ui/UIButton/UIButton'
 
 export const Profile = () => {
-  const [isEditing, setIsEditing] = useState(true)
+  const [isEditing, setIsEditing] = useState(false)
 
   const startEditing = () => {
     setIsEditing(true)
@@ -56,12 +54,16 @@ export const Profile = () => {
       <View style={styles.btnContainer}>
         {isEditing ? (
           <>
-            <BtnFilled onPress={submitEditing}>Save</BtnFilled>
+            <UIButton type="filled" onPress={submitEditing}>
+              Save
+            </UIButton>
           </>
         ) : (
           <>
-            <BtnDanger>Delete account</BtnDanger>
-            <BtnSimple onPress={startEditing}>Edit</BtnSimple>
+            <UIButton type="danger">Delete account</UIButton>
+            <UIButton type="simple" onPress={startEditing}>
+              Edit
+            </UIButton>
           </>
         )}
       </View>

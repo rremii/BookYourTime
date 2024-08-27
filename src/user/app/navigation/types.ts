@@ -1,6 +1,4 @@
-import { NavigatorScreenParams } from '@react-navigation/native'
-
-export type RootNavigationParam = {
+export type ClientRootNavigationParam = {
   Search: undefined
   Booking: undefined
   Profile: undefined

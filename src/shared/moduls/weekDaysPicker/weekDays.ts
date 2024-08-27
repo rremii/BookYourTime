@@ -1,4 +1,6 @@
-export const weekDays = [
+import { WeekDays } from './types'
+
+export const weekDays: WeekDays[] = [
   'Monday',
   'Tuesday',
   'Wednesday',
