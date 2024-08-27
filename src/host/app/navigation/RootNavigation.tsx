@@ -8,6 +8,8 @@ import ProfileIcon from '@icons/profile.svg'
 import BookingIcon from '@icons/calendar.svg'
 import { Booking } from '@host/screens/booking/Booking'
 import { Profile } from '@host/screens/profile/Profile'
+import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 
 interface BottomTabIconProps {
   focused: boolean
@@ -18,6 +20,8 @@ interface BottomTabIconProps {
 const RootBottomTabs = createBottomTabNavigator<HostRootNavigationParam>()
 
 const RootNavigation = () => {
+  const { colors } = useTheme()
+
   const routes: {
     name: keyof HostRootNavigationParam
     component: React.FC
@@ -39,9 +43,10 @@ const RootNavigation = () => {
     },
   ]
 
+  const options = getRootBottomTabsOptions(colors)
   return (
     <RootBottomTabs.Navigator
-      screenOptions={BottomTabsOptions}
+      screenOptions={options}
       initialRouteName="Booking"
     >
       {routes.map((route, index) => (
@@ -58,7 +63,10 @@ const RootNavigation = () => {
   )
 }
 export default RootNavigation
-const BottomTabsOptions: BottomTabNavigationOptions = {
+
+const getRootBottomTabsOptions = (
+  colors: Theme, //TODO we can recieve specific theme colors but i think its not necessary
+): BottomTabNavigationOptions => ({
   headerShown: false,
 
   tabBarStyle: {
@@ -66,8 +74,8 @@ const BottomTabsOptions: BottomTabNavigationOptions = {
     paddingTop: 7,
 
     height: 60,
-    backgroundColor: '#fff',
-    borderTopColor: '#6e6e7731',
+    backgroundColor: colors.bcColor_tabBar,
+    borderTopColor: colors.borderTopColor_tabBar,
     borderTopWidth: 1,
   },
   tabBarItemStyle: {
@@ -83,6 +91,6 @@ const BottomTabsOptions: BottomTabNavigationOptions = {
     width: 10,
   },
 
-  tabBarActiveTintColor: '#0A8537',
-  tabBarInactiveTintColor: '#6E6E77',
-}
+  tabBarActiveTintColor: colors.color_tabBar_active,
+  tabBarInactiveTintColor: colors.color_tabBar_inactive,
+})

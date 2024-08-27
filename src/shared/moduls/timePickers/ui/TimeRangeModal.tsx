@@ -15,6 +15,8 @@ import { inputSectionStyles } from '@shared/ui/styles/InputSectionStyles'
 import { TimePicker } from './TimePicker'
 import { TimeRange } from '../types'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
+import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 
 interface Props extends ModalProps {
   onChange: (time: TimeRange) => void
@@ -22,6 +24,7 @@ interface Props extends ModalProps {
 }
 
 export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
+  const { colors } = useTheme()
   const [timeRange, setTimeRange] = useState<TimeRange>(initTime)
 
   const handleChange = (type: keyof TimeRange) => (newTime: Date | null) => {
@@ -65,10 +68,14 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
       height: e.nativeEvent.layout.height,
     })
   }
-  const styles = getStyles(modalSizes.width, modalSizes.height)
+  const styles = getStyles(modalSizes.width, modalSizes.height, colors)
   return (
     <>
-      <Overlay onPress={close} isActive={isOpen} />
+      <Overlay
+        onPress={close}
+        isActive={isOpen}
+        backgroundColor={colors.bcColor_overlay}
+      />
       <Animated.View
         onLayout={onLayout}
         style={[
@@ -78,7 +85,12 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
           },
         ]}
       >
-        <Text style={[inputSectionStyles.sectionTitle, { marginBottom: 10 }]}>
+        <Text
+          style={[
+            inputSectionStyles.sectionTitle,
+            styles.sectionTitle,
+          ]}
+        >
           Time:
         </Text>
         <View
@@ -87,7 +99,9 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
             inputSectionStyles.withPadding,
           ]}
         >
-          <Text style={{ fontSize: 16 }}>Start</Text>
+          <Text style={styles.optionTitle}>
+            Start
+          </Text>
           <TimePicker
             initTime={timeRange.start}
             onChange={handleChange('start')}
@@ -99,15 +113,27 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
             inputSectionStyles.withPadding,
           ]}
         >
-          <Text style={{ fontSize: 16 }}>End</Text>
+          <Text style={styles.optionTitle}>
+            End
+          </Text>
           <TimePicker initTime={timeRange.end} onChange={handleChange('end')} />
         </View>
 
         <View style={styles.btnContainer}>
-          <UIButton type="simple" onPress={reset}>
+          <UIButton
+            type="simple"
+            onPress={reset}
+            btnStyles={styles.btnSimple}
+            textStyles={{ color: colors.color_standart_text }}
+          >
             Reset
           </UIButton>
-          <UIButton type="filled" onPress={apply}>
+          <UIButton
+            type="filled"
+            onPress={apply}
+            btnStyles={{ backgroundColor: colors.bcColor_btn_filled }}
+            textStyles={{ color: colors.color_btn_filled }}
+          >
             Apply
           </UIButton>
         </View>
@@ -115,7 +141,7 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
     </>
   )
 }
-const getStyles = (width: number, height: number) => {
+const getStyles = (width: number, height: number, colors: Theme) => {
   return StyleSheet.create({
     container: {
       width: '90%',
@@ -125,9 +151,9 @@ const getStyles = (width: number, height: number) => {
       position: 'absolute',
       transform: [{ translateY: -height / 2 }, { translateX: -width / 2 }],
       zIndex: 100,
-      backgroundColor: 'white',
       padding: 20,
       borderRadius: 10,
+      backgroundColor: colors.bcColor_standart_container,
     },
     btnContainer: {
       marginTop: 20,
@@ -136,5 +162,17 @@ const getStyles = (width: number, height: number) => {
       alignItems: 'center',
       gap: 10,
     },
+    optionTitle: {
+      fontSize: 16,
+      color: colors.color_standart_text
+    },
+    sectionTitle: {
+      marginBottom: 10,
+      color: colors.color_standart_text
+    },
+    btnSimple: {
+      backgroundColor: colors.bcColor_button,
+      borderColor: colors.borderColor_standart,
+    }
   })
 }

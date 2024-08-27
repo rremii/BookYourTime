@@ -7,6 +7,8 @@ import { ReactNode, useState } from 'react'
 import { Toast, ToastType } from '@shared/ui/Toast'
 import { BookingModalType } from '../CreateEditBookingModal'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
+import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 
 interface FormValues {
   date: Date | null
@@ -20,6 +22,9 @@ interface Props {
 }
 
 export const BookingForm = ({ type }: Props) => {
+  const { colors } = useTheme()
+  const styles = getStyles(colors)
+
   const { closeModal, openModal } = useModal()
 
   const [formValues, setFormValues] = useState<FormValues>({
@@ -82,7 +87,14 @@ export const BookingForm = ({ type }: Props) => {
   return (
     <>
       <View style={inputSectionStyles.sectionContainer}>
-        <Text style={inputSectionStyles.sectionTitle}>title: </Text>
+        <Text
+          style={[
+            inputSectionStyles.sectionTitle,
+            { color: colors.color_standart_text },
+          ]}
+        >
+          title:{' '}
+        </Text>
         <TextInput
           value={formValues.title}
           onChangeText={onFilterChange('title')}
@@ -90,21 +102,37 @@ export const BookingForm = ({ type }: Props) => {
         />
       </View>
       <View style={inputSectionStyles.sectionContainer}>
-        <Text style={inputSectionStyles.sectionTitle}>Date:</Text>
+        <Text
+          style={[
+            inputSectionStyles.sectionTitle,
+            { color: colors.color_standart_text },
+          ]}
+        >
+          Date:
+        </Text>
         <DatePicker
           onChange={onFilterChange('date')}
           initDate={formValues.date}
         />
       </View>
       <View>
-        <Text style={inputSectionStyles.sectionTitle}>Time:</Text>
+        <Text
+          style={[
+            inputSectionStyles.sectionTitle,
+            { color: colors.color_standart_text },
+          ]}
+        >
+          Time:
+        </Text>
         <View
           style={[
             inputSectionStyles.sectionContainer,
             inputSectionStyles.withPadding,
           ]}
         >
-          <Text style={{ fontSize: 16 }}>Start</Text>
+          <Text style={styles.text}>
+            Start
+          </Text>
           <TimePicker
             onChange={onFilterChange('startTime')}
             initTime={formValues.startTime}
@@ -116,7 +144,9 @@ export const BookingForm = ({ type }: Props) => {
             inputSectionStyles.withPadding,
           ]}
         >
-          <Text style={{ fontSize: 16 }}>End</Text>
+          <Text style={styles.text}>
+            End
+          </Text>
           <TimePicker
             onChange={onFilterChange('endTime')}
             initTime={formValues.endTime}
@@ -126,22 +156,47 @@ export const BookingForm = ({ type }: Props) => {
       <View style={styles.btnContainer}>
         {type === 'create' ? (
           <>
-            <UIButton type="simple" onPress={onReset}>
+            <UIButton
+              type="simple"
+              onPress={onReset}
+              btnStyles={styles.btnSimple}
+              textStyles={{ color: colors.color_standart_text }}
+            >
               Reset
             </UIButton>
-            <UIButton type="filled" onPress={onSubmit}>
+            <UIButton
+              type="filled"
+              onPress={onSubmit}
+              btnStyles={{ backgroundColor: colors.bcColor_btn_filled }}
+              textStyles={{ color: colors.color_btn_filled }}
+            >
               Create
             </UIButton>
           </>
         ) : (
           <>
-            <UIButton type="danger" onPress={onDelete}>
+            <UIButton
+              type="danger"
+              onPress={onDelete}
+              btnStyles={{ backgroundColor: colors.bcColor_btn_danger }}
+              textStyles={{ color: colors.color_btn_danger }}
+            >
               Delete
             </UIButton>
-            <UIButton type="simple" onPress={onCancel}>
+            <UIButton
+              type="simple"
+              onPress={onCancel}
+              btnStyles={styles.btnSimple}
+              textStyles={{ color: colors.color_standart_text }}
+            >
               Cancel
             </UIButton>
-            <UIButton type="filled" onPress={onSubmit}>
+            <UIButton
+              type="filled"
+              onPress={onSubmit}
+              btnStyles={{ backgroundColor: colors.bcColor_btn_filled }}
+              textStyles={{ color: colors.color_btn_filled }}
+            >
               Apply
             </UIButton>
           </>
@@ -150,18 +205,18 @@ export const BookingForm = ({ type }: Props) => {
     </>
   )
 }
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   titleInput: {
     fontSize: 16,
     flex: 1,
     marginLeft: 10,
-    borderColor: '#48484866',
-    color: '#000',
     borderWidth: 1,
     borderRadius: 7,
     padding: 12,
     paddingTop: 3,
     paddingBottom: 3,
+    borderColor: colors.borderColor_titleInput,
+    color: colors.color_titleInput,
   },
 
   btnContainer: {
@@ -170,5 +225,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 10,
     marginTop: 15,
+  },
+
+  btnSimple: {
+    backgroundColor: colors.bcColor_button,
+    borderColor: colors.borderColor_standart,
+  },
+  text: {
+    fontSize: 16,
+    color: colors.color_standart_text
   },
 })

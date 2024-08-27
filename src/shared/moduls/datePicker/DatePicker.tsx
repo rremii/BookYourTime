@@ -8,6 +8,8 @@ import {
   ViewStyle,
 } from 'react-native'
 import DateTimePickerModal from 'react-native-modal-datetime-picker'
+import { useTheme } from '../theme'
+import { Theme } from '../theme/types'
 
 interface Props {
   onChange?: (date: Date | null) => void
@@ -17,6 +19,9 @@ interface Props {
 }
 
 export const DatePicker = ({ initDate, onChange, ...props }: Props) => {
+  const { colors } = useTheme()
+  const styles = getStyles(colors)
+
   const [date, setDate] = useState<Date | null>(initDate)
   const [isPicker, setIsPicker] = useState(false)
 
@@ -44,12 +49,24 @@ export const DatePicker = ({ initDate, onChange, ...props }: Props) => {
         date={date || new Date()}
         isVisible={isPicker}
         mode="date"
-        accentColor="#0A8537"
+        accentColor={colors.color_accentPicker}
         onConfirm={handleChange}
         onCancel={closePicker}
+        isDarkModeEnabled={true}
       />
-      <TouchableOpacity style={[btnStyles, styles.btn]} onPress={openPicker}>
-        <Text style={[textStyles, styles.text]}>
+      <TouchableOpacity
+        style={[
+          btnStyles,
+          styles.btn,
+        ]}
+        onPress={openPicker}
+      >
+        <Text
+          style={[
+            textStyles,
+            styles.text,
+          ]}
+        >
           {date ? date.toDateString() : '- - -'}
         </Text>
       </TouchableOpacity>
@@ -57,7 +74,7 @@ export const DatePicker = ({ initDate, onChange, ...props }: Props) => {
   )
 }
 
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   btn: {
     zIndex: 10,
     paddingTop: 5,
@@ -66,14 +83,13 @@ const styles = StyleSheet.create({
     paddingRight: 17,
     alignSelf: 'flex-start',
     borderRadius: 10,
-    borderColor: '#acacac',
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    borderColor: colors.borderColor_date_picker
   },
   text: {
     fontSize: 16,
-
-    color: 'black',
+    color: colors.color_standart_text
   },
 })

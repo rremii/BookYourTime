@@ -1,6 +1,5 @@
 import {
   Dimensions,
-  LayoutChangeEvent,
   StyleSheet,
   View,
   Text,
@@ -9,7 +8,9 @@ import { CalendarCell } from './CalendarCell'
 import { GetMonthDays } from '@host/shared/utils/GetMonthDays'
 import { SubHeader } from './SubHeader'
 import { Header } from './Header'
-import { memo, useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
+import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 
 interface Props {
   calendarId: number
@@ -18,6 +19,9 @@ interface Props {
 }
 
 export const Calendar = memo(({ calendarId, dateFrom, dateTo }: Props) => {
+  const { colors } = useTheme()
+  const styles = getStyles(colors)
+
   const { days, weekDayShift } = GetMonthDays(dateFrom)
 
   const [active, setActive] = useState(false)
@@ -51,29 +55,32 @@ export const Calendar = memo(({ calendarId, dateFrom, dateTo }: Props) => {
         </>
       ) : (
         <View style={styles.loader}>
-          <Text style={styles.loaderText}>LOADING</Text>
+          <Text style={styles.loaderText}>
+            LOADING
+          </Text>
         </View>
       )}
     </View>
   )
 })
 
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   container: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
 
-    borderColor: 'black',
+    backgroundColor: colors.bcColor_standart_container,
+    borderColor: colors.borderColor_standart,
+
     borderWidth: 1,
-    backgroundColor: 'white',
   },
   monthDaysContainer: {
     flex: 1,
-    backgroundColor: 'white',
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
+    backgroundColor: colors.bcColor_standart_container
   },
   emptyCell: {
     maxWidth: Math.floor(Dimensions.get('screen').width / 7) - 1, // width - / daysAmount
@@ -88,5 +95,6 @@ const styles = StyleSheet.create({
   loaderText: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: colors.color_standart_text
   },
 })

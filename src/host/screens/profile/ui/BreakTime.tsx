@@ -4,12 +4,15 @@ import { Text } from 'react-native'
 import { useState } from 'react'
 import { TimeRange } from '@shared/moduls/timePickers/types'
 import { TimeRangePicker } from '@shared/moduls/timePickers'
+import { useTheme } from '@shared/moduls/theme'
 
 interface Props {
   isEditing?: boolean
 }
 
 export const BreakTime = ({ isEditing }: Props) => {
+  const { colors } = useTheme()
+
   const [time, setTime] = useState<TimeRange>({
     start: null,
     end: null,
@@ -23,13 +26,21 @@ export const BreakTime = ({ isEditing }: Props) => {
     <>
       {isEditing ? (
         <>
-          <Text style={styles.sectionTitle}>Choose Break time</Text>
+          <Text
+            style={[styles.sectionTitle, { color: colors.color_section_title }]}
+          >
+            Choose Break time
+          </Text>
 
           <TimeRangePicker initTime={time} onChange={handleChange} />
         </>
       ) : (
         <>
-          <Text style={styles.sectionTitle}>Break time</Text>
+          <Text
+            style={[styles.sectionTitle, { color: colors.color_section_title }]}
+          >
+            Break time
+          </Text>
           <WorkingTime>
             {' '}
             {time.start

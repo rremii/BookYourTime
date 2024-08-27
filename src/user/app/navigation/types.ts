@@ -1,5 +1,10 @@
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 
+export type ProfileNavigationParam = {
+  Root: undefined
+  HostPreview: undefined
+}
+
 export type SearchNavigationParam = {
   Root: undefined
   HostPreview: undefined

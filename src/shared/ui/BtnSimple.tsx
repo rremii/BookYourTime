@@ -1,3 +1,5 @@
+import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 import { PropsWithChildren } from 'react'
 import {
   StyleProp,
@@ -20,22 +22,28 @@ export const BtnSimple = ({
   btnStyles,
   textStyles,
 }: Props) => {
+  const { colors } = useTheme()
+  const styles = getStyles(colors)
+
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.btn, btnStyles]}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.btn, btnStyles]}
+    >
       <Text style={[styles.text, textStyles]}>{children}</Text>
     </TouchableOpacity>
   )
 }
 
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   btn: {
-    backgroundColor: 'white',
     borderRadius: 10,
     padding: 23,
     paddingTop: 6,
     paddingBottom: 6,
-    borderColor: 'black',
     borderWidth: 1,
+    backgroundColor: colors.bcColor_button,
+    borderColor: colors.borderColor_standart,
   },
   text: {
     fontSize: 16,

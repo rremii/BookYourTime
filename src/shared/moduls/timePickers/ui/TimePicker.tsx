@@ -1,3 +1,5 @@
+import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 import React, { useEffect, useState } from 'react'
 import {
   StyleProp,
@@ -22,6 +24,9 @@ export const TimePicker = ({
   btnStyles,
   textStyles,
 }: Props) => {
+  const { colors } = useTheme()
+  const styles = getStyles(colors)
+
   const [date, setDate] = useState<Date | null>(initTime)
   const [isPicker, setIsPicker] = useState(false)
 
@@ -44,7 +49,7 @@ export const TimePicker = ({
   return (
     <>
       <DateTimePickerModal
-        accentColor="#0A8537"
+        accentColor={colors.color_accentPicker}
         date={date || new Date()}
         isVisible={isPicker}
         mode="time"
@@ -60,23 +65,23 @@ export const TimePicker = ({
   )
 }
 
-const styles = StyleSheet.create({
-  btn: {
-    zIndex: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
-    paddingLeft: 17,
-    paddingRight: 17,
-    alignSelf: 'flex-start',
-    borderRadius: 10,
-    borderColor: '#acacac',
-    borderWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 16,
-
-    color: 'black',
-  },
-})
+const getStyles = (colors: Theme) =>
+  StyleSheet.create({
+    btn: {
+      zIndex: 10,
+      paddingTop: 5,
+      paddingBottom: 5,
+      paddingLeft: 17,
+      paddingRight: 17,
+      alignSelf: 'flex-start',
+      borderRadius: 10,
+      borderWidth: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderColor: colors.borderColor_date_picker,
+    },
+    text: {
+      fontSize: 16,
+      color: colors.color_standart_text,
+    },
+  })

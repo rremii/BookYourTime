@@ -5,19 +5,23 @@ import {
   HostAuthContext,
   setAuthSuccess,
 } from '@shared/entities/auth/authStore'
+import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
 import { InputWithLabel } from '@shared/ui/InputWithLabel'
-import { authFormStyles } from '@shared/ui/styles/authFormStyles'
+import { getAuthFormStyles } from '@shared/ui/styles/authFormStyles'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
 import { useContext } from 'react'
 import {
   View,
   Text,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
 } from 'react-native'
 
 export const SignUp = () => {
+  const { colors } = useTheme()
+  const styles = getStyles(colors)
+
   const navigation = useNavigation<StackNavigationProp<AuthNavigationParam>>()
 
   const { dispatch } = useContext(HostAuthContext)
@@ -30,18 +34,38 @@ export const SignUp = () => {
     navigation.push('SignIn')
   }
 
+  const authFormStyles = getAuthFormStyles({
+    additionalInfoColor: colors.color_standart_text,
+    titleColor: colors.color_standart_text,
+    btnBgColor: colors.bcColor_btn_filled,
+  })
   return (
     <View style={styles.container}>
       <View style={authFormStyles.form}>
         <Text style={authFormStyles.title}>Sign Up</Text>
 
-        <InputWithLabel label="Email" />
-        <InputWithLabel label="Password" />
+        <InputWithLabel
+          labelContStyles={{ backgroundColor: colors.bcColor_layout }}
+          inputStyles={{
+            backgroundColor: colors.bcColor_input,
+            borderColor: colors.borderColor_standart,
+          }}
+          label="Email"
+        />
+        <InputWithLabel
+          labelContStyles={{ backgroundColor: colors.bcColor_layout }}
+          inputStyles={{
+            backgroundColor: colors.bcColor_input,
+            borderColor: colors.borderColor_standart,
+          }}
+          label="Password"
+        />
 
         <View style={authFormStyles.btnContainer}>
           <UIButton
             onPress={signUp}
             btnStyles={authFormStyles.submitBtn}
+            textStyles={{ color: colors.color_btn_filled }}
             type="filled"
           >
             Sign Up
@@ -57,12 +81,11 @@ export const SignUp = () => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
+const getStyles = (colors: Theme) => StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: colors.bcColor_standart_container
   },
 })
