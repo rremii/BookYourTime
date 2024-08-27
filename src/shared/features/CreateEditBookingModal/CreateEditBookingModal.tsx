@@ -1,13 +1,13 @@
 import { DatePicker } from '@shared/moduls/datePicker/DatePicker'
 import { ModalProps } from '@shared/moduls/modals/types'
 import { useModal } from '@shared/moduls/modals/useModal'
-import { TimePicker } from '@shared/moduls/timePicker/TimePicker'
+import { TimePicker } from '@shared/moduls/timePickers/ui/TimePicker'
 import { Avatar } from '@shared/ui/Avatar'
 import { BtnFilled } from '@shared/ui/BtnFilled'
 import { BtnSimple } from '@shared/ui/BtnSimple'
 import { Overlay } from '@shared/ui/Overlay'
 import { useAnimatedValue } from '@shared/utils/useAnimatedValue'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import {
   View,
   Text,
@@ -24,14 +24,17 @@ import { HostInfo } from './ui/HostInfo'
 import { BookingForm } from './ui/BookingForm'
 import Cross from '@icons/cross.svg'
 import { Header } from './ui/Header'
+import { ClientInfo } from './ui/ClientInfo'
 
 export type BookingModalType = 'create' | 'edit'
+export type UserType = 'client' | 'host'
 
 interface Props extends ModalProps {
   type: BookingModalType
+  userType: UserType
 }
 
-export const CreateEditBookingModal = ({ isOpen, type }: Props) => {
+export const CreateEditBookingModal = ({ isOpen, type, userType }: Props) => {
   const { closeModal } = useModal()
 
   const [modalHeight, setModalHeight] = useState(
@@ -65,7 +68,7 @@ export const CreateEditBookingModal = ({ isOpen, type }: Props) => {
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <Header type={type} />
 
-          <HostInfo />
+          {userType === 'client' ? <ClientInfo /> : <HostInfo />}
 
           <BookingForm type={type} />
         </ScrollView>

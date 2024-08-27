@@ -1,6 +1,11 @@
 import { FC } from 'react'
 
-export type ModalNames = 'SearchFilters' | 'CreateEditBooking' | 'Toast'
+export type ModalNames =
+  | 'SearchFilters'
+  | 'CreateEditBooking'
+  | 'Toast'
+  | 'TimeRangePicker'
+  | 'BookingPreview'
 
 export interface IModal {
   isOpen: boolean

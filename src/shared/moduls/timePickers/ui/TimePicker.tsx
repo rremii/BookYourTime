@@ -19,7 +19,7 @@ interface Props {
 }
 
 export const TimePicker = ({ initTime, onChange, ...props }: Props) => {
-  const [date, setDate] = useState<Date | null>(null)
+  const [date, setDate] = useState<Date | null>(initTime)
   const [isPicker, setIsPicker] = useState(false)
 
   useEffect(() => {
