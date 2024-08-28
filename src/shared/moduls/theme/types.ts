@@ -62,5 +62,8 @@ export type ThemeKeys =
   | 'color_search_icon'
   | 'bcColor_card'
   | 'color_linearGradient'
+  | 'bcColor_btn_filled_active'
+  | 'bcColor_btn_danger_active'
+  | 'borderColor_active'
 
 export type Theme = Record<ThemeKeys, string>

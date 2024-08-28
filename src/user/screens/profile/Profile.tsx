@@ -6,9 +6,7 @@ import { LabelWithEdit } from '@shared/ui/LabelWithEdit'
 import { ProfileStatus } from '@shared/ui/ProfileStatus'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
 import { StyleSheet, Text, View } from 'react-native'
-//TODO FOR LISA
-// add pressed colors to all btns
-// remove precents
+
 export const Profile = () => {
   const { colors } = useTheme()
   const styles = getStyles(colors)
@@ -43,8 +41,9 @@ export const Profile = () => {
       <View style={styles.btnContainer}>
         <UIButton
           type="danger"
-          btnStyles={{ backgroundColor: colors.bcColor_btn_danger }}
-          textStyles={{ color: colors.color_btn_danger }}
+          mainColor={colors.bcColor_btn_danger}
+          activeColor={colors.bcColor_btn_danger_active}
+          subColor={colors.color_btn_danger}
         >
           Delete account
         </UIButton>

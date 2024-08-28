@@ -95,7 +95,7 @@ export const SearchFilters = ({ isOpen }: Props) => {
         style={[
           styles.container,
           {
-            transform: [{ translateY: slideAnim }]
+            transform: [{ translateY: slideAnim }],
           },
         ]}
       >
@@ -130,9 +130,7 @@ export const SearchFilters = ({ isOpen }: Props) => {
               inputSectionStyles.withPadding,
             ]}
           >
-            <Text style={styles.text}>
-              Start
-            </Text>
+            <Text style={styles.text}>Start</Text>
             <TimePicker
               initTime={filters.startTime}
               onChange={onFilterChange('startTime')}
@@ -144,9 +142,7 @@ export const SearchFilters = ({ isOpen }: Props) => {
               inputSectionStyles.withPadding,
             ]}
           >
-            <Text style={styles.text}>
-              End
-            </Text>
+            <Text style={styles.text}>End</Text>
             <TimePicker
               initTime={filters.endTime}
               onChange={onFilterChange('endTime')}
@@ -171,16 +167,17 @@ export const SearchFilters = ({ isOpen }: Props) => {
           <UIButton
             type="simple"
             onPress={onReset}
-            btnStyles={styles.btnSimple}
-            textStyles={{ color: colors.color_standart_text }}
+            mainColor={colors.borderColor_standart}
+            activeColor={colors.borderColor_active}
           >
             Reset
           </UIButton>
           <UIButton
             type="filled"
             onPress={onSubmit}
-            btnStyles={{ backgroundColor: colors.bcColor_btn_filled }}
-            textStyles={{ color: colors.color_btn_filled }}
+            mainColor={colors.bcColor_btn_filled}
+            activeColor={colors.bcColor_btn_filled_active}
+            subColor={colors.color_btn_filled}
           >
             Apply
           </UIButton>
@@ -190,39 +187,40 @@ export const SearchFilters = ({ isOpen }: Props) => {
   )
 }
 
-const getStyles = (colors: Theme) => StyleSheet.create({
-  container: {
-    paddingTop: 20,
-    paddingLeft: 50,
-    paddingRight: 50,
-    paddingBottom: 20,
-    gap: 15,
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    width: '100%',
-    zIndex: 1,
-    transform: [{ translateY: 0 }],
-    borderTopEndRadius: 40,
-    borderTopStartRadius: 40,
-    backgroundColor: colors.bcColor_standart_container,
-  },
+const getStyles = (colors: Theme) =>
+  StyleSheet.create({
+    container: {
+      paddingTop: 20,
+      paddingLeft: 50,
+      paddingRight: 50,
+      paddingBottom: 20,
+      gap: 15,
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      width: '100%',
+      zIndex: 1,
+      transform: [{ translateY: 0 }],
+      borderTopEndRadius: 40,
+      borderTopStartRadius: 40,
+      backgroundColor: colors.bcColor_standart_container,
+    },
 
-  btnContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    gap: 15,
-    marginTop: 15,
-  },
+    btnContainer: {
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+      gap: 15,
+      marginTop: 15,
+    },
 
-  text: {
-    fontSize: 16,
-    color: colors.color_standart_text
-  },
+    text: {
+      fontSize: 16,
+      color: colors.color_standart_text,
+    },
 
-  btnSimple: {
-    backgroundColor: colors.bcColor_button,
-    borderColor: colors.borderColor_standart,
-  },
-})
+    btnSimple: {
+      backgroundColor: colors.bcColor_button,
+      borderColor: colors.borderColor_standart,
+    },
+  })

@@ -45,8 +45,9 @@ export const HostPreview = () => {
         <UIButton
           type="filled"
           onPress={openBookingModal}
-          btnStyles={{ backgroundColor: colors.bcColor_btn_filled }}
-          textStyles={{ color: colors.color_btn_filled }}
+          mainColor={colors.bcColor_btn_filled}
+          activeColor={colors.bcColor_btn_filled_active}
+          subColor={colors.color_btn_filled}
         >
           Book Appointment
         </UIButton>

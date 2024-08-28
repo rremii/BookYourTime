@@ -123,16 +123,17 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
           <UIButton
             type="simple"
             onPress={reset}
-            btnStyles={styles.btnSimple}
-            textStyles={{ color: colors.color_standart_text }}
+            mainColor={colors.borderColor_standart}
+            activeColor={colors.borderColor_active}
           >
             Reset
           </UIButton>
           <UIButton
             type="filled"
             onPress={apply}
-            btnStyles={{ backgroundColor: colors.bcColor_btn_filled }}
-            textStyles={{ color: colors.color_btn_filled }}
+            mainColor={colors.bcColor_btn_filled}
+            activeColor={colors.bcColor_btn_filled_active}
+            subColor={colors.color_btn_filled}
           >
             Apply
           </UIButton>
