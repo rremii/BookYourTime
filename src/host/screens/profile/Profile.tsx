@@ -86,6 +86,7 @@ export const Profile = () => {
               Delete account
             </UIButton>
             <UIButton
+              onPress={startEditing}
               type="simple"
               mainColor={colors.borderColor_standart}
               activeColor={colors.borderColor_active}

@@ -19,7 +19,7 @@ export interface BtnParams extends PropsWithChildren {
   onPress?: () => void
   btnStyles?: BtnStyles
   textStyles?: TextStyles
-  pressed?: boolean
+  pending?: boolean
 }
 
 type BtnParamsWithType<

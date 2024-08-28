@@ -1,24 +1,28 @@
 import { BtnParams } from '@shared/ui/UIButton/types'
 import { FC } from 'react'
-import { StyleSheet, TouchableOpacity, Text, ActivityIndicator } from 'react-native'
-
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  ActivityIndicator,
+} from 'react-native'
 
 export interface DangerBtnProps extends BtnParams {
-  withSpinner?:boolean
-  mainColor?:string
-  activeColor?:string
-  subColor?:string
+  withSpinner?: boolean
+  mainColor?: string
+  activeColor?: string
+  subColor?: string
 }
 
 type StyleParams = {
-  pressed?: boolean
+  pending?: boolean
   mainColor?: string
   activeColor?: string
   subColor?: string
 }
 
 export const DangerBtn: FC<DangerBtnProps> = ({
-  pressed,
+  pending,
   btnStyles,
   onPress,
   textStyles,
@@ -26,22 +30,35 @@ export const DangerBtn: FC<DangerBtnProps> = ({
   withSpinner = false,
   ...colors
 }) => {
-  const styles = getStyles({ pressed, ...colors })
+  const styles = getStyles({ pending, ...colors })
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.btn, btnStyles]}>
-      {withSpinner && pressed ? (
-        <ActivityIndicator size='small' animating={true} color={colors.subColor}/>
-      ): (
+    <TouchableOpacity
+      disabled={pending}
+      onPress={onPress}
+      style={[styles.btn, btnStyles]}
+    >
+      {withSpinner && pending ? (
+        <ActivityIndicator
+          size="small"
+          animating={true}
+          color={colors.subColor}
+        />
+      ) : (
         <Text style={[styles.text, textStyles]}>{children}</Text>
       )}
     </TouchableOpacity>
   )
 }
 
-const getStyles = ({ pressed, activeColor, mainColor, subColor }: StyleParams) =>
+const getStyles = ({
+  pending,
+  activeColor,
+  mainColor,
+  subColor,
+}: StyleParams) =>
   StyleSheet.create({
     btn: {
-      backgroundColor: pressed ? activeColor : mainColor,
+      backgroundColor: pending ? activeColor : mainColor,
       borderRadius: 10,
       padding: 25,
       paddingTop: 7,
