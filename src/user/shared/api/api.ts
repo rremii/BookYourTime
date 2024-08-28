@@ -9,18 +9,22 @@ import axios from 'axios'
 
 export const API_URL = API_NGROK || 'http://localhost:3000/'
 
-export const clientApi = axios.create({
+export const clientApiConfig = axios.create({
   withCredentials: true,
   baseURL: API_URL,
 })
 
-export const clientApiDefault = axios.create({
+export const clientApiDefaultConfig = axios.create({
   withCredentials: true,
   baseURL: API_URL,
 })
 
-clientApi.interceptors.request.use(createWithTokenInterceptor(Roles.CLIENT))
-clientApi.interceptors.response.use(createWithNewTokenInterceptor(Roles.CLIENT))
-clientApi.interceptors.response.use((config) => {
+clientApiConfig.interceptors.request.use(
+  createWithTokenInterceptor(Roles.CLIENT),
+)
+clientApiConfig.interceptors.response.use(
+  createWithNewTokenInterceptor(Roles.CLIENT),
+)
+clientApiConfig.interceptors.response.use((config) => {
   return config
 }, createAuthRefreshInterceptor(Roles.CLIENT))
