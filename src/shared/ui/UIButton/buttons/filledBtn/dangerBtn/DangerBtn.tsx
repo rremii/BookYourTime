@@ -1,17 +1,20 @@
+
 import { BtnParams } from '@shared/ui/UIButton/types'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import {
   StyleSheet,
-  TouchableOpacity,
   Text,
   ActivityIndicator,
+  LayoutChangeEvent,
+  Pressable,
 } from 'react-native'
 
 export interface DangerBtnProps extends BtnParams {
-  withSpinner?: boolean
-  mainColor?: string
-  activeColor?: string
-  subColor?: string
+  pending?: boolean
+  withSpinner?:boolean
+  mainColor?:string
+  activeColor?:string
+  subColor?:string
 }
 
 type StyleParams = {
@@ -28,43 +31,52 @@ export const DangerBtn: FC<DangerBtnProps> = ({
   textStyles,
   children,
   withSpinner = false,
-  ...colors
+  activeColor = '#eb4d6a',
+  mainColor = '#bc1736',
+  subColor = '#fff',
 }) => {
-  const styles = getStyles({ pending, ...colors })
+  const [contentWidth, setContentWidth] = useState(0)
+
+  const styles = getStyles({ pending, activeColor, mainColor, subColor })
+
+  const onLayout = (e: LayoutChangeEvent) => {
+    if (contentWidth) return
+    setContentWidth(e.nativeEvent.layout.width)
+  }
+
   return (
-    <TouchableOpacity
+    <Pressable
       disabled={pending}
       onPress={onPress}
       style={[styles.btn, btnStyles]}
     >
       {withSpinner && pending ? (
         <ActivityIndicator
+          style={{
+            width: contentWidth ? contentWidth : undefined,
+          }}
           size="small"
           animating={true}
-          color={colors.subColor}
+          color={subColor}
         />
       ) : (
-        <Text style={[styles.text, textStyles]}>{children}</Text>
+        <Text onLayout={onLayout} style={[styles.text, textStyles]}>
+          {children}
+        </Text>
       )}
-    </TouchableOpacity>
+    </Pressable>
   )
 }
 
-const getStyles = ({
-  pending,
-  activeColor,
-  mainColor,
-  subColor,
-}: StyleParams) =>
+const getStyles = ({ pending, activeColor, mainColor, subColor }: StyleParams) =>
   StyleSheet.create({
     btn: {
       backgroundColor: pending ? activeColor : mainColor,
       borderRadius: 10,
       padding: 25,
       paddingTop: 7,
-      justifyContent: 'center',
-
       paddingBottom: 7,
+      justifyContent: 'center',
     },
     text: {
       textAlign: 'center',

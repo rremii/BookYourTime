@@ -1,6 +1,6 @@
 import { BtnParams } from '@shared/ui/UIButton/types'
-import { FC } from 'react'
-import { TouchableOpacity, Text, StyleSheet } from 'react-native'
+import { FC, useState } from 'react'
+import { Text, StyleSheet, LayoutChangeEvent, Pressable } from 'react-native'
 
 type StyleParams = {
   pending?: boolean
@@ -9,8 +9,9 @@ type StyleParams = {
 }
 
 export interface SimpleBtnProps extends BtnParams {
-  mainColor?: string
-  activeColor?: string
+  pending?:boolean
+  mainColor?:string
+  activeColor?:string
 }
 
 export const SimpleBtn: FC<SimpleBtnProps> = ({
@@ -19,21 +20,31 @@ export const SimpleBtn: FC<SimpleBtnProps> = ({
   onPress,
   textStyles,
   children,
-  ...colors
+  mainColor = '#000000',
+  activeColor = '#e6e6e6',
 }) => {
-  const styles = getStyles({ pending, ...colors })
+  const [contentWidth, setContentWidth] = useState(0)
+
+  const onLayout = (e: LayoutChangeEvent) => {
+    if (contentWidth) return
+    setContentWidth(e.nativeEvent.layout.width)
+  }
+
+  const styles = getStyles({ pending, mainColor, activeColor })
+
   return (
-    <TouchableOpacity
+    <Pressable
       disabled={pending}
       onPress={onPress}
       style={[styles.btn, btnStyles]}
+      onLayout={onLayout}
     >
       <Text style={[styles.text, textStyles]}>{children}</Text>
-    </TouchableOpacity>
+    </Pressable>
   )
 }
 
-const getStyles = ({ pending, activeColor, mainColor }: StyleParams) =>
+const getStyles = ({ pending, mainColor, activeColor }: StyleParams) =>
   StyleSheet.create({
     btn: {
       backgroundColor: 'transparent',
