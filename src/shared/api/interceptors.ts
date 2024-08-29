@@ -37,9 +37,8 @@ export const createAuthRefreshInterceptor =
 export const createWithTokenInterceptor =
   (role: Roles) => (config: InternalAxiosRequestConfig) => {
     if (config.headers !== null) {
-      config.headers.Authorization = `Bearer ${SecureStore.getItem(
-        getTokenNameByRole(role),
-      )}`
+      const token = SecureStore.getItem(getTokenNameByRole(role))
+      config.headers.Authorization = `${token}`
     }
     return config
   }

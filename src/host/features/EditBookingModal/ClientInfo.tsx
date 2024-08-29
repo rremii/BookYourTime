@@ -2,8 +2,15 @@ import { StyleSheet, Text, View } from 'react-native'
 import { Avatar } from '@shared/ui/Avatar'
 import { useTheme } from '@shared/moduls/theme'
 import { Theme } from '@shared/moduls/theme/types'
+import { Client } from '@shared/entities/client/types'
 
-export const ClientInfo = () => {
+interface Props {
+  clientInfo?: Client
+}
+
+export const ClientInfo = ({ clientInfo }: Props) => {
+  const { firstName, id, lastName } = clientInfo || {}
+
   const { colors } = useTheme()
   const styles = getStyles(colors)
 
@@ -11,7 +18,9 @@ export const ClientInfo = () => {
     <View style={styles.container}>
       <Text style={styles.hostInfoTitle}>client info:</Text>
       <Avatar size={75} color={colors.color_standart_avatar} />
-      <Text style={styles.name}>Jon Doue</Text>
+      <Text style={styles.name}>
+        {firstName} {lastName}
+      </Text>
     </View>
   )
 }

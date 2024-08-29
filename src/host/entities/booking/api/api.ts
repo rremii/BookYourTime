@@ -1,5 +1,5 @@
 import { hostApiConfig } from '@host/shared/api/api'
-import { CancelBookingDto, UpdateBookingDto } from '../types'
+import { CancelBookingDto, GetBookingDto, UpdateBookingDto } from '../types'
 import { Booking } from '@shared/entities/booking/types'
 
 class BookingApi {
@@ -20,6 +20,12 @@ class BookingApi {
   async cancelBooking(cancelBookingDto: CancelBookingDto): Promise<Booking> {
     const response = await hostApiConfig.post<Booking>(
       `hosts/${cancelBookingDto.hostId}/bookings/${cancelBookingDto.bookingId}/cancel`,
+    )
+    return response.data
+  }
+  async getBooking(getBookingDto: GetBookingDto): Promise<Booking> {
+    const response = await hostApiConfig.get<Booking>(
+      `hosts/${getBookingDto.hostId}/bookings/${getBookingDto.id}`,
     )
     return response.data
   }

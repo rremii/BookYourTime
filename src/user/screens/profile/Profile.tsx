@@ -5,12 +5,17 @@ import { Avatar } from '@shared/ui/Avatar'
 import { LabelWithEdit } from '@shared/ui/LabelWithEdit'
 import { ProfileStatus } from '@shared/ui/ProfileStatus'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
+import { useGetMe } from '@user/entities/client/model/useGetMe'
+import { ChangeLastName } from '@user/features/changeLastName/ChangeLastName'
+import { ChangeName } from '@user/features/changeName/ChangeName'
+import { DeleteAccount } from '@user/features/deleteAccount/DeleteAccount'
+import { Controller, useForm } from 'react-hook-form'
 import { StyleSheet, Text, View } from 'react-native'
 
 export const Profile = () => {
   const { colors } = useTheme()
-  const styles = getStyles(colors)
 
+  const styles = getStyles(colors)
   return (
     <View style={styles.container}>
       <View style={styles.subContainer}>
@@ -29,24 +34,17 @@ export const Profile = () => {
 
         <View style={styles.textContainer}>
           <Text style={styles.textLabel}>Name:</Text>
-          <LabelWithEdit label={'Artem'} labelStyle={styles.label} />
+          <ChangeName />
         </View>
 
         <View style={styles.textContainer}>
           <Text style={styles.textLabel}>Last name:</Text>
-          <LabelWithEdit label={'Romanov'} labelStyle={styles.label} />
+          <ChangeLastName />
         </View>
       </View>
 
       <View style={styles.btnContainer}>
-        <UIButton
-          type="danger"
-          mainColor={colors.bcColor_btn_danger}
-          activeColor={colors.bcColor_btn_danger_active}
-          subColor={colors.color_btn_danger}
-        >
-          Delete account
-        </UIButton>
+        <DeleteAccount />
       </View>
     </View>
   )

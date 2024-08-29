@@ -9,6 +9,7 @@ export interface CreateBookingDto {
   hostId: string
   date: string
   time: Time
+  title: string
 }
 
 export interface UpdateBookingDto {
@@ -16,4 +17,10 @@ export interface UpdateBookingDto {
   id: string
   date?: string
   time?: Time
+  title?: string
+}
+
+export interface GetBookingDto {
+  id: string
+  clientId: string
 }

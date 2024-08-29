@@ -13,9 +13,9 @@ export const useUpdateMe = () => {
     mutationFn: clientApi.updateMe,
   })
 
-  const updateHost = (clientDto: UpdateClientDto) => {
+  const updateMe = (clientDto: UpdateClientDto) => {
     mutateMe(clientDto)
   }
 
-  return { client, updateHost, isPending, isSuccess, error }
+  return { client, updateMe, isPending, isSuccess, error }
 }

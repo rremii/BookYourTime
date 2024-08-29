@@ -47,9 +47,22 @@ export const BookingPreviewModal = ({ isOpen, name }: Props) => {
           styles.modal,
         ]}
       >
-        <BookingCard />
-        <BookingCard />
-        <BookingCard />
+        <BookingCard
+          clientId="1"
+          date={new Date().toISOString()}
+          time={{ from: '12 AM', to: '1 PM' }}
+          hostId="1"
+          id="1"
+          title="Some cool damn title"
+        />
+        <BookingCard
+          clientId="1"
+          date={new Date().toISOString()}
+          time={{ from: '12 AM', to: '1 PM' }}
+          hostId="1"
+          id="1"
+          title="Some cool damn title"
+        />
       </Animated.View>
     </>
   )

@@ -3,8 +3,15 @@ import { Avatar } from '@shared/ui/Avatar'
 import { Tag } from '@shared/ui/Tag'
 import { useTheme } from '@shared/moduls/theme'
 import { Theme } from '@shared/moduls/theme/types'
+import { Host } from '@shared/entities/host/types'
 
-export const HostInfo = () => {
+interface Props {
+  hostInfo?: Host
+}
+
+export const HostInfo = ({ hostInfo }: Props) => {
+  const { firstName, info, lastName, tags } = hostInfo || {}
+
   const { colors } = useTheme()
   const styles = getStyles(colors)
 
@@ -12,13 +19,12 @@ export const HostInfo = () => {
     <View style={styles.container}>
       <Text style={styles.hostInfoTitle}>Host info:</Text>
       <Avatar size={75} color={colors.color_standart_avatar} />
-      <Text style={styles.name}>Jon Doue</Text>
-      <Text style={styles.specialty}>Software Engineer</Text>
+      <Text style={styles.name}>
+        {firstName} {lastName}
+      </Text>
+      <Text style={styles.specialty}>{info}</Text>
       <View style={styles.tagsContainer}>
-        <Tag>Frontend</Tag>
-        <Tag>Frontend</Tag>
-        <Tag>Frontend</Tag>
-        <Tag>Frontend</Tag>
+        {tags?.map((tag) => <Tag key={tag}>{tag}</Tag>)}
       </View>
     </View>
   )

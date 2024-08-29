@@ -12,10 +12,11 @@ export const useAuth = () => {
     if (isLoggedIn) return
 
     const token = SecureStore.getItem(getTokenNameByRole(Roles.CLIENT))
-
+    console.log('token', token)
     const exp = token ? jwtDecode(token).exp : null
-    const isTokenValid = exp && exp * 1000 > Date.now()
+    if (!exp) return dispatch(setAuthReject())
 
+    const isTokenValid = exp * 1000 > Date.now()
     if (isTokenValid) {
       console.log('client token is valid')
       dispatch(setAuthSuccess())

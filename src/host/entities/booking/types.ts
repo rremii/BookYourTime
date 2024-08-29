@@ -17,3 +17,7 @@ export interface UpdateBookingDto {
   date?: string
   time?: Time
 }
+export interface GetBookingDto {
+  id: string
+  hostId: string
+}

@@ -5,62 +5,95 @@ import { TimePicker } from '@shared/moduls/timePickers/ui/TimePicker'
 import { useModal } from '@shared/moduls/modals/useModal'
 import { ReactNode, useState } from 'react'
 import { Toast, ToastType } from '@shared/ui/Toast'
-import { BookingModalType } from '../CreateEditBookingModal'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
 import { useTheme } from '@shared/moduls/theme'
 import { Theme } from '@shared/moduls/theme/types'
-
-interface FormValues {
-  date: Date | null
-  startTime: Date | null
-  endTime: Date | null
-  title: string
-}
+import { Booking } from '@shared/entities/booking/types'
+import {
+  CreateBookingDto,
+  UpdateBookingDto,
+} from '@user/entities/booking/types'
+import { useGetMe } from '@user/entities/client/model/useGetMe'
+import { Time } from '@shared/entities/types'
+import { bookingFormSchema } from '../constants/bookingFormSchema'
+import { BookingFormValues, BookingInfoDto } from '../types'
+import { BookingModalType } from '@user/features/CreateEditBookingModal'
+import * as yup from 'yup'
+import { timeToDate } from '@shared/utils/timeToDate'
 
 interface Props {
   type: BookingModalType
+  booking?: Booking
+  onCreate?: (bookingInfo: BookingInfoDto) => void
+  onUpdate: (bookingInfo: BookingInfoDto) => void
+  onDelete: () => void
+  onCancel: () => void
+  deleting: boolean
+  updating: boolean
+  creating?: boolean
 }
 
-export const BookingForm = ({ type }: Props) => {
+export const BookingForm = ({
+  type,
+  booking,
+  onCreate,
+  onUpdate,
+  onCancel,
+  onDelete,
+  deleting,
+  updating,
+  creating,
+}: Props) => {
+  const { date, time } = booking || {}
+  const startTime = time?.from
+  const endTime = time?.to
+
   const { colors } = useTheme()
-  const styles = getStyles(colors)
+  const { openModal } = useModal()
 
-  const { closeModal, openModal } = useModal()
-
-  const [formValues, setFormValues] = useState<FormValues>({
-    date: null,
-    startTime: null,
-    endTime: null,
-    title: '',
+  const [formValues, setFormValues] = useState<BookingFormValues>({
+    date: date ? new Date(date) : null,
+    startTime: timeToDate(startTime),
+    endTime: timeToDate(endTime),
+    title: booking?.title || '',
   })
 
   const onFilterChange =
-    (filter: keyof FormValues) => (value: string[] | Date | null | string) => {
-      if (filter === 'title') {
-        const title = value as string
-        if (title.length > 25) return
-      }
-
+    (filter: keyof BookingFormValues) =>
+    (value: BookingFormValues[keyof BookingFormValues]) => {
       setFormValues({
         ...formValues,
         [filter]: value,
       })
     }
 
-  const onSubmit = () => {
+  const handleSubmit = async () => {
     const { date, endTime, startTime, title } = formValues
+    try {
+      await bookingFormSchema.validate(formValues)
 
-    if (!date || !startTime || !endTime || !title) {
-      return openModal<{ type: ToastType; children: ReactNode }>({
+      const dto = {
+        date: date?.toISOString(),
+        time: {
+          from: startTime?.toISOString(),
+          to: endTime?.toISOString(),
+        },
+        title,
+      } as BookingInfoDto
+
+      if (type === 'edit') onUpdate(dto)
+      if (type === 'create' && onCreate) onCreate(dto)
+    } catch (err: unknown) {
+      const validationError = err as { errors: string[] }
+      const errorMsg = validationError.errors[0]
+
+      openModal<{ type: ToastType; children: ReactNode }>({
         name: 'Toast',
         modal: Toast,
         duration: 3000,
-        props: { children: 'Please fill all fields', type: 'error' },
+        props: { children: errorMsg, type: 'error' },
       })
     }
-
-    console.log(formValues)
-    close()
   }
   const onReset = () => {
     setFormValues({
@@ -71,19 +104,12 @@ export const BookingForm = ({ type }: Props) => {
     })
   }
 
-  const onCancel = () => {
+  const handleCancel = () => {
     onReset()
-    closeModal('CreateEditBooking')
+    onCancel()
   }
 
-  const onDelete = () => {
-    closeModal('CreateEditBooking')
-  }
-
-  const close = () => {
-    closeModal('CreateEditBooking')
-  }
-
+  const styles = getStyles(colors)
   return (
     <>
       <View style={inputSectionStyles.sectionContainer}>
@@ -161,8 +187,9 @@ export const BookingForm = ({ type }: Props) => {
               Reset
             </UIButton>
             <UIButton
+              pending={creating}
               type="filled"
-              onPress={onSubmit}
+              onPress={handleSubmit}
               mainColor={colors.bcColor_btn_filled}
               activeColor={colors.bcColor_btn_filled_active}
               subColor={colors.color_btn_filled}
@@ -173,6 +200,7 @@ export const BookingForm = ({ type }: Props) => {
         ) : (
           <>
             <UIButton
+              pending={deleting}
               type="danger"
               onPress={onDelete}
               mainColor={colors.bcColor_btn_danger}
@@ -183,15 +211,16 @@ export const BookingForm = ({ type }: Props) => {
             </UIButton>
             <UIButton
               type="simple"
-              onPress={onCancel}
+              onPress={handleCancel}
               mainColor={colors.borderColor_standart}
               activeColor={colors.borderColor_active}
             >
               Cancel
             </UIButton>
             <UIButton
+              pending={updating}
               type="filled"
-              onPress={onSubmit}
+              onPress={handleSubmit}
               mainColor={colors.bcColor_btn_filled}
               activeColor={colors.bcColor_btn_filled_active}
               subColor={colors.color_btn_filled}

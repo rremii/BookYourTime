@@ -1,9 +1,5 @@
 import { ScrollView, StyleSheet, View } from 'react-native'
 import { useModal } from '@shared/moduls/modals/useModal'
-import {
-  BookingModalType,
-  CreateEditBookingModal,
-} from '@shared/features/CreateEditBookingModal/CreateEditBookingModal'
 import { HostProfile } from './ui/HostProfile'
 import { WorkingHours } from './ui/WorkingHours'
 import { WorkingDays } from './ui/WorkingDays'
@@ -12,6 +8,10 @@ import { TagsSection } from './ui/TagsSection'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
 import { useTheme } from '@shared/moduls/theme'
 import { Theme } from '@shared/moduls/theme/types'
+import {
+  BookingModalType,
+  CreateEditBookingModal,
+} from '@user/features/CreateEditBookingModal'
 
 export const HostPreview = () => {
   const { colors } = useTheme()

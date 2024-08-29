@@ -58,7 +58,6 @@ export const SearchFilters = ({ isOpen }: Props) => {
   })
 
   const onSubmit = () => {
-    console.log(filters)
     close()
   }
   const onReset = () => {
