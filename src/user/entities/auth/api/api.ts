@@ -3,17 +3,20 @@ import {
   LoginDto,
   RegisterDto,
 } from '@shared/entities/auth/types'
-import { clientApi } from '@user/shared/api/api'
+import { clientApiConfig } from '@user/shared/api/api'
 
 class AuthApi {
   async login(loginDto: LoginDto): Promise<AuthResponse> {
-    const response = await clientApi.post<AuthResponse>('auth/login', loginDto)
+    const response = await clientApiConfig.post<AuthResponse>(
+      'auth/login',
+      loginDto,
+    )
 
     return response.data
   }
 
   async register(registerDto: RegisterDto): Promise<AuthResponse> {
-    const response = await clientApi.post<AuthResponse>(
+    const response = await clientApiConfig.post<AuthResponse>(
       'auth/register',
       registerDto,
     )
