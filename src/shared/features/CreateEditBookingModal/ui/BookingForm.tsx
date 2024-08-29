@@ -130,9 +130,7 @@ export const BookingForm = ({ type }: Props) => {
             inputSectionStyles.withPadding,
           ]}
         >
-          <Text style={styles.text}>
-            Start
-          </Text>
+          <Text style={styles.text}>Start</Text>
           <TimePicker
             onChange={onFilterChange('startTime')}
             initTime={formValues.startTime}
@@ -144,9 +142,7 @@ export const BookingForm = ({ type }: Props) => {
             inputSectionStyles.withPadding,
           ]}
         >
-          <Text style={styles.text}>
-            End
-          </Text>
+          <Text style={styles.text}>End</Text>
           <TimePicker
             onChange={onFilterChange('endTime')}
             initTime={formValues.endTime}
@@ -159,16 +155,17 @@ export const BookingForm = ({ type }: Props) => {
             <UIButton
               type="simple"
               onPress={onReset}
-              btnStyles={styles.btnSimple}
-              textStyles={{ color: colors.color_standart_text }}
+              mainColor={colors.borderColor_standart}
+              activeColor={colors.borderColor_active}
             >
               Reset
             </UIButton>
             <UIButton
               type="filled"
               onPress={onSubmit}
-              btnStyles={{ backgroundColor: colors.bcColor_btn_filled }}
-              textStyles={{ color: colors.color_btn_filled }}
+              mainColor={colors.bcColor_btn_filled}
+              activeColor={colors.bcColor_btn_filled_active}
+              subColor={colors.color_btn_filled}
             >
               Create
             </UIButton>
@@ -178,24 +175,26 @@ export const BookingForm = ({ type }: Props) => {
             <UIButton
               type="danger"
               onPress={onDelete}
-              btnStyles={{ backgroundColor: colors.bcColor_btn_danger }}
-              textStyles={{ color: colors.color_btn_danger }}
+              mainColor={colors.bcColor_btn_danger}
+              activeColor={colors.bcColor_btn_danger_active}
+              subColor={colors.color_btn_danger}
             >
               Delete
             </UIButton>
             <UIButton
               type="simple"
               onPress={onCancel}
-              btnStyles={styles.btnSimple}
-              textStyles={{ color: colors.color_standart_text }}
+              mainColor={colors.borderColor_standart}
+              activeColor={colors.borderColor_active}
             >
               Cancel
             </UIButton>
             <UIButton
               type="filled"
               onPress={onSubmit}
-              btnStyles={{ backgroundColor: colors.bcColor_btn_filled }}
-              textStyles={{ color: colors.color_btn_filled }}
+              mainColor={colors.bcColor_btn_filled}
+              activeColor={colors.bcColor_btn_filled_active}
+              subColor={colors.color_btn_filled}
             >
               Apply
             </UIButton>
@@ -205,34 +204,30 @@ export const BookingForm = ({ type }: Props) => {
     </>
   )
 }
-const getStyles = (colors: Theme) => StyleSheet.create({
-  titleInput: {
-    fontSize: 16,
-    flex: 1,
-    marginLeft: 10,
-    borderWidth: 1,
-    borderRadius: 7,
-    padding: 12,
-    paddingTop: 3,
-    paddingBottom: 3,
-    borderColor: colors.borderColor_titleInput,
-    color: colors.color_titleInput,
-  },
+const getStyles = (colors: Theme) =>
+  StyleSheet.create({
+    titleInput: {
+      fontSize: 16,
+      flex: 1,
+      marginLeft: 10,
+      borderWidth: 1,
+      borderRadius: 7,
+      padding: 12,
+      paddingTop: 3,
+      paddingBottom: 3,
+      borderColor: colors.borderColor_titleInput,
+      color: colors.color_titleInput,
+    },
 
-  btnContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    gap: 10,
-    marginTop: 15,
-  },
-
-  btnSimple: {
-    backgroundColor: colors.bcColor_button,
-    borderColor: colors.borderColor_standart,
-  },
-  text: {
-    fontSize: 16,
-    color: colors.color_standart_text
-  },
-})
+    btnContainer: {
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+      gap: 10,
+      marginTop: 15,
+    },
+    text: {
+      fontSize: 16,
+      color: colors.color_standart_text,
+    },
+  })

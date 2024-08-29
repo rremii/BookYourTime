@@ -90,10 +90,14 @@ export const SignUpForm = () => {
 
       <View style={styles.btnContainer}>
         <UIButton
-          pressed={isPending}
+          pending={isPending}
           onPress={handleSubmit(signUp)}
-          btnStyles={styles.submitBtn}
+          mainColor={colors.bcColor_btn_filled}
+          activeColor={colors.bcColor_btn_filled_active}
+          subColor={colors.color_btn_filled}
+          withSpinner={true}
           type="filled"
+          btnStyles={styles.submitBtn}
         >
           Sign Up
         </UIButton>

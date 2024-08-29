@@ -6,20 +6,10 @@ import { useTheme } from '@shared/moduls/theme'
 import { InputWithLabel } from '@shared/ui/InputWithLabel'
 import { getAuthFormStyles } from '@shared/ui/styles/authFormStyles'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
-import {
-  AuthNavigationParam,
-  ClientRootNavigationParam,
-} from '@user/app/navigation/types'
+import { AuthNavigationParam } from '@user/app/navigation/types'
 import { useLogin } from '@user/entities/auth/model/useLogin'
-import { useContext } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 
 interface FormValues {
   email: string
@@ -99,10 +89,14 @@ export const SignInForm = () => {
 
       <View style={styles.btnContainer}>
         <UIButton
-          pressed={isPending}
+          pending={isPending}
           onPress={handleSubmit(signIn)}
-          btnStyles={styles.submitBtn}
+          mainColor={colors.bcColor_btn_filled}
+          subColor={colors.color_btn_filled}
+          activeColor={colors.bcColor_btn_filled_active}
+          withSpinner={true}
           type="filled"
+          btnStyles={styles.submitBtn}
         >
           Sign In
         </UIButton>

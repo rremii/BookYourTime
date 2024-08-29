@@ -27,7 +27,6 @@ export const getAuthFormStyles = ({
     btnContainer: {},
     submitBtn: {
       height: 40,
-      backgroundColor: btnBgColor,
     },
     additionalInfo: {
       fontSize: 14,

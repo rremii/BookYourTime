@@ -68,8 +68,9 @@ export const Profile = () => {
             <UIButton
               type="filled"
               onPress={submitEditing}
-              btnStyles={{ backgroundColor: colors.bcColor_btn_filled }}
-              textStyles={{ color: colors.color_btn_filled }}
+              mainColor={colors.bcColor_btn_filled}
+              subColor={colors.color_btn_filled}
+              activeColor={colors.bcColor_btn_filled_active}
             >
               Save
             </UIButton>
@@ -78,16 +79,17 @@ export const Profile = () => {
           <>
             <UIButton
               type="danger"
-              btnStyles={{ backgroundColor: colors.bcColor_btn_danger }}
-              textStyles={{ color: colors.color_btn_danger }}
+              mainColor={colors.bcColor_btn_danger}
+              subColor={colors.color_btn_danger}
+              activeColor={colors.bcColor_btn_danger_active}
             >
               Delete account
             </UIButton>
             <UIButton
-              type="simple"
               onPress={startEditing}
-              btnStyles={styles.btnSimple}
-              textStyles={{ color: colors.color_standart_text }}
+              type="simple"
+              mainColor={colors.borderColor_standart}
+              activeColor={colors.borderColor_active}
             >
               Edit
             </UIButton>

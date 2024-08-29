@@ -3,10 +3,7 @@ import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 import { InputWithLabel } from '@shared/ui/InputWithLabel'
-import {
-  authFormStyles,
-  getAuthFormStyles,
-} from '@shared/ui/styles/authFormStyles'
+import { getAuthFormStyles } from '@shared/ui/styles/authFormStyles'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
 import { Controller, useForm } from 'react-hook-form'
 import { View, Text, TouchableOpacity } from 'react-native'
@@ -93,8 +90,12 @@ export const SignUpForm = () => {
 
       <View style={styles.btnContainer}>
         <UIButton
-          pressed={isPending}
+          pending={isPending}
           onPress={handleSubmit(signUp)}
+          mainColor={colors.bcColor_btn_filled}
+          subColor={colors.color_btn_filled}
+          activeColor={colors.bcColor_btn_filled_active}
+          withSpinner={true}
           btnStyles={styles.submitBtn}
           type="filled"
         >

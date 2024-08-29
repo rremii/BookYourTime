@@ -31,16 +31,19 @@ export const Welcome = () => {
       <UIButton
         type="filled"
         onPress={goToHost}
-        btnStyles={[styles.btn, { backgroundColor: colors.bcColor_btn_filled }]}
-        textStyles={{ color: colors.color_btn_filled }}
+        btnStyles={styles.btn}
+        mainColor={colors.bcColor_btn_filled}
+        activeColor={colors.bcColor_btn_filled_active}
+        subColor={colors.color_btn_filled}
       >
         Host
       </UIButton>
       <UIButton
         type="simple"
         onPress={goToClient}
-        btnStyles={[styles.btn, styles.btnSimple]}
-        textStyles={{ color: colors.color_standart_text }}
+        btnStyles={styles.btn}
+        mainColor={colors.borderColor_standart}
+        activeColor={colors.borderColor_active}
       >
         Client
       </UIButton>
@@ -75,9 +78,5 @@ const getStyles = (colors: Theme) =>
       alignItems: 'center',
       width: '50%',
       minWidth: 200,
-    },
-    btnSimple: {
-      backgroundColor: colors.bcColor_button,
-      borderColor: colors.borderColor_standart,
     },
   })
