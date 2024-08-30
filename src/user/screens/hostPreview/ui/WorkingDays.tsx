@@ -1,8 +1,8 @@
-import { WorkingDay } from '@shared/ui/WorkingDay'
-import { styles } from './styles'
-import { Text, View } from 'react-native'
-import { useTheme } from '@shared/moduls/theme'
-import { Host } from '@shared/entities/host/types'
+import {WorkingDay} from '@shared/ui/WorkingDay'
+import {styles} from './styles'
+import {Text, View} from 'react-native'
+import {useTheme} from '@shared/moduls/theme'
+import {Host} from '@shared/entities/host/types'
 
 interface Props {
   workingDays?: Host['workDays']

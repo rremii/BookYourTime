@@ -1,6 +1,6 @@
-import { useTheme } from '@shared/moduls/theme'
-import { Theme } from '@shared/moduls/theme/types'
-import { Dimensions, StyleSheet, Text, View } from 'react-native'
+import {useTheme} from '@shared/moduls/theme'
+import {Theme} from '@shared/moduls/theme/types'
+import {Dimensions, StyleSheet, Text, View} from 'react-native'
 
 export const SubHeader = () => {
   const { colors } = useTheme()

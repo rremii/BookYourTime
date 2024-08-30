@@ -11,6 +11,8 @@ import { UIButton } from '@shared/ui/UIButton/UIButton'
 import { useTheme } from '@shared/moduls/theme'
 import { Theme } from '@shared/moduls/theme/types'
 import { OpenSettings } from '@shared/features/ProfileSettingsModal/ui/OpenSettings'
+import { ChangeName } from '@host/features/changeName/ChangeName'
+import { ChangeLastName } from '@host/features/changeLastName/ChangeLastName'
 
 export const Profile = () => {
   const { colors } = useTheme()
@@ -44,12 +46,12 @@ export const Profile = () => {
 
         <View style={styles.textContainer}>
           <Text style={styles.textLabel}>Name:</Text>
-          <LabelWithEdit label={'Artem'} labelStyle={styles.label} />
+          <ChangeName />
         </View>
 
         <View style={styles.textContainer}>
           <Text style={styles.textLabel}>Last name:</Text>
-          <LabelWithEdit label={'Romanov'} labelStyle={styles.label} />
+          <ChangeLastName />
         </View>
         <View style={styles.widthEntire}>
           <WorkingHours isEditing={isEditing} />

@@ -1,11 +1,11 @@
-import { useMutation } from '@tanstack/react-query'
-import { hostApi } from '../api/api'
-import { useEffect } from 'react'
+import {useMutation} from '@tanstack/react-query'
+import {hostApi} from '../api/api'
+import {useEffect} from 'react'
 import * as SecureStore from 'expo-secure-store'
-import { getTokenNameByRole } from '@shared/utils/getTokenNameByRole'
-import { useModal } from '@shared/moduls/modals/useModal'
-import { Toast } from '@shared/ui/Toast'
-import { navigateToWelcome } from '@root/app/providers/with-navigation'
+import {getTokenNameByRole} from '@shared/utils/getTokenNameByRole'
+import {useModal} from '@shared/moduls/modals/useModal'
+import {Toast} from '@shared/ui/Toast'
+import {navigateToWelcome} from '@root/app/providers/with-navigation'
 
 export const useDeleteMe = () => {
   const { openModal } = useModal()

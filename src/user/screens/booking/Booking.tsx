@@ -1,19 +1,14 @@
-import { FlatList, StyleSheet, View } from 'react-native'
-import { Header } from './Header'
-import { BookingCard } from '@user/features/bookingCard/BookingCard'
-import { useTheme } from '@shared/moduls/theme'
-import { Theme } from '@shared/moduls/theme/types'
-import { useGetBookings } from '@user/entities/booking/model/useGetBookings'
-import { useGetMe } from '@user/entities/client/model/useGetMe'
-import { Text } from 'react-native'
+import {FlatList, StyleSheet, Text, View} from 'react-native'
+import {Header} from './Header'
+import {BookingCard} from '@user/features/bookingCard/BookingCard'
+import {useTheme} from '@shared/moduls/theme'
+import {Theme} from '@shared/moduls/theme/types'
+import {useGetBookings} from '@user/entities/booking/model/useGetBookings'
 
 export const Booking = () => {
   const { colors } = useTheme()
 
-  const { client } = useGetMe()
-  const { bookings } = useGetBookings(client?.id)
-
-  console.log(JSON.stringify(bookings, null, 2))
+  const { bookings } = useGetBookings()
 
   const styles = getStyles(colors)
   return (

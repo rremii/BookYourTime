@@ -1,6 +1,6 @@
-import { Host } from '@shared/entities/host/types'
-import { UpdateHostDto } from '../types'
-import { hostApiConfig } from '@host/shared/api/api'
+import {Host} from '@shared/entities/host/types'
+import {UpdateHostDto} from '../types'
+import {hostApiConfig} from '@host/shared/api/api'
 
 class HostApi {
   async getMe(): Promise<Host> {

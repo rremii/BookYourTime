@@ -1,9 +1,9 @@
-import { useContext, useEffect } from 'react'
-import { ClientAuthContext, setAuthReject, setAuthSuccess } from './authStore'
-import { getTokenNameByRole } from '@shared/utils/getTokenNameByRole'
-import { Roles } from '@shared/entities/auth/types'
+import {useContext, useEffect} from 'react'
+import {ClientAuthContext, setAuthReject, setAuthSuccess} from './authStore'
+import {getTokenNameByRole} from '@shared/utils/getTokenNameByRole'
+import {Roles} from '@shared/entities/auth/types'
 import * as SecureStore from 'expo-secure-store'
-import { jwtDecode } from 'jwt-decode'
+import {jwtDecode} from 'jwt-decode'
 
 export const useAuth = () => {
   const { dispatch, isLoggedIn } = useContext(ClientAuthContext)

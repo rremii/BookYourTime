@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import { FlatList } from 'react-native'
+import {useEffect, useRef, useState} from 'react'
+import {FlatList} from 'react-native'
 
 export const useSliderIndexes = (initIndexes: number[]) => {
   const [scrollIndexes, setScrollIndexes] = useState<number[]>(initIndexes)

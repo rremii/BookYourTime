@@ -1,4 +1,4 @@
-import { Time } from '@shared/entities/types'
+import {Time} from '@shared/entities/types'
 
 export interface UpdateHostDto {
   id: string

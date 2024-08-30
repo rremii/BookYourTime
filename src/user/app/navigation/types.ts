@@ -1,4 +1,4 @@
-import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs'
 
 export type ProfileNavigationParam = {
   Root: undefined

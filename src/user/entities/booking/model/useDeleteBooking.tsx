@@ -1,13 +1,13 @@
 import { useMutation } from '@tanstack/react-query'
 import { bookingApi } from '../api/api'
-import { CreateBookingDto } from '../types'
 import { queryApiClient } from '@user/shared/api/queryApiClient'
 
-export const useCreateBooking = () => {
+export const useDeleteBooking = () => {
   const {
-    data: booking,
-    mutate: create,
+    mutate: cancel,
+    data,
     isPending,
+    isSuccess,
     error,
   } = useMutation({
     onSuccess: () => {
@@ -15,17 +15,12 @@ export const useCreateBooking = () => {
         .invalidateQueries({ queryKey: ['bookings'] })
         .catch(() => console.log('could not invalidate bookings'))
     },
-    mutationFn: bookingApi.createBooking,
+    mutationFn: bookingApi.deleteBooking,
   })
 
-  const createBooking = (createBookingDto: CreateBookingDto) => {
-    create(createBookingDto)
+  const deleteBooking = (id: string) => {
+    cancel(id)
   }
 
-  return {
-    booking,
-    createBooking,
-    isPending,
-    error,
-  }
+  return { deleteBooking, data, isPending, isSuccess, error }
 }

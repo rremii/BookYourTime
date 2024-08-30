@@ -1,9 +1,9 @@
-import { Tag } from '@shared/ui/Tag'
-import { styles } from './styles'
-import { Text, View } from 'react-native'
-import { TagsPicker } from '@shared/moduls/tagsPicker/TagsPicker'
-import { useState } from 'react'
-import { useTheme } from '@shared/moduls/theme'
+import {Tag} from '@shared/ui/Tag'
+import {styles} from './styles'
+import {Text, View} from 'react-native'
+import {TagsPicker} from '@shared/moduls/tagsPicker/TagsPicker'
+import {useState} from 'react'
+import {useTheme} from '@shared/moduls/theme'
 
 interface Props {
   isEditing?: boolean

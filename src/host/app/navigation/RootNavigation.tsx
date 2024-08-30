@@ -1,15 +1,12 @@
-import {
-  BottomTabNavigationOptions,
-  createBottomTabNavigator,
-} from '@react-navigation/bottom-tabs'
-import { HostRootNavigationParam } from './types'
+import {BottomTabNavigationOptions, createBottomTabNavigator,} from '@react-navigation/bottom-tabs'
+import {HostRootNavigationParam} from './types'
 import React from 'react'
 import ProfileIcon from '@icons/profile.svg'
 import BookingIcon from '@icons/calendar.svg'
-import { Booking } from '@host/screens/booking/Booking'
-import { Profile } from '@host/screens/profile/Profile'
-import { useTheme } from '@shared/moduls/theme'
-import { Theme } from '@shared/moduls/theme/types'
+import {Booking} from '@host/screens/booking/Booking'
+import {Profile} from '@host/screens/profile/Profile'
+import {useTheme} from '@shared/moduls/theme'
+import {Theme} from '@shared/moduls/theme/types'
 
 interface BottomTabIconProps {
   focused: boolean

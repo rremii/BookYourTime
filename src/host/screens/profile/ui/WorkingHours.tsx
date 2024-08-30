@@ -1,10 +1,10 @@
-import { WorkingTime } from '@shared/ui/WorkingTime'
-import { styles } from './styles'
-import { Text, View } from 'react-native'
-import { TimeRangePicker } from '@shared/moduls/timePickers/ui/TimeRangePicker'
-import { TimeRange } from '@shared/moduls/timePickers/types'
-import { useState } from 'react'
-import { useTheme } from '@shared/moduls/theme'
+import {WorkingTime} from '@shared/ui/WorkingTime'
+import {styles} from './styles'
+import {Text, View} from 'react-native'
+import {TimeRangePicker} from '@shared/moduls/timePickers/ui/TimeRangePicker'
+import {TimeRange} from '@shared/moduls/timePickers/types'
+import {useState} from 'react'
+import {useTheme} from '@shared/moduls/theme'
 
 interface Props {
   isEditing?: boolean

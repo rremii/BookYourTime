@@ -1,4 +1,5 @@
-import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs'
+
 export type HostRootNavigationParam = {
   Booking: undefined
   Profile: undefined

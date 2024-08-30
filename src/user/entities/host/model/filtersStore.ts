@@ -1,10 +1,5 @@
-import {
-  HostFilterAction,
-  HostFilters,
-  ResetFilters,
-  SetFilters,
-} from './../type'
-import { createContext } from 'react'
+import {HostFilterAction, HostFilters, ResetFilters, SetFilters,} from './../type'
+import {createContext} from 'react'
 
 interface InitialState extends HostFilters {}
 

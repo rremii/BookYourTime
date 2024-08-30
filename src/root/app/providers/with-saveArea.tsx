@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
+import React, {FC} from 'react'
+import {SafeAreaProvider} from 'react-native-safe-area-context'
 
 export const withSaveArea = (Component: FC): FC => {
   return (props) => {

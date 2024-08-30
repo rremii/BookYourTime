@@ -1,10 +1,10 @@
-import { useNavigation } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
-import { RootNavigationParam } from '@root/app/navigation/types'
-import { useTheme } from '@shared/moduls/theme'
-import { Theme } from '@shared/moduls/theme/types'
-import { UIButton } from '@shared/ui/UIButton/UIButton'
-import { StyleSheet, Text, View } from 'react-native'
+import {useNavigation} from '@react-navigation/native'
+import {StackNavigationProp} from '@react-navigation/stack'
+import {RootNavigationParam} from '@root/app/navigation/types'
+import {useTheme} from '@shared/moduls/theme'
+import {Theme} from '@shared/moduls/theme/types'
+import {UIButton} from '@shared/ui/UIButton/UIButton'
+import {StyleSheet, Text, View} from 'react-native'
 
 export const Welcome = () => {
   const { colors } = useTheme()

@@ -1,12 +1,11 @@
-import { ModalProps } from '@shared/moduls/modals/types'
-import { useModal } from '@shared/moduls/modals/useModal'
-import { Overlay } from '@shared/ui/Overlay'
-import { useAnimatedValue } from '@shared/utils/useAnimatedValue'
-import { Animated, Dimensions, StyleSheet } from 'react-native'
-import { BookingCard } from './BookingCard'
-import { memo } from 'react'
-import { useTheme } from '@shared/moduls/theme'
-import { Theme } from '@shared/moduls/theme/types'
+import {ModalProps} from '@shared/moduls/modals/types'
+import {useModal} from '@shared/moduls/modals/useModal'
+import {Overlay} from '@shared/ui/Overlay'
+import {useAnimatedValue} from '@shared/utils/useAnimatedValue'
+import {Animated, Dimensions, StyleSheet} from 'react-native'
+import {BookingCard} from './BookingCard'
+import {useTheme} from '@shared/moduls/theme'
+import {Theme} from '@shared/moduls/theme/types'
 
 interface Props extends ModalProps {}
 

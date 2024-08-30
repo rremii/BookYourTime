@@ -13,9 +13,8 @@ import {
 
 import { useTheme } from '@shared/moduls/theme'
 import { Theme } from '@shared/moduls/theme/types'
-import { useCancelBooking } from '@user/entities/booking/model/useCancelBooking'
+import { useDeleteBooking } from '@user/entities/booking/model/useDeleteBooking'
 import { useUpdateBooking } from '@user/entities/booking/model/useUpdateBooking'
-import { useGetMe } from '@user/entities/client/model/useGetMe'
 import { Header } from '@shared/features/CreateEditBookingModal/ui/Header'
 import { HostInfo } from '@user/features/CreateEditBookingModal/HostInfo'
 import { BookingForm } from '@shared/features/CreateEditBookingModal/ui/BookingForm'
@@ -38,38 +37,32 @@ export const CreateEditBookingModal = ({
   hostId,
   bookingId,
 }: Props) => {
-  const { client } = useGetMe()
-  const { booking } = useGetBooking(bookingId, client?.id)
-  const { host } = useGetHost(hostId)
   const { colors } = useTheme()
   const { closeModal } = useModal()
-  const { cancelBooking: deleteBooking, isPending: deleting } =
-    useCancelBooking()
+  const { host } = useGetHost(hostId)
+  const { booking } = useGetBooking(bookingId)
+  const { deleteBooking, isPending: deleting } = useDeleteBooking()
   const { updateBooking, isPending: updating } = useUpdateBooking()
   const { createBooking, isPending: creating } = useCreateBooking()
 
   const handleDelete = () => {
-    if (!client || !bookingId) return
-    deleteBooking({ bookingId: bookingId, clientId: client.id })
+    if (!bookingId) return
+    deleteBooking(bookingId)
     close()
   }
   const update = (bookingInfo: BookingInfoDto) => {
-    if (!client || !bookingId) return
+    if (!bookingId) return
 
     updateBooking({
       id: bookingId,
-      clientId: client.id,
       ...bookingInfo,
     })
 
     close()
   }
   const create = (bookingInfo: BookingInfoDto) => {
-    if (!client) return
-
     createBooking({
-      hostId: hostId,
-      clientId: client.id,
+      hostId,
       ...bookingInfo,
     })
     close()
@@ -122,7 +115,7 @@ export const CreateEditBookingModal = ({
             onCreate={create}
             onUpdate={update}
             onDelete={handleDelete}
-            bookingInfo={booking}
+            booking={booking}
           />
         </ScrollView>
       </Animated.View>

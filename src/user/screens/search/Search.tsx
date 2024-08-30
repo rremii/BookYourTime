@@ -1,11 +1,11 @@
-import { FlatList, StyleSheet, View, Text } from 'react-native'
-import React, { useContext, useEffect } from 'react'
-import { SearchHeader } from '@user/features/searchHeader/SearchHeader'
-import { HostCard } from '@user/features/hostCard/HostCard'
-import { useTheme } from '@shared/moduls/theme'
-import { Theme } from '@shared/moduls/theme/types'
-import { HostFilterContext } from '@user/entities/host/model/filtersStore'
-import { useGetHosts } from '@user/entities/host/model/useGetHosts'
+import {FlatList, StyleSheet, Text, View} from 'react-native'
+import React, {useContext} from 'react'
+import {SearchHeader} from '@user/features/searchHeader/SearchHeader'
+import {HostCard} from '@user/features/hostCard/HostCard'
+import {useTheme} from '@shared/moduls/theme'
+import {Theme} from '@shared/moduls/theme/types'
+import {HostFilterContext} from '@user/entities/host/model/filtersStore'
+import {useGetHosts} from '@user/entities/host/model/useGetHosts'
 
 export const Search = () => {
   const { colors } = useTheme()

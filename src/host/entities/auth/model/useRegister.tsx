@@ -1,16 +1,11 @@
-import { useMutation } from '@tanstack/react-query'
-import {
-  AuthResponse,
-  LoginDto,
-  RegisterDto,
-  Roles,
-} from '@shared/entities/auth/types'
-import { useContext, useEffect } from 'react'
-import { Axios, AxiosError } from 'axios'
+import {useMutation} from '@tanstack/react-query'
+import {AuthResponse, RegisterDto, Roles,} from '@shared/entities/auth/types'
+import {useContext, useEffect} from 'react'
+import {AxiosError} from 'axios'
 import * as SecureStore from 'expo-secure-store'
-import { HostAuthContext, setAuthReject, setAuthSuccess } from './authStore'
-import { authApi } from '../api/api'
-import { getTokenNameByRole } from '@shared/utils/getTokenNameByRole'
+import {HostAuthContext, setAuthReject, setAuthSuccess} from './authStore'
+import {authApi} from '../api/api'
+import {getTokenNameByRole} from '@shared/utils/getTokenNameByRole'
 
 export const useRegister = () => {
   const { dispatch } = useContext(HostAuthContext)

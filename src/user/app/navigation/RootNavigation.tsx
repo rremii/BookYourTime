@@ -1,14 +1,13 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Profile } from '../../screens/profile/Profile'
-import { Booking } from '../../screens/booking/Booking'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import {Profile} from '../../screens/profile/Profile'
+import {Booking} from '../../screens/booking/Booking'
 import React from 'react'
 import SearchIcon from '@icons/search.svg'
 import ProfileIcon from '@icons/profile.svg'
 import BookingIcon from '@icons/calendar.svg'
-import { SearchNavigation } from './SearchNavigation'
-import { ClientRootNavigationParam } from './types'
-import { useAuth } from '@user/entities/auth/model/useAuth'
-import { useTheme } from '@shared/moduls/theme'
+import {SearchNavigation} from './SearchNavigation'
+import {ClientRootNavigationParam} from './types'
+import {useTheme} from '@shared/moduls/theme'
 
 interface BottomTabIconProps {
   focused: boolean

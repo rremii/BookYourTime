@@ -1,11 +1,6 @@
-import { Booking } from '@shared/entities/booking/types'
-import { clientApiConfig } from '@user/shared/api/api'
-import {
-  CancelBookingDto,
-  CreateBookingDto,
-  GetBookingDto,
-  UpdateBookingDto,
-} from '../types'
+import {Booking} from '@shared/entities/booking/types'
+import {clientApiConfig} from '@user/shared/api/api'
+import {CreateBookingDto, UpdateBookingDto,} from '../types'
 
 class BookingApi {
   async getBookings(): Promise<Booking[]> {
@@ -31,18 +26,15 @@ class BookingApi {
 
   async createBooking(createBookingDto: CreateBookingDto): Promise<Booking> {
     const response = await clientApiConfig.post<Booking>(
-      `clients/${createBookingDto.clientId}/bookings`,
+      `clients/bookings`,
       createBookingDto,
     )
     return response.data
   }
 
-  async cancelBooking({
-    clientId,
-    bookingId,
-  }: CancelBookingDto): Promise<Booking> {
+  async deleteBooking(id: string): Promise<Booking> {
     const response = await clientApiConfig.post<Booking>(
-      `clients/${clientId}/bookings/${bookingId}/cancel`,
+      `clients/bookings/${id}/cancel`,
     )
     return response.data
   }

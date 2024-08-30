@@ -1,5 +1,5 @@
-import { hostApiConfig } from '@host/shared/api/api'
-import { Client } from '@shared/entities/client/types'
+import {hostApiConfig} from '@host/shared/api/api'
+import {Client} from '@shared/entities/client/types'
 
 class ClientApi {
   async getClient(clientId: string): Promise<Client> {

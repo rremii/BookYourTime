@@ -1,5 +1,3 @@
-import { Host } from '@shared/entities/host/types'
-
 type Action<T, P = undefined> = {
   type: T
   payload?: P

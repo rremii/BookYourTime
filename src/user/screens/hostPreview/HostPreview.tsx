@@ -1,20 +1,17 @@
-import { ScrollView, StyleSheet, View } from 'react-native'
-import { useModal } from '@shared/moduls/modals/useModal'
-import { HostProfile } from './ui/HostProfile'
-import { WorkingHours } from './ui/WorkingHours'
-import { WorkingDays } from './ui/WorkingDays'
-import { BreakTime } from './ui/BreakTime'
-import { TagsSection } from './ui/TagsSection'
-import { UIButton } from '@shared/ui/UIButton/UIButton'
-import { useTheme } from '@shared/moduls/theme'
-import { Theme } from '@shared/moduls/theme/types'
-import {
-  BookingModalType,
-  CreateEditBookingModal,
-} from '@user/features/CreateEditBookingModal'
-import { SearchNavigationParam } from '@user/app/navigation/types'
-import { RouteProp, useRoute } from '@react-navigation/native'
-import { useGetHost } from '@user/entities/host/model/useGetHost'
+import {ScrollView, StyleSheet, View} from 'react-native'
+import {useModal} from '@shared/moduls/modals/useModal'
+import {HostProfile} from './ui/HostProfile'
+import {WorkingHours} from './ui/WorkingHours'
+import {WorkingDays} from './ui/WorkingDays'
+import {BreakTime} from './ui/BreakTime'
+import {TagsSection} from './ui/TagsSection'
+import {UIButton} from '@shared/ui/UIButton/UIButton'
+import {useTheme} from '@shared/moduls/theme'
+import {Theme} from '@shared/moduls/theme/types'
+import {BookingModalType, CreateEditBookingModal,} from '@user/features/CreateEditBookingModal'
+import {SearchNavigationParam} from '@user/app/navigation/types'
+import {RouteProp, useRoute} from '@react-navigation/native'
+import {useGetHost} from '@user/entities/host/model/useGetHost'
 
 export const HostPreview = () => {
   const {

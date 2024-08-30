@@ -1,6 +1,6 @@
-import { AppLayout } from './layout/AppLayout'
+import {AppLayout} from './layout/AppLayout'
 import Navigation from './navigation'
-import { withProviders } from './providers/with-providers'
+import {withProviders} from './providers/with-providers'
 
 function App() {
   return (

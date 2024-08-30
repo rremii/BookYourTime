@@ -1,9 +1,9 @@
-import { FC, PropsWithChildren, useReducer } from 'react'
+import {FC, PropsWithChildren, useReducer} from 'react'
 import {
-  HostFilterContext,
-  HostFilterDispatchContext,
-  hostFiltersInitialState,
-  HostFiltersReducer,
+    HostFilterContext,
+    HostFilterDispatchContext,
+    hostFiltersInitialState,
+    HostFiltersReducer,
 } from './filtersStore'
 
 interface Props extends PropsWithChildren {}

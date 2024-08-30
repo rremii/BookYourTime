@@ -1,8 +1,8 @@
-import { WorkingTime } from '@shared/ui/WorkingTime'
-import { styles } from './styles'
-import { Text, View } from 'react-native'
-import { useTheme } from '@shared/moduls/theme'
-import { Host } from '@shared/entities/host/types'
+import {WorkingTime} from '@shared/ui/WorkingTime'
+import {styles} from './styles'
+import {Text, View} from 'react-native'
+import {useTheme} from '@shared/moduls/theme'
+import {Host} from '@shared/entities/host/types'
 
 interface Props {
   workingHours?: Host['workHours']

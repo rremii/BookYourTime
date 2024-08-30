@@ -1,12 +1,12 @@
-import { Avatar } from '@shared/ui/Avatar'
+import {Avatar} from '@shared/ui/Avatar'
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { useModal } from '@shared/moduls/modals/useModal'
-import { useTheme } from '@shared/moduls/theme'
-import { Theme } from '@shared/moduls/theme/types'
-import { EditBookingModal } from '../EditBookingModal'
-import { Booking } from '@shared/entities/booking/types'
-import { useGetClient } from '@host/entities/client/model/useGetClient'
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {useModal} from '@shared/moduls/modals/useModal'
+import {useTheme} from '@shared/moduls/theme'
+import {Theme} from '@shared/moduls/theme/types'
+import {EditBookingModal} from '../EditBookingModal'
+import {Booking} from '@shared/entities/booking/types'
+import {useGetClient} from '@host/entities/client/model/useGetClient'
 
 interface Props extends Booking {}
 

@@ -1,8 +1,8 @@
-import { Avatar } from '@shared/ui/Avatar'
-import { styles } from './styles'
-import { Text, View } from 'react-native'
-import { useTheme } from '@shared/moduls/theme'
-import { Host } from '@shared/entities/host/types'
+import {Avatar} from '@shared/ui/Avatar'
+import {styles} from './styles'
+import {Text, View} from 'react-native'
+import {useTheme} from '@shared/moduls/theme'
+import {Host} from '@shared/entities/host/types'
 
 interface Props {
   firstName?: Host['firstName']

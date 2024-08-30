@@ -4,7 +4,7 @@ import { HostFilters } from '../type'
 
 export const useGetHosts = (filters: HostFilters) => {
   const { data: hosts } = useQuery({
-    queryKey: [''],
+    queryKey: ['hosts'],
     queryFn: () => hostApi.getHosts(filters),
   })
 

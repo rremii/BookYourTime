@@ -1,11 +1,11 @@
-import { Dimensions, StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { EventPreview } from './EventPreview'
-import { LinearGradient } from 'expo-linear-gradient'
-import { useModal } from '@shared/moduls/modals/useModal'
-import { BookingPreviewModal } from '@host/features/BookingPreviewModal/BookingPreviewModal'
-import { memo } from 'react'
-import { useTheme } from '@shared/moduls/theme'
-import { Theme } from '@shared/moduls/theme/types'
+import {Dimensions, StyleSheet, Text, TouchableOpacity} from 'react-native'
+import {EventPreview} from './EventPreview'
+import {LinearGradient} from 'expo-linear-gradient'
+import {useModal} from '@shared/moduls/modals/useModal'
+import {BookingPreviewModal} from '@host/features/BookingPreviewModal/BookingPreviewModal'
+import {memo} from 'react'
+import {useTheme} from '@shared/moduls/theme'
+import {Theme} from '@shared/moduls/theme/types'
 
 interface Props {
   dateFrom: string

@@ -1,4 +1,4 @@
-import { HostFilters } from '../type'
+import {HostFilters} from '../type'
 
 export const getQueryFromHostFilters = (filters: HostFilters) => {
   const queryFilters = new URLSearchParams()

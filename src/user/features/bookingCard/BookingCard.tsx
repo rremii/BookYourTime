@@ -11,16 +11,10 @@ import {
   CreateEditBookingModal,
 } from '../CreateEditBookingModal'
 
-/*
-todo back
-
-
-
-*/
 interface Props extends Booking {}
 
 export const BookingCard = ({ ...booking }: Props) => {
-  const { clientId, date, time, hostId, id, title } = booking
+  const { date, time, hostId, id, title } = booking
 
   const { colors } = useTheme()
   const { openModal } = useModal()

@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { clientApi } from '../api/api'
 import { UpdateClientDto } from '../types'
+import { queryApiClient } from '@user/shared/api/queryApiClient'
 
 export const useUpdateMe = () => {
   const {
@@ -10,6 +11,13 @@ export const useUpdateMe = () => {
     isSuccess,
     error,
   } = useMutation({
+    onSuccess() {
+      queryApiClient
+        .invalidateQueries({
+          queryKey: ['me'],
+        })
+        .catch(() => console.log('couldnt invalidate me'))
+    },
     mutationFn: clientApi.updateMe,
   })
 

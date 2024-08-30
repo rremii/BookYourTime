@@ -3,7 +3,7 @@ import { clientApi } from '../api/api'
 
 export const useGetClient = (id?: string) => {
   const { data: client, isLoading } = useQuery({
-    queryKey: [''],
+    queryKey: ['clients', id],
     queryFn: () => clientApi.getClient(id),
     enabled: !!id,
   })

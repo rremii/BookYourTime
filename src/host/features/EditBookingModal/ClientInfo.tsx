@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native'
-import { Avatar } from '@shared/ui/Avatar'
-import { useTheme } from '@shared/moduls/theme'
-import { Theme } from '@shared/moduls/theme/types'
-import { Client } from '@shared/entities/client/types'
+import {StyleSheet, Text, View} from 'react-native'
+import {Avatar} from '@shared/ui/Avatar'
+import {useTheme} from '@shared/moduls/theme'
+import {Theme} from '@shared/moduls/theme/types'
+import {Client} from '@shared/entities/client/types'
 
 interface Props {
   clientInfo?: Client
