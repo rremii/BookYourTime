@@ -5,7 +5,6 @@ export interface CancelBookingDto {
   bookingId: string
 }
 export interface CreateBookingDto {
-  clientId: string
   hostId: string
   date: string
   time: Time
@@ -13,14 +12,8 @@ export interface CreateBookingDto {
 }
 
 export interface UpdateBookingDto {
-  clientId: string
   id: string
   date?: string
   time?: Time
   title?: string
-}
-
-export interface GetBookingDto {
-  id: string
-  clientId: string
 }

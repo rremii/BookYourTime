@@ -2,8 +2,13 @@ import { WorkingTime } from '@shared/ui/WorkingTime'
 import { styles } from './styles'
 import { Text, View } from 'react-native'
 import { useTheme } from '@shared/moduls/theme'
+import { Time } from '@shared/entities/types'
 
-export const BreakTime = () => {
+interface Props {
+  breakTime?: Time[]
+}
+
+export const BreakTime = ({ breakTime }: Props) => {
   const { colors } = useTheme()
 
   return (
@@ -14,7 +19,11 @@ export const BreakTime = () => {
         Break time
       </Text>
       <View style={styles.paddingSection}>
-        <WorkingTime>1 AM - 2 PM</WorkingTime>
+        {breakTime?.map((time, index) => (
+          <WorkingTime key={time.from}>
+            {time.from} - {time.to}
+          </WorkingTime>
+        ))}
       </View>
     </>
   )

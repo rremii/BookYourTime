@@ -13,19 +13,13 @@ export const Booking = () => {
   const { client } = useGetMe()
   const { bookings } = useGetBookings(client?.id)
 
+  console.log(JSON.stringify(bookings, null, 2))
+
   const styles = getStyles(colors)
   return (
     <View>
       <Header>Your bookings</Header>
 
-      <BookingCard
-        clientId="1"
-        date={new Date().toISOString()}
-        time={{ from: '12 AM', to: '1 PM' }}
-        hostId="1"
-        id="1"
-        title="Some cool damn title"
-      />
       {!bookings?.length ? (
         <Text style={styles.noBookings}>No bookings yet</Text>
       ) : (

@@ -2,8 +2,13 @@ import { Tag } from '@shared/ui/Tag'
 import { styles } from './styles'
 import { Text, View } from 'react-native'
 import { useTheme } from '@shared/moduls/theme'
+import { Host } from '@shared/entities/host/types'
 
-export const TagsSection = () => {
+interface Props {
+  tags?: Host['tags']
+}
+
+export const TagsSection = ({ tags }: Props) => {
   const { colors } = useTheme()
 
   return (
@@ -14,9 +19,7 @@ export const TagsSection = () => {
         Tags
       </Text>
       <View style={[styles.sectionContainer, styles.paddingSection]}>
-        <Tag>Frontend</Tag>
-        <Tag>Frontend</Tag>
-        <Tag>Frontend</Tag>
+        {tags?.map((tag, index) => <Tag key={tag}>{tag}</Tag>)}
       </View>
     </>
   )

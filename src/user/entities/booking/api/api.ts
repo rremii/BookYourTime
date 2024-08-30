@@ -8,24 +8,22 @@ import {
 } from '../types'
 
 class BookingApi {
-  async getBookings(clientId: string): Promise<Booking[]> {
-    const response = await clientApiConfig.get<Booking[]>(
-      `clients/${clientId}/bookings`,
-    )
+  async getBookings(): Promise<Booking[]> {
+    const response = await clientApiConfig.get<Booking[]>(`clients/bookings`)
 
     return response.data
   }
 
-  async getBooking(getBookingDto: GetBookingDto): Promise<Booking> {
+  async getBooking(id: string): Promise<Booking> {
     const response = await clientApiConfig.get<Booking>(
-      `clients/${getBookingDto.clientId}/bookings/${getBookingDto.id}`,
+      `clients/bookings/${id}`,
     )
     return response.data
   }
 
   async updateBooking(updateBookingDto: UpdateBookingDto): Promise<Booking> {
     const response = await clientApiConfig.patch<Booking>(
-      `clients/${updateBookingDto.clientId}/bookings/${updateBookingDto.id}`,
+      `clients/bookings/${updateBookingDto.id}`,
       updateBookingDto,
     )
     return response.data

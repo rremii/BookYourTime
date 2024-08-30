@@ -11,6 +11,12 @@ import {
   CreateEditBookingModal,
 } from '../CreateEditBookingModal'
 
+/*
+todo back
+
+
+
+*/
 interface Props extends Booking {}
 
 export const BookingCard = ({ ...booking }: Props) => {
@@ -66,7 +72,7 @@ export const BookingCard = ({ ...booking }: Props) => {
       <View style={[styles.sectionContainer, styles.withPadding]}>
         <Text style={styles.sectionTitle}>time:</Text>
         <Text style={styles.sectionContent}>
-          from {time.from} to {time.to}
+          from {time?.from} to {time?.to}
         </Text>
       </View>
     </TouchableOpacity>

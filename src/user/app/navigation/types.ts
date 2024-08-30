@@ -7,7 +7,7 @@ export type ProfileNavigationParam = {
 
 export type SearchNavigationParam = {
   Root: undefined
-  HostPreview: undefined
+  HostPreview: { hostId: string }
 }
 
 export type ClientRootNavigationParam = {

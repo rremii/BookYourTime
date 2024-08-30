@@ -29,7 +29,7 @@ export type BookingModalType = 'create' | 'edit'
 interface Props extends ModalProps {
   type: BookingModalType
   hostId: string
-  bookingId: string
+  bookingId?: string
 }
 
 export const CreateEditBookingModal = ({
@@ -49,12 +49,12 @@ export const CreateEditBookingModal = ({
   const { createBooking, isPending: creating } = useCreateBooking()
 
   const handleDelete = () => {
-    if (!client) return
+    if (!client || !bookingId) return
     deleteBooking({ bookingId: bookingId, clientId: client.id })
     close()
   }
   const update = (bookingInfo: BookingInfoDto) => {
-    if (!client) return
+    if (!client || !bookingId) return
 
     updateBooking({
       id: bookingId,

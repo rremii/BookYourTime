@@ -6,6 +6,7 @@ import { withTheme } from './with-theme'
 import { withHostAuth } from '@host/app/providers/with-hostAuth'
 import { withClientApi } from '@user/app/providers/with-clientApi'
 import { withHostApi } from '@host/app/providers/with-hostApi'
+import { withHostFilters } from '@user/app/providers/with-hostFilters'
 
 export const withProviders = compose(
   withNavigation,
@@ -15,6 +16,7 @@ export const withProviders = compose(
   //client
   withClientAuth,
   withClientApi,
+  withHostFilters,
 
   //host
   withHostAuth,
