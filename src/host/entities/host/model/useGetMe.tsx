@@ -3,7 +3,7 @@ import { hostApi } from '../api/api'
 
 export const useGetMe = () => {
   const { data: host } = useQuery({
-    queryKey: [''],
+    queryKey: ['me'],
     queryFn: () => hostApi.getMe(),
   })
 

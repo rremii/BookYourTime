@@ -1,19 +1,25 @@
-import { ScrollView, StyleSheet, View } from 'react-native'
-import { useModal } from '@shared/moduls/modals/useModal'
-import {
-  BookingModalType,
-  CreateEditBookingModal,
-} from '@shared/features/CreateEditBookingModal/CreateEditBookingModal'
-import { HostProfile } from './ui/HostProfile'
-import { WorkingHours } from './ui/WorkingHours'
-import { WorkingDays } from './ui/WorkingDays'
-import { BreakTime } from './ui/BreakTime'
-import { TagsSection } from './ui/TagsSection'
-import { UIButton } from '@shared/ui/UIButton/UIButton'
-import { useTheme } from '@shared/moduls/theme'
-import { Theme } from '@shared/moduls/theme/types'
+import {ScrollView, StyleSheet, View} from 'react-native'
+import {useModal} from '@shared/moduls/modals/useModal'
+import {HostProfile} from './ui/HostProfile'
+import {WorkingHours} from './ui/WorkingHours'
+import {WorkingDays} from './ui/WorkingDays'
+import {BreakTime} from './ui/BreakTime'
+import {TagsSection} from './ui/TagsSection'
+import {UIButton} from '@shared/ui/UIButton/UIButton'
+import {useTheme} from '@shared/moduls/theme'
+import {Theme} from '@shared/moduls/theme/types'
+import {BookingModalType, CreateEditBookingModal,} from '@user/features/CreateEditBookingModal'
+import {SearchNavigationParam} from '@user/app/navigation/types'
+import {RouteProp, useRoute} from '@react-navigation/native'
+import {useGetHost} from '@user/entities/host/model/useGetHost'
 
 export const HostPreview = () => {
+  const {
+    params: { hostId },
+  } = useRoute<RouteProp<SearchNavigationParam, 'HostPreview'>>()
+
+  const { host } = useGetHost(hostId)
+
   const { colors } = useTheme()
   const styles = getStyles(colors)
 
@@ -22,22 +28,27 @@ export const HostPreview = () => {
   const openBookingModal = () => {
     openModal<{
       type: BookingModalType
+      hostId: string
     }>({
       name: 'CreateEditBooking',
       modal: CreateEditBookingModal,
-      props: { type: 'create' },
+      props: { type: 'create', hostId },
     })
   }
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <HostProfile />
+      <HostProfile
+        firstName={host?.firstName}
+        lastName={host?.lastName}
+        info={host?.info}
+      />
       <View style={styles.workContainer}>
-        <WorkingHours />
+        <WorkingHours workingHours={host?.workHours} />
 
-        <WorkingDays />
+        <WorkingDays workingDays={host?.workDays} />
 
-        <BreakTime />
+        <BreakTime breakTime={host?.workHours} />
 
         <TagsSection />
       </View>

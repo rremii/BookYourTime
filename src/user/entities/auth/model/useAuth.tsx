@@ -1,9 +1,9 @@
-import { useContext, useEffect } from 'react'
-import { ClientAuthContext, setAuthReject, setAuthSuccess } from './authStore'
-import { getTokenNameByRole } from '@shared/utils/getTokenNameByRole'
-import { Roles } from '@shared/entities/auth/types'
+import {useContext, useEffect} from 'react'
+import {ClientAuthContext, setAuthReject, setAuthSuccess} from './authStore'
+import {getTokenNameByRole} from '@shared/utils/getTokenNameByRole'
+import {Roles} from '@shared/entities/auth/types'
 import * as SecureStore from 'expo-secure-store'
-import { jwtDecode } from 'jwt-decode'
+import {jwtDecode} from 'jwt-decode'
 
 export const useAuth = () => {
   const { dispatch, isLoggedIn } = useContext(ClientAuthContext)
@@ -12,10 +12,11 @@ export const useAuth = () => {
     if (isLoggedIn) return
 
     const token = SecureStore.getItem(getTokenNameByRole(Roles.CLIENT))
-
+    console.log('token', token)
     const exp = token ? jwtDecode(token).exp : null
-    const isTokenValid = exp && exp * 1000 > Date.now()
+    if (!exp) return dispatch(setAuthReject())
 
+    const isTokenValid = exp * 1000 > Date.now()
     if (isTokenValid) {
       console.log('client token is valid')
       dispatch(setAuthSuccess())

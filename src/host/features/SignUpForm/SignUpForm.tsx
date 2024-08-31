@@ -1,16 +1,16 @@
-import { AuthNavigationParam } from '@host/app/navigation/types'
-import { useNavigation } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
+import {AuthNavigationParam} from '@host/app/navigation/types'
+import {useNavigation} from '@react-navigation/native'
+import {StackNavigationProp} from '@react-navigation/stack'
 
-import { InputWithLabel } from '@shared/ui/InputWithLabel'
-import { getAuthFormStyles } from '@shared/ui/styles/authFormStyles'
-import { UIButton } from '@shared/ui/UIButton/UIButton'
-import { Controller, useForm } from 'react-hook-form'
-import { View, Text, TouchableOpacity } from 'react-native'
-import { Roles } from '@shared/entities/auth/types'
-import { emailRegex } from '@shared/constants/emailRegex'
-import { useRegister } from '@host/entities/auth/model/useRegister'
-import { useTheme } from '@shared/moduls/theme'
+import {InputWithLabel} from '@shared/ui/InputWithLabel'
+import {getAuthFormStyles} from '@shared/ui/styles/authFormStyles'
+import {UIButton} from '@shared/ui/UIButton/UIButton'
+import {Controller, useForm} from 'react-hook-form'
+import {Text, TouchableOpacity, View} from 'react-native'
+import {Roles} from '@shared/entities/auth/types'
+import {emailRegex} from '@shared/constants/emailRegex'
+import {useRegister} from '@host/entities/auth/model/useRegister'
+import {useTheme} from '@shared/moduls/theme'
 
 interface FormValues {
   email: string

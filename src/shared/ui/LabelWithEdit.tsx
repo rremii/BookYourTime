@@ -17,7 +17,7 @@ import { useTheme } from '@shared/moduls/theme'
 import { Theme } from '@shared/moduls/theme/types'
 
 interface Props {
-  onChange?: (value: string) => void
+  onChange: (value: string) => void
   label: string
   labelStyle?: StyleProp<TextStyle>
   inputStyle?: StyleProp<TextStyle>
@@ -37,9 +37,13 @@ export const LabelWithEdit = ({
   const [isEditing, setIsEditing] = useState(false)
   const [curLabel, setCurLabel] = useState(label)
 
+  useEffect(() => {
+    setCurLabel(label)
+  }, [label])
+
   const onSubmit = () => {
-    if (onChange) onChange(curLabel)
     setIsEditing(false)
+    onChange(curLabel)
   }
 
   const onTextChange = (newLabel: string) => {
@@ -55,10 +59,7 @@ export const LabelWithEdit = ({
           value={curLabel}
           onSubmitEditing={onSubmit}
           autoFocus={true}
-          style={[
-            styles.input,
-            inputStyle,
-          ]}
+          style={[styles.input, inputStyle]}
         />
       ) : (
         <TouchableOpacity
@@ -79,32 +80,33 @@ export const LabelWithEdit = ({
     </View>
   )
 }
-const getStyles = (colors: Theme) => StyleSheet.create({
-  container: {
-    position: 'relative',
-  },
-  labelContainer: {
-    alignSelf: 'flex-start',
-    flexDirection: 'row',
-    width: 'auto',
-  },
-  label: {
-    position: 'relative',
-    fontSize: 18,
-    color: colors.color_standart_text
-  },
-  input: {
-    padding: 12,
-    paddingTop: 0,
-    paddingBottom: 0,
-    borderRadius: 7,
-    borderWidth: 1,
-    fontSize: 16,
-    alignSelf: 'flex-start',
-    borderColor: colors.borderColor_standart,
-    color: colors.color_standart_text
-  },
-  editIcon: {
-    transform: [{ translateY: -10 }, { translateX: 5 }],
-  },
-})
+const getStyles = (colors: Theme) =>
+  StyleSheet.create({
+    container: {
+      position: 'relative',
+    },
+    labelContainer: {
+      alignSelf: 'flex-start',
+      flexDirection: 'row',
+      width: 'auto',
+    },
+    label: {
+      position: 'relative',
+      fontSize: 18,
+      color: colors.color_standart_text,
+    },
+    input: {
+      padding: 12,
+      paddingTop: 0,
+      paddingBottom: 0,
+      borderRadius: 7,
+      borderWidth: 1,
+      fontSize: 16,
+      alignSelf: 'flex-start',
+      borderColor: colors.borderColor_standart,
+      color: colors.color_standart_text,
+    },
+    editIcon: {
+      transform: [{ translateY: -10 }, { translateX: 5 }],
+    },
+  })

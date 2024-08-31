@@ -44,9 +44,8 @@ export const TimeRangePicker = ({
     <>
       <TouchableOpacity style={[btnStyles, styles.btn]} onPress={openPicker}>
         <Text style={[textStyles, styles.text]}>
-          {startTime ? startTime.toTimeString().slice(0, 5) : '00:00 AM'}{' '}
-          {' - '}
-          {endTime ? endTime.toTimeString().slice(0, 5) : '00:00 PM'}
+          {startTime ? startTime.toTimeString().slice(0, 5) : '00:00'} {' - '}
+          {endTime ? endTime.toTimeString().slice(0, 5) : '00:00'}
         </Text>
       </TouchableOpacity>
     </>

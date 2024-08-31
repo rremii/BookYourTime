@@ -10,16 +10,20 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { useNavigation } from '@react-navigation/native'
 import { useTheme } from '@shared/moduls/theme'
 import { Theme } from '@shared/moduls/theme/types'
+import { Host } from '@shared/entities/host/types'
 
-export const HostCard = () => {
-  const { colors } = useTheme()
-  const styles = getStyles(colors)
+interface Props extends Host {}
 
+export const HostCard = ({ ...host }: Props) => {
   const navigation = useNavigation<StackNavigationProp<SearchNavigationParam>>()
+  const { colors } = useTheme()
 
   const goToHostPreview = () => {
-    navigation.navigate('HostPreview')
+    navigation.navigate('HostPreview', {
+      hostId: host.id,
+    })
   }
+  const styles = getStyles(colors)
   return (
     <TouchableOpacity
       activeOpacity={0.7}
@@ -29,8 +33,10 @@ export const HostCard = () => {
       <View style={styles.subContainer}>
         <Avatar size={50} color={colors.color_standart_avatar} />
         <View style={styles.textInfoContainer}>
-          <Text style={styles.name}>Jon Doue</Text>
-          <Text style={styles.specialty}>Software Engineer</Text>
+          <Text style={styles.name}>
+            {host?.firstName} {host?.lastName}
+          </Text>
+          <Text style={styles.specialty}>{host?.info}</Text>
         </View>
       </View>
       <View style={styles.workingDaysContainer}>
@@ -39,15 +45,11 @@ export const HostCard = () => {
           height={20}
           color={colors.color_calendar_icon}
         />
-        <WorkingDay>Monday,</WorkingDay>
-        <WorkingDay>Tuesday,</WorkingDay>
-        <WorkingDay>Wednesday</WorkingDay>
+        {host?.workDays?.map((day) => <WorkingDay key={day}>{day}</WorkingDay>)}
       </View>
       <View style={styles.tagsContainer}>
         <TagIcon width={20} height={20} color={colors.color_tag_icon} />
-        <Tag>Frontend</Tag>
-        <Tag>Frontend</Tag>
-        <Tag>Frontend</Tag>
+        {host?.tags?.map((tag) => <Tag key={tag}>{tag}</Tag>)}
       </View>
     </TouchableOpacity>
   )

@@ -1,9 +1,5 @@
-import {
-  AuthAction,
-  SetAuthReject,
-  SetAuthSuccess,
-} from '@shared/entities/auth/types'
-import { createContext } from 'react'
+import {AuthAction, SetAuthReject, SetAuthSuccess,} from '@shared/entities/auth/types'
+import {createContext} from 'react'
 
 interface InitialState {
   isLoggedIn: boolean

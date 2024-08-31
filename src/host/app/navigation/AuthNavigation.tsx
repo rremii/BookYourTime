@@ -1,15 +1,11 @@
-import { AuthNavigationParam, HostRootNavigationParam } from './types'
-import React, { useContext, useEffect } from 'react'
-import {
-  createStackNavigator,
-  StackNavigationOptions,
-  TransitionPresets,
-} from '@react-navigation/stack'
-import { SignIn } from '@host/screens/signIn/SignIn'
-import { SignUp } from '@host/screens/signUp/SignUp'
+import {AuthNavigationParam} from './types'
+import React, {useContext} from 'react'
+import {createStackNavigator, StackNavigationOptions, TransitionPresets,} from '@react-navigation/stack'
+import {SignIn} from '@host/screens/signIn/SignIn'
+import {SignUp} from '@host/screens/signUp/SignUp'
 import RootNavigation from './RootNavigation'
-import { HostAuthContext } from '@host/entities/auth/model/authStore'
-import { useAuth } from '@host/entities/auth/model/useAuth'
+import {HostAuthContext} from '@host/entities/auth/model/authStore'
+import {useAuth} from '@host/entities/auth/model/useAuth'
 
 const AuthStack = createStackNavigator<AuthNavigationParam>()
 

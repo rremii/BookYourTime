@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Text,
   ActivityIndicator,
+  Pressable,
 } from 'react-native'
 
 export interface DangerBtnProps extends BtnParams {
@@ -32,7 +33,7 @@ export const DangerBtn: FC<DangerBtnProps> = ({
 }) => {
   const styles = getStyles({ pending, ...colors })
   return (
-    <TouchableOpacity
+    <Pressable
       disabled={pending}
       onPress={onPress}
       style={[styles.btn, btnStyles]}
@@ -46,7 +47,7 @@ export const DangerBtn: FC<DangerBtnProps> = ({
       ) : (
         <Text style={[styles.text, textStyles]}>{children}</Text>
       )}
-    </TouchableOpacity>
+    </Pressable>
   )
 }
 

@@ -1,11 +1,15 @@
-import { WorkingTime } from '@shared/ui/WorkingTime'
-import { styles } from './styles'
-import { Text, View } from 'react-native'
-import { useTheme } from '@shared/moduls/theme'
+import {WorkingTime} from '@shared/ui/WorkingTime'
+import {styles} from './styles'
+import {Text, View} from 'react-native'
+import {useTheme} from '@shared/moduls/theme'
+import {Host} from '@shared/entities/host/types'
 
-export const WorkingHours = () => {
+interface Props {
+  workingHours?: Host['workHours']
+}
+
+export const WorkingHours = ({ workingHours }: Props) => {
   const { colors } = useTheme()
-
   return (
     <>
       <Text
@@ -14,7 +18,11 @@ export const WorkingHours = () => {
         Working hours
       </Text>
       <View style={styles.paddingSection}>
-        <WorkingTime>6 AM - 10 PM</WorkingTime>
+        {workingHours?.map((timeRange, index) => (
+          <WorkingTime key={timeRange.from}>
+            {timeRange.from} - {timeRange.to}
+          </WorkingTime>
+        ))}
       </View>
     </>
   )

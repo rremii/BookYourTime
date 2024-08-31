@@ -1,9 +1,5 @@
-import {
-  AuthResponse,
-  LoginDto,
-  RegisterDto,
-} from '@shared/entities/auth/types'
-import { clientApiConfig } from '@user/shared/api/api'
+import {AuthResponse, LoginDto, RegisterDto,} from '@shared/entities/auth/types'
+import {clientApiConfig} from '@user/shared/api/api'
 
 class AuthApi {
   async login(loginDto: LoginDto): Promise<AuthResponse> {

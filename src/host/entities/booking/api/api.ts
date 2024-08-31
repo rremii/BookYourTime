@@ -1,26 +1,28 @@
-import { hostApiConfig } from '@host/shared/api/api'
-import { CancelBookingDto, UpdateBookingDto } from '../types'
-import { Booking } from '@shared/entities/booking/types'
+import {hostApiConfig} from '@host/shared/api/api'
+import {UpdateBookingDto} from '../types'
+import {Booking} from '@shared/entities/booking/types'
 
 class BookingApi {
-  async getBookings(hostId: string): Promise<Booking[]> {
-    const response = await hostApiConfig.get<Booking[]>(
-      `hosts/${hostId}/bookings`,
-    )
+  async getBookings(): Promise<Booking[]> {
+    const response = await hostApiConfig.get<Booking[]>(`hosts/bookings`)
 
     return response.data
   }
   async updateBooking(updateBookingDto: UpdateBookingDto): Promise<Booking> {
     const response = await hostApiConfig.patch<Booking>(
-      `hosts/${updateBookingDto.hostId}/bookings/${updateBookingDto.id}`,
+      `hosts/bookings/${updateBookingDto.id}`,
       updateBookingDto,
     )
     return response.data
   }
-  async cancelBooking(cancelBookingDto: CancelBookingDto): Promise<Booking> {
+  async deleteBooking(id: string): Promise<Booking> {
     const response = await hostApiConfig.post<Booking>(
-      `hosts/${cancelBookingDto.hostId}/bookings/${cancelBookingDto.bookingId}/cancel`,
+      `hosts/bookings/${id}/cancel`,
     )
+    return response.data
+  }
+  async getBooking(id: string): Promise<Booking> {
+    const response = await hostApiConfig.get<Booking>(`hosts/bookings/${id}`)
     return response.data
   }
 }

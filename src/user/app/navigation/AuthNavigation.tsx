@@ -1,16 +1,11 @@
-import { AuthNavigationParam } from './types'
-import React, { useContext, useEffect } from 'react'
-import {
-  createStackNavigator,
-  StackNavigationOptions,
-  TransitionPresets,
-} from '@react-navigation/stack'
+import {AuthNavigationParam} from './types'
+import React, {useContext} from 'react'
+import {createStackNavigator, StackNavigationOptions, TransitionPresets,} from '@react-navigation/stack'
 import RootNavigation from './RootNavigation'
-import { SignIn } from '@user/screens/signIn/SignIn'
-import { SignUp } from '@user/screens/signUp/SignUp'
-import { ClientAuthContext } from '@user/entities/auth/model/authStore'
-import { useAuth } from '@user/entities/auth/model/useAuth'
-import * as SecureStore from 'expo-secure-store'
+import {SignIn} from '@user/screens/signIn/SignIn'
+import {SignUp} from '@user/screens/signUp/SignUp'
+import {ClientAuthContext} from '@user/entities/auth/model/authStore'
+import {useAuth} from '@user/entities/auth/model/useAuth'
 
 const AuthStack = createStackNavigator<AuthNavigationParam>()
 

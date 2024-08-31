@@ -1,7 +1,7 @@
-import { useTheme } from '@shared/moduls/theme'
-import { Theme } from '@shared/moduls/theme/types'
-import { SignUpForm } from '@user/features/SignUpForm/SignUpForm'
-import { View, StyleSheet } from 'react-native'
+import {useTheme} from '@shared/moduls/theme'
+import {Theme} from '@shared/moduls/theme/types'
+import {SignUpForm} from '@user/features/SignUpForm/SignUpForm'
+import {StyleSheet, View} from 'react-native'
 
 export const SignUp = () => {
   const { colors } = useTheme()

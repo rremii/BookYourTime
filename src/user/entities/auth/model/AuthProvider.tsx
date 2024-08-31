@@ -1,5 +1,5 @@
-import { FC, PropsWithChildren, useReducer } from 'react'
-import { authInitialState, AuthReducer, ClientAuthContext } from './authStore'
+import {FC, PropsWithChildren, useReducer} from 'react'
+import {authInitialState, AuthReducer, ClientAuthContext} from './authStore'
 
 interface Props extends PropsWithChildren {}
 

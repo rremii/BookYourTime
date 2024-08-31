@@ -12,7 +12,6 @@ export const Welcome = () => {
   const navigation = useNavigation<StackNavigationProp<RootNavigationParam>>()
 
   const goToHost = () => {
-    console.log('Host')
     navigation.push('Host', {
       screen: 'Booking',
     })

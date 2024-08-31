@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { clientApi } from '../api/api'
 import { UpdateClientDto } from '../types'
+import { queryApiClient } from '@user/shared/api/queryApiClient'
 
 export const useUpdateMe = () => {
   const {
@@ -10,12 +11,19 @@ export const useUpdateMe = () => {
     isSuccess,
     error,
   } = useMutation({
+    onSuccess() {
+      queryApiClient
+        .invalidateQueries({
+          queryKey: ['me'],
+        })
+        .catch(() => console.log('couldnt invalidate me'))
+    },
     mutationFn: clientApi.updateMe,
   })
 
-  const updateHost = (clientDto: UpdateClientDto) => {
+  const updateMe = (clientDto: UpdateClientDto) => {
     mutateMe(clientDto)
   }
 
-  return { client, updateHost, isPending, isSuccess, error }
+  return { client, updateMe, isPending, isSuccess, error }
 }

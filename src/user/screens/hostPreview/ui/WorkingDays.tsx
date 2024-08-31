@@ -1,9 +1,14 @@
-import { WorkingDay } from '@shared/ui/WorkingDay'
-import { styles } from './styles'
-import { Text, View } from 'react-native'
-import { useTheme } from '@shared/moduls/theme'
+import {WorkingDay} from '@shared/ui/WorkingDay'
+import {styles} from './styles'
+import {Text, View} from 'react-native'
+import {useTheme} from '@shared/moduls/theme'
+import {Host} from '@shared/entities/host/types'
 
-export const WorkingDays = () => {
+interface Props {
+  workingDays?: Host['workDays']
+}
+
+export const WorkingDays = ({ workingDays }: Props) => {
   const { colors } = useTheme()
 
   return (
@@ -14,11 +19,9 @@ export const WorkingDays = () => {
         Working days
       </Text>
       <View style={[styles.sectionContainer, styles.paddingSection]}>
-        <WorkingDay rounded>Monday</WorkingDay>
-        <WorkingDay rounded>Monday</WorkingDay>
-        <WorkingDay rounded>Monday</WorkingDay>
-        <WorkingDay rounded>Monday</WorkingDay>
-        <WorkingDay rounded>Monday</WorkingDay>
+        {workingDays?.map((day, index) => (
+          <WorkingDay key={day}>{day}</WorkingDay>
+        ))}
       </View>
     </>
   )

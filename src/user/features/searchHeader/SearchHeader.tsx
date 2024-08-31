@@ -1,22 +1,30 @@
 import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import SearchIcon from '@icons/search.svg'
 import FilterIcon from '@icons/filter.svg'
 import { useModal } from '@shared/moduls/modals/useModal'
 import { SearchFilters } from '../searchFilters.tsx/SearchFilters'
 import { useTheme } from '@shared/moduls/theme'
 import { Theme } from '@shared/moduls/theme/types'
+import {
+  HostFilterDispatchContext,
+  setFilters,
+} from '@user/entities/host/model/filtersStore'
 
 export const SearchHeader = () => {
   const { colors } = useTheme()
-  const styles = getStyles(colors)
-
   const { openModal } = useModal()
+  const { dispatch } = useContext(HostFilterDispatchContext)
+
+  const setFullTextFilter = (fullText: string) => {
+    dispatch(setFilters({ fullText }))
+  }
 
   const openFilters = () => {
     openModal({ name: 'SearchFilters', modal: SearchFilters })
   }
 
+  const styles = getStyles(colors)
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -27,6 +35,7 @@ export const SearchHeader = () => {
           color={colors.color_search_icon}
         />
         <TextInput
+          onChangeText={setFullTextFilter}
           placeholderTextColor={'white'}
           placeholder="Search for the host"
           style={styles.input}
@@ -38,45 +47,46 @@ export const SearchHeader = () => {
     </View>
   )
 }
-const getStyles = (colors: Theme) => StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    zIndex: 1,
-    position: 'absolute',
-    top: 15,
-    left: '2.5%',
-    right: 0,
-    height: 50,
-    paddingRight: 10,
+const getStyles = (colors: Theme) =>
+  StyleSheet.create({
+    container: {
+      flexDirection: 'row',
+      zIndex: 1,
+      position: 'absolute',
+      top: 15,
+      left: '2.5%',
+      right: 0,
+      height: 50,
+      paddingRight: 10,
 
-    borderWidth: 1,
-    borderRadius: 50,
-    width: '95%',
-    backgroundColor: colors.bcColor_search,
-    borderColor: colors.borderColor_searchHeader,
+      borderWidth: 1,
+      borderRadius: 50,
+      width: '95%',
+      backgroundColor: colors.bcColor_search,
+      borderColor: colors.borderColor_searchHeader,
 
-    shadowColor: colors.color_standart_shadow,
-    elevation: 3,
-  },
-  inputContainer: {
-    position: 'relative',
-    flex: 1,
-    justifyContent: 'center',
-  },
-  input: {
-    flex: 1,
-    fontSize: 16,
-    paddingLeft: 50,
-    color: colors.color_input
-  },
-  filterBtn: {
-    width: 50,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  searchIcon: {
-    left: 15,
-    position: 'absolute',
-  },
-})
+      shadowColor: colors.color_standart_shadow,
+      elevation: 3,
+    },
+    inputContainer: {
+      position: 'relative',
+      flex: 1,
+      justifyContent: 'center',
+    },
+    input: {
+      flex: 1,
+      fontSize: 16,
+      paddingLeft: 50,
+      color: colors.color_input,
+    },
+    filterBtn: {
+      width: 50,
+      height: 50,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    searchIcon: {
+      left: 15,
+      position: 'absolute',
+    },
+  })

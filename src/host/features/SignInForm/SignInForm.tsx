@@ -1,15 +1,15 @@
-import { AuthNavigationParam } from '@host/app/navigation/types'
-import { useLogin } from '@host/entities/auth/model/useLogin'
-import { useNavigation } from '@react-navigation/native'
-import { StackNavigationProp } from '@react-navigation/stack'
-import { emailRegex } from '@shared/constants/emailRegex'
-import { useTheme } from '@shared/moduls/theme'
+import {AuthNavigationParam} from '@host/app/navigation/types'
+import {useLogin} from '@host/entities/auth/model/useLogin'
+import {useNavigation} from '@react-navigation/native'
+import {StackNavigationProp} from '@react-navigation/stack'
+import {emailRegex} from '@shared/constants/emailRegex'
+import {useTheme} from '@shared/moduls/theme'
 
-import { InputWithLabel } from '@shared/ui/InputWithLabel'
-import { getAuthFormStyles } from '@shared/ui/styles/authFormStyles'
-import { UIButton } from '@shared/ui/UIButton/UIButton'
-import { Controller, useForm } from 'react-hook-form'
-import { View, Text, TouchableOpacity } from 'react-native'
+import {InputWithLabel} from '@shared/ui/InputWithLabel'
+import {getAuthFormStyles} from '@shared/ui/styles/authFormStyles'
+import {UIButton} from '@shared/ui/UIButton/UIButton'
+import {Controller, useForm} from 'react-hook-form'
+import {Text, TouchableOpacity, View} from 'react-native'
 
 interface FormValues {
   email: string

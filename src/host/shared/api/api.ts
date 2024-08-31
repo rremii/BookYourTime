@@ -1,11 +1,11 @@
 import axios from 'axios'
 import {
-  createAuthRefreshInterceptor,
-  createWithNewTokenInterceptor,
-  createWithTokenInterceptor,
+    createAuthRefreshInterceptor,
+    createWithNewTokenInterceptor,
+    createWithTokenInterceptor,
 } from '../../../shared/api/interceptors'
-import { API_NGROK } from '@shared/api/temp'
-import { Roles } from '@shared/entities/auth/types'
+import {API_NGROK} from '@shared/api/temp'
+import {Roles} from '@shared/entities/auth/types'
 
 export const API_URL = API_NGROK || 'http://localhost:3000/'
 

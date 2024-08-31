@@ -1,5 +1,5 @@
-import { View } from 'react-native'
-import { CalendarSlider } from '../../features/CalendarSlider/CalendarSlider'
+import {View} from 'react-native'
+import {CalendarSlider} from '../../features/CalendarSlider/CalendarSlider'
 
 export const Booking = () => {
   return (

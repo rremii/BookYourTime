@@ -1,11 +1,11 @@
-import { Dimensions, StyleSheet, View, Text } from 'react-native'
-import { GetMonthDays } from '@host/shared/utils/GetMonthDays'
-import { SubHeader } from './SubHeader'
-import { Header } from './Header'
-import { memo, useEffect, useState } from 'react'
-import { useTheme } from '@shared/moduls/theme'
-import { Theme } from '@shared/moduls/theme/types'
-import { CalendarCell } from './CalendarCell'
+import {Dimensions, StyleSheet, Text, View} from 'react-native'
+import {GetMonthDays} from '@host/shared/utils/GetMonthDays'
+import {SubHeader} from './SubHeader'
+import {Header} from './Header'
+import {memo, useEffect, useState} from 'react'
+import {useTheme} from '@shared/moduls/theme'
+import {Theme} from '@shared/moduls/theme/types'
+import {CalendarCell} from './CalendarCell'
 
 interface Props {
   calendarId: number

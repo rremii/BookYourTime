@@ -1,3 +1,3 @@
-export const API_NGROK = 'https://5da3-185-53-133-78.ngrok-free.app'
+export const API_NGROK = 'https://089b-37-212-197-100.ngrok-free.app'
 
 //TODO DELETE

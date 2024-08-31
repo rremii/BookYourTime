@@ -10,7 +10,7 @@ import {
   Text,
   View,
 } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { DatePicker } from '../../../shared/moduls/datePicker/DatePicker'
 import { TimePicker } from '@shared/moduls/timePickers/ui/TimePicker'
 import { inputSectionStyles } from '@shared/ui/styles/InputSectionStyles'
@@ -19,32 +19,27 @@ import { Header } from './ui/Header'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
 import { useTheme } from '@shared/moduls/theme'
 import { Theme } from '@shared/moduls/theme/types'
-
-interface Filters {
-  date: Date | null
-  startTime: Date | null
-  endTime: Date | null
-  tags: string[]
-}
-
-const initTags = ['Frontend', 'Backend']
+import { HostFilters } from '@user/entities/host/type'
+import {
+  HostFilterContext,
+  HostFilterDispatchContext,
+  resetFilters,
+  setFilters,
+} from '@user/entities/host/model/filtersStore'
+import { TimeRangePicker } from '@shared/moduls/timePickers'
 
 interface Props extends ModalProps {}
 
 export const SearchFilters = ({ isOpen }: Props) => {
   const { colors } = useTheme()
-  const styles = getStyles(colors)
 
   const [modalHeight, setModalHeight] = useState(
     Dimensions.get('screen').height * 0.6, // approximate
   )
 
-  const [filters, setFilters] = useState<Filters>({
-    date: null,
-    startTime: null,
-    endTime: null,
-    tags: initTags,
-  })
+  const { ...filters } = useContext(HostFilterContext)
+  const { dispatch } = useContext(HostFilterDispatchContext)
+
   const { closeModal } = useModal()
   const slideAnim = useAnimatedValue({
     initValue: modalHeight,
@@ -57,25 +52,13 @@ export const SearchFilters = ({ isOpen }: Props) => {
     },
   })
 
-  const onSubmit = () => {
-    console.log(filters)
-    close()
-  }
   const onReset = () => {
-    setFilters({
-      date: null,
-      startTime: null,
-      endTime: null,
-      tags: initTags,
-    })
+    dispatch(resetFilters())
   }
 
   const onFilterChange =
-    (filter: keyof Filters) => (value: string[] | Date | null) => {
-      setFilters({
-        ...filters,
-        [filter]: value,
-      })
+    (filter: keyof HostFilters) => (value: HostFilters[keyof HostFilters]) => {
+      dispatch(setFilters({ [filter]: value }))
     }
   const close = () => {
     closeModal('SearchFilters')
@@ -83,6 +66,7 @@ export const SearchFilters = ({ isOpen }: Props) => {
   const onLayout = (e: LayoutChangeEvent) => {
     setModalHeight(+e.nativeEvent.layout.height)
   }
+  const styles = getStyles(colors)
   return (
     <>
       <Overlay
@@ -115,44 +99,30 @@ export const SearchFilters = ({ isOpen }: Props) => {
             onChange={onFilterChange('date')}
           />
         </View>
-        <View>
+        <View style={inputSectionStyles.sectionContainer}>
           <Text
             style={[
               inputSectionStyles.sectionTitle,
               { color: colors.color_standart_text },
             ]}
           >
-            Time:
+            Work time:
           </Text>
-          <View
-            style={[
-              inputSectionStyles.sectionContainer,
-              inputSectionStyles.withPadding,
-            ]}
-          >
-            <Text style={styles.text}>Start</Text>
-            <TimePicker
-              initTime={filters.startTime}
-              onChange={onFilterChange('startTime')}
-            />
-          </View>
-          <View
-            style={[
-              inputSectionStyles.sectionContainer,
-              inputSectionStyles.withPadding,
-            ]}
-          >
-            <Text style={styles.text}>End</Text>
-            <TimePicker
-              initTime={filters.endTime}
-              onChange={onFilterChange('endTime')}
-            />
-          </View>
+          <TimeRangePicker
+            initTime={{ start: filters.startTime, end: filters.endTime }}
+            onChange={(timeRange) => {
+              onFilterChange('startTime')(timeRange.start)
+              onFilterChange('endTime')(timeRange.end)
+            }}
+          />
         </View>
-        <View>
+        <View
+          style={[inputSectionStyles.sectionContainer, styles.tagsContainer]}
+        >
           <Text
             style={[
               inputSectionStyles.sectionTitle,
+              styles.tagsTitle,
               { color: colors.color_standart_text },
             ]}
           >
@@ -171,15 +141,6 @@ export const SearchFilters = ({ isOpen }: Props) => {
             activeColor={colors.borderColor_active}
           >
             Reset
-          </UIButton>
-          <UIButton
-            type="filled"
-            onPress={onSubmit}
-            mainColor={colors.bcColor_btn_filled}
-            activeColor={colors.bcColor_btn_filled_active}
-            subColor={colors.color_btn_filled}
-          >
-            Apply
           </UIButton>
         </View>
       </Animated.View>
@@ -211,7 +172,13 @@ const getStyles = (colors: Theme) =>
       justifyContent: 'flex-end',
       alignItems: 'center',
       gap: 15,
-      marginTop: 15,
+    },
+
+    tagsContainer: {
+      alignItems: 'flex-start',
+    },
+    tagsTitle: {
+      lineHeight: 35,
     },
 
     text: {

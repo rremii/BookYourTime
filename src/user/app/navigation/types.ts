@@ -1,4 +1,4 @@
-import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs'
 
 export type ProfileNavigationParam = {
   Root: undefined
@@ -7,7 +7,7 @@ export type ProfileNavigationParam = {
 
 export type SearchNavigationParam = {
   Root: undefined
-  HostPreview: undefined
+  HostPreview: { hostId: string }
 }
 
 export type ClientRootNavigationParam = {

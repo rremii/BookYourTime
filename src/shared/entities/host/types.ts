@@ -6,6 +6,7 @@ export interface Host {
   workHours: Time[]
   workDays: WorkDays[]
 
+  info: string
   tags: string[]
   firstName: string
   lastName: string

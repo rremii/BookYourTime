@@ -1,10 +1,7 @@
-import { RootNavigationParam } from './types'
+import {RootNavigationParam} from './types'
 import React from 'react'
-import { Welcome } from 'src/root/screens/welcome/Welcome'
-import {
-  createStackNavigator,
-  StackNavigationOptions,
-} from '@react-navigation/stack'
+import {Welcome} from 'src/root/screens/welcome/Welcome'
+import {createStackNavigator, StackNavigationOptions,} from '@react-navigation/stack'
 import ClientRootNavigation from '@user/app/navigation'
 import HostRootNavigation from '@host/app/navigation'
 

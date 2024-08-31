@@ -1,12 +1,11 @@
-import { ModalProps } from '@shared/moduls/modals/types'
-import { useModal } from '@shared/moduls/modals/useModal'
-import { Overlay } from '@shared/ui/Overlay'
-import { useAnimatedValue } from '@shared/utils/useAnimatedValue'
-import { Animated, Dimensions, StyleSheet } from 'react-native'
-import { BookingCard } from './BookingCard'
-import { memo } from 'react'
-import { useTheme } from '@shared/moduls/theme'
-import { Theme } from '@shared/moduls/theme/types'
+import {ModalProps} from '@shared/moduls/modals/types'
+import {useModal} from '@shared/moduls/modals/useModal'
+import {Overlay} from '@shared/ui/Overlay'
+import {useAnimatedValue} from '@shared/utils/useAnimatedValue'
+import {Animated, Dimensions, StyleSheet} from 'react-native'
+import {BookingCard} from './BookingCard'
+import {useTheme} from '@shared/moduls/theme'
+import {Theme} from '@shared/moduls/theme/types'
 
 interface Props extends ModalProps {}
 
@@ -47,9 +46,22 @@ export const BookingPreviewModal = ({ isOpen, name }: Props) => {
           styles.modal,
         ]}
       >
-        <BookingCard />
-        <BookingCard />
-        <BookingCard />
+        <BookingCard
+          clientId="1"
+          date={new Date().toISOString()}
+          time={{ from: '12 AM', to: '1 PM' }}
+          hostId="1"
+          id="1"
+          title="Some cool damn title"
+        />
+        <BookingCard
+          clientId="1"
+          date={new Date().toISOString()}
+          time={{ from: '12 AM', to: '1 PM' }}
+          hostId="1"
+          id="1"
+          title="Some cool damn title"
+        />
       </Animated.View>
     </>
   )

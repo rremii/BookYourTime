@@ -1,25 +1,26 @@
-import { StyleSheet, Text, View } from 'react-native'
-import { Avatar } from '@shared/ui/Avatar'
-import { Tag } from '@shared/ui/Tag'
-import { useTheme } from '@shared/moduls/theme'
-import { Theme } from '@shared/moduls/theme/types'
+import {StyleSheet, Text, View} from 'react-native'
+import {Avatar} from '@shared/ui/Avatar'
+import {useTheme} from '@shared/moduls/theme'
+import {Theme} from '@shared/moduls/theme/types'
+import {Client} from '@shared/entities/client/types'
 
-export const HostInfo = () => {
+interface Props {
+  clientInfo?: Client
+}
+
+export const ClientInfo = ({ clientInfo }: Props) => {
+  const { firstName, id, lastName } = clientInfo || {}
+
   const { colors } = useTheme()
   const styles = getStyles(colors)
 
   return (
     <View style={styles.container}>
-      <Text style={styles.hostInfoTitle}>Host info:</Text>
+      <Text style={styles.hostInfoTitle}>client info:</Text>
       <Avatar size={75} color={colors.color_standart_avatar} />
-      <Text style={styles.name}>Jon Doue</Text>
-      <Text style={styles.specialty}>Software Engineer</Text>
-      <View style={styles.tagsContainer}>
-        <Tag>Frontend</Tag>
-        <Tag>Frontend</Tag>
-        <Tag>Frontend</Tag>
-        <Tag>Frontend</Tag>
-      </View>
+      <Text style={styles.name}>
+        {firstName} {lastName}
+      </Text>
     </View>
   )
 }
@@ -29,16 +30,14 @@ const getStyles = (colors: Theme) =>
       alignItems: 'center',
       gap: 10,
     },
+
     hostInfoTitle: {
       fontSize: 16,
       marginBottom: 5,
       width: '100%',
       color: colors.color_standart_text,
     },
-    hostName: {
-      fontSize: 18,
-      fontWeight: 'bold',
-    },
+
     nameContainer: {
       flexDirection: 'row',
       gap: 5,
@@ -47,7 +46,7 @@ const getStyles = (colors: Theme) =>
     },
     name: {
       fontSize: 25,
-      fontWeight: 'bold',
+      fontWeight: 'semibold',
       color: colors.color_name,
     },
     specialty: {
