@@ -45,12 +45,13 @@ export const TimePicker = ({
     setDate(date)
     if (onChange) onChange(date)
   }
-
+  // console.log(date)
   return (
     <>
       <DateTimePickerModal
         accentColor={colors.color_accentPicker}
         date={date || new Date()}
+        is24Hour={true}
         isVisible={isPicker}
         mode="time"
         onConfirm={handleChange}

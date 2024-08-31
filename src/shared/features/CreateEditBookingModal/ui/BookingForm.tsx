@@ -20,6 +20,7 @@ import { BookingFormValues, BookingInfoDto } from '../types'
 import { BookingModalType } from '@user/features/CreateEditBookingModal'
 import * as yup from 'yup'
 import { timeToDate } from '@shared/utils/timeToDate'
+import { TimeRangePicker } from '@shared/moduls/timePickers'
 
 interface Props {
   type: BookingModalType
@@ -53,17 +54,18 @@ export const BookingForm = ({
 
   const [formValues, setFormValues] = useState<BookingFormValues>({
     date: date ? new Date(date) : null,
-    startTime: timeToDate(startTime),
-    endTime: timeToDate(endTime),
+    startTime: startTime ? timeToDate(startTime) : null,
+    endTime: endTime ? timeToDate(endTime) : null,
     title: booking?.title || '',
   })
+  console.log(formValues)
 
-  const onFilterChange =
-    (filter: keyof BookingFormValues) =>
+  const onChange =
+    (key: keyof BookingFormValues) =>
     (value: BookingFormValues[keyof BookingFormValues]) => {
       setFormValues({
         ...formValues,
-        [filter]: value,
+        [key]: value,
       })
     }
 
@@ -123,7 +125,7 @@ export const BookingForm = ({
         </Text>
         <TextInput
           value={formValues.title}
-          onChangeText={onFilterChange('title')}
+          onChangeText={onChange('title')}
           style={styles.titleInput}
         />
       </View>
@@ -136,12 +138,9 @@ export const BookingForm = ({
         >
           Date:
         </Text>
-        <DatePicker
-          onChange={onFilterChange('date')}
-          initDate={formValues.date}
-        />
+        <DatePicker onChange={onChange('date')} initDate={formValues.date} />
       </View>
-      <View>
+      <View style={inputSectionStyles.sectionContainer}>
         <Text
           style={[
             inputSectionStyles.sectionTitle,
@@ -150,30 +149,13 @@ export const BookingForm = ({
         >
           Time:
         </Text>
-        <View
-          style={[
-            inputSectionStyles.sectionContainer,
-            inputSectionStyles.withPadding,
-          ]}
-        >
-          <Text style={styles.text}>Start</Text>
-          <TimePicker
-            onChange={onFilterChange('startTime')}
-            initTime={formValues.startTime}
-          />
-        </View>
-        <View
-          style={[
-            inputSectionStyles.sectionContainer,
-            inputSectionStyles.withPadding,
-          ]}
-        >
-          <Text style={styles.text}>End</Text>
-          <TimePicker
-            onChange={onFilterChange('endTime')}
-            initTime={formValues.endTime}
-          />
-        </View>
+        <TimeRangePicker
+          initTime={{ start: formValues.startTime, end: formValues.endTime }}
+          onChange={(timeRange) => {
+            onChange('endTime')(timeRange.end)
+            onChange('startTime')(timeRange.start)
+          }}
+        />
       </View>
       <View style={styles.btnContainer}>
         {type === 'create' ? (

@@ -16,7 +16,7 @@ export const SearchHeader = () => {
   const { openModal } = useModal()
   const { dispatch } = useContext(HostFilterDispatchContext)
 
-  const setNameFilter = (fullText: string) => {
+  const setFullTextFilter = (fullText: string) => {
     dispatch(setFilters({ fullText }))
   }
 
@@ -35,7 +35,7 @@ export const SearchHeader = () => {
           color={colors.color_search_icon}
         />
         <TextInput
-          onChangeText={setNameFilter}
+          onChangeText={setFullTextFilter}
           placeholderTextColor={'white'}
           placeholder="Search for the host"
           style={styles.input}

@@ -85,12 +85,7 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
           },
         ]}
       >
-        <Text
-          style={[
-            inputSectionStyles.sectionTitle,
-            styles.sectionTitle,
-          ]}
-        >
+        <Text style={[inputSectionStyles.sectionTitle, styles.sectionTitle]}>
           Time:
         </Text>
         <View
@@ -99,9 +94,7 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
             inputSectionStyles.withPadding,
           ]}
         >
-          <Text style={styles.optionTitle}>
-            Start
-          </Text>
+          <Text style={styles.optionTitle}>Start</Text>
           <TimePicker
             initTime={timeRange.start}
             onChange={handleChange('start')}
@@ -113,9 +106,7 @@ export const TimeRangeModal = ({ isOpen, initTime, onChange }: Props) => {
             inputSectionStyles.withPadding,
           ]}
         >
-          <Text style={styles.optionTitle}>
-            End
-          </Text>
+          <Text style={styles.optionTitle}>End</Text>
           <TimePicker initTime={timeRange.end} onChange={handleChange('end')} />
         </View>
 
@@ -165,15 +156,15 @@ const getStyles = (width: number, height: number, colors: Theme) => {
     },
     optionTitle: {
       fontSize: 16,
-      color: colors.color_standart_text
+      color: colors.color_standart_text,
     },
     sectionTitle: {
       marginBottom: 10,
-      color: colors.color_standart_text
+      color: colors.color_standart_text,
     },
     btnSimple: {
       backgroundColor: colors.bcColor_button,
       borderColor: colors.borderColor_standart,
-    }
+    },
   })
 }

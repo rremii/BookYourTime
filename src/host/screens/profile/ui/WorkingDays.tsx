@@ -1,25 +1,26 @@
-import {WorkingDay} from '@shared/ui/WorkingDay'
-import {styles} from './styles'
-import {Text, View} from 'react-native'
-import {useState} from 'react'
-import {WeekDaysPicker} from '@shared/moduls/weekDaysPicker/WeekDaysPicker'
-import {WeekDays} from '@shared/moduls/weekDaysPicker/types'
-import {useTheme} from '@shared/moduls/theme'
+import { WorkingDay } from '@shared/ui/WorkingDay'
+import { styles } from './styles'
+import { Text, View } from 'react-native'
+import { useState } from 'react'
+import { WeekDaysPicker } from '@shared/moduls/weekDaysPicker/WeekDaysPicker'
+import { WeekDays } from '@shared/moduls/weekDaysPicker/types'
+import { useTheme } from '@shared/moduls/theme'
+import { UpdateHostValues } from '../Profile'
+import { WorkDays } from '@shared/entities/host/types'
+import { weekDaysToWorkDays } from '../utils/weekDaysToWorkDays'
+import { workDaysToWeekDays } from '../utils/workDaysToWeekDays'
 
 interface Props {
+  onChange: (workDays: UpdateHostValues['workDays']) => void
+  workingDays?: UpdateHostValues['workDays']
   isEditing?: boolean
 }
 
-export const WorkingDays = ({ isEditing }: Props) => {
+export const WorkingDays = ({ isEditing, onChange, workingDays }: Props) => {
   const { colors } = useTheme()
 
-  const [selectedDays, setSelectedDays] = useState<WeekDays[]>([
-    'Friday',
-    'Saturday',
-  ])
-
   const setWorkingDays = (days: WeekDays[]) => {
-    setSelectedDays(days)
+    onChange(weekDaysToWorkDays(days))
   }
 
   return (
@@ -32,7 +33,7 @@ export const WorkingDays = ({ isEditing }: Props) => {
             Choose working days
           </Text>
           <WeekDaysPicker
-            initSelectedDays={selectedDays}
+            initSelectedDays={workDaysToWeekDays(workingDays || [])}
             onChange={setWorkingDays}
           />
         </>
@@ -44,7 +45,7 @@ export const WorkingDays = ({ isEditing }: Props) => {
             Working days
           </Text>
           <View style={[styles.sectionContainer, styles.paddingSection]}>
-            {selectedDays.map((day) => (
+            {workingDays?.map((day) => (
               <WorkingDay key={day} rounded>
                 {day}
               </WorkingDay>

@@ -49,7 +49,9 @@ export const TagsPicker = ({ onChange, tags = [] }: Props) => {
       {tags.map((tag) => (
         <TouchableOpacity key={tag} onPress={() => onRemove(tag)}>
           <Tag>
-            {tag} <Cross width={10} height={10} color={colors.color_cross} />
+            {tag}
+            {'  '}
+            <Cross width={10} height={10} color={colors.color_cross} />
           </Tag>
         </TouchableOpacity>
       ))}
