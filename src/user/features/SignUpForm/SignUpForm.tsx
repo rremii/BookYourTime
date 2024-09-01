@@ -11,6 +11,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import { Roles } from '@shared/entities/auth/types'
 import { emailRegex } from '@shared/constants/emailRegex'
 import { useTheme } from '@shared/moduls/theme'
+import { useEffect } from 'react'
 
 interface FormValues {
   email: string
@@ -20,12 +21,13 @@ interface FormValues {
 export const SignUpForm = () => {
   const navigation = useNavigation<StackNavigationProp<AuthNavigationParam>>()
 
-  const { register, isPending } = useRegister()
+  const { register, isPending, isError } = useRegister()
   const { colors } = useTheme()
 
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
@@ -33,6 +35,10 @@ export const SignUpForm = () => {
       password: '',
     },
   })
+
+  useEffect(() => {
+    if (isError) reset()
+  }, [isError])
 
   const signUp = (formValues: FormValues) => {
     register({ ...formValues, role: Roles.CLIENT })
@@ -60,7 +66,7 @@ export const SignUpForm = () => {
         render={({ field: { onChange, onBlur, value } }) => (
           <InputWithLabel
             keyboardType="email-address"
-            isError={!!errors.email}
+            isError={!!errors.email || isError}
             label="Email"
             onBlur={onBlur}
             onChangeText={onChange}
@@ -78,7 +84,7 @@ export const SignUpForm = () => {
         render={({ field: { onChange, onBlur, value } }) => (
           <InputWithLabel
             keyboardType="visible-password"
-            isError={!!errors.password}
+            isError={!!errors.password || isError}
             label="Password"
             onBlur={onBlur}
             onChangeText={onChange}

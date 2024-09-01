@@ -1,34 +1,56 @@
-import {Dimensions, StyleSheet, Text, TouchableOpacity} from 'react-native'
-import {EventPreview} from './EventPreview'
-import {LinearGradient} from 'expo-linear-gradient'
-import {useModal} from '@shared/moduls/modals/useModal'
-import {BookingPreviewModal} from '@host/features/BookingPreviewModal/BookingPreviewModal'
-import {memo} from 'react'
-import {useTheme} from '@shared/moduls/theme'
-import {Theme} from '@shared/moduls/theme/types'
+import {
+  Dimensions,
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from 'react-native'
+import { EventPreview } from './EventPreview'
+import { LinearGradient } from 'expo-linear-gradient'
+import { useModal } from '@shared/moduls/modals/useModal'
+import { BookingPreviewModal } from '@host/features/BookingPreviewModal/BookingPreviewModal'
+import { memo } from 'react'
+import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
+import { Booking } from '@shared/entities/booking/types'
 
 interface Props {
   dateFrom: string
   dateTo: string
+  bookings?: Booking[]
 }
 
-export const CalendarCell = memo(({ dateFrom, dateTo }: Props) => {
+export const CalendarCell = memo(({ dateFrom, bookings, dateTo }: Props) => {
   const { colors } = useTheme()
   const styles = getStyles(colors)
 
   const { openModal } = useModal()
 
   const openPreview = () => {
-    openModal({ name: 'BookingPreview', modal: BookingPreviewModal })
+    openModal<{
+      bookings?: Booking[]
+    }>({
+      name: 'BookingPreview',
+      modal: BookingPreviewModal,
+      props: {
+        bookings,
+      },
+    })
   }
 
   const gradientColors = ['transparent', colors.color_linearGradient]
   return (
     <TouchableOpacity onPress={openPreview} style={styles.container}>
       <Text style={styles.date}>{new Date(dateTo).getDate()}</Text>
-
-      <EventPreview title="Event qwe" time={new Date(2024, 8, 20, 15, 30)} />
-      <EventPreview title="Event qwe" time={new Date(2024, 8, 20, 15, 30)} />
+      {bookings?.length && (
+        <FlatList
+          data={bookings}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <EventPreview time={new Date(item.time.from)} title={item.title} />
+          )}
+        />
+      )}
 
       <LinearGradient colors={gradientColors} style={styles.shadow} />
     </TouchableOpacity>

@@ -8,6 +8,7 @@ import { getAuthFormStyles } from '@shared/ui/styles/authFormStyles'
 import { UIButton } from '@shared/ui/UIButton/UIButton'
 import { AuthNavigationParam } from '@user/app/navigation/types'
 import { useLogin } from '@user/entities/auth/model/useLogin'
+import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { View, Text, TouchableOpacity } from 'react-native'
 
@@ -20,11 +21,12 @@ export const SignInForm = () => {
   const navigation = useNavigation<StackNavigationProp<AuthNavigationParam>>()
 
   const { colors } = useTheme()
-  const { login, isPending } = useLogin()
+  const { login, isPending, isError } = useLogin()
 
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: {
@@ -32,6 +34,10 @@ export const SignInForm = () => {
       password: '',
     },
   })
+
+  useEffect(() => {
+    if (isError) reset()
+  }, [isError])
 
   const signIn = (formValues: FormValues) => {
     login(formValues)
@@ -59,7 +65,7 @@ export const SignInForm = () => {
         render={({ field: { onChange, onBlur, value } }) => (
           <InputWithLabel
             keyboardType="email-address"
-            isError={!!errors.email}
+            isError={!!errors.email || isError}
             label="Email"
             onBlur={onBlur}
             onChangeText={onChange}
@@ -77,7 +83,7 @@ export const SignInForm = () => {
         render={({ field: { onChange, onBlur, value } }) => (
           <InputWithLabel
             keyboardType="visible-password"
-            isError={!!errors.password}
+            isError={!!errors.password || isError}
             label="Password"
             onBlur={onBlur}
             onChangeText={onChange}

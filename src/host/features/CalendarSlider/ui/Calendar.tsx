@@ -1,61 +1,72 @@
-import {Dimensions, StyleSheet, Text, View} from 'react-native'
-import {GetMonthDays} from '@host/shared/utils/GetMonthDays'
-import {SubHeader} from './SubHeader'
-import {Header} from './Header'
-import {memo, useEffect, useState} from 'react'
-import {useTheme} from '@shared/moduls/theme'
-import {Theme} from '@shared/moduls/theme/types'
-import {CalendarCell} from './CalendarCell'
+import { Dimensions, StyleSheet, Text, View } from 'react-native'
+import { GetMonthDays } from '@host/shared/utils/GetMonthDays'
+import { SubHeader } from './SubHeader'
+import { Header } from './Header'
+import { memo, useEffect, useState } from 'react'
+import { useTheme } from '@shared/moduls/theme'
+import { Theme } from '@shared/moduls/theme/types'
+import { CalendarCell } from './CalendarCell'
+import { Booking } from '@shared/entities/booking/types'
 
 interface Props {
   calendarId: number
   dateFrom: string
   dateTo: string
+  bookings?: Booking[]
 }
 
-export const Calendar = memo(({ calendarId, dateFrom, dateTo }: Props) => {
-  const { colors } = useTheme()
-  const styles = getStyles(colors)
+export const Calendar = memo(
+  ({ calendarId, bookings, dateFrom, dateTo }: Props) => {
+    const { colors } = useTheme()
+    const styles = getStyles(colors)
 
-  const { days, weekDayShift } = GetMonthDays(dateFrom)
+    const { days, weekDayShift } = GetMonthDays(dateFrom)
 
-  const [active, setActive] = useState(false)
+    const [active, setActive] = useState(false)
 
-  useEffect(() => {
-    setActive(true)
-  }, [])
-  return (
-    <View style={styles.container}>
-      {active ? (
-        <>
-          <Header date={new Date(dateFrom)} />
-          <SubHeader />
-          <View style={styles.monthDaysContainer}>
-            {/* +1 due to we start at sunday */}
-            {weekDayShift + 1 < 6
-              ? new Array(weekDayShift + 1)
-                  .fill(null)
-                  .map((_, index) => (
-                    <View key={index} style={styles.emptyCell} />
-                  ))
-              : null}
-            {days.map(({ dateFrom, dateTo }) => (
-              <CalendarCell
-                key={dateFrom.toUTCString()}
-                dateFrom={dateFrom.toUTCString()}
-                dateTo={dateTo.toUTCString()}
-              />
-            ))}
+    useEffect(() => {
+      setActive(true)
+    }, [])
+    return (
+      <View style={styles.container}>
+        {active ? (
+          <>
+            <Header date={new Date(dateFrom)} />
+            <SubHeader />
+            <View style={styles.monthDaysContainer}>
+              {/* +1 due to we start at sunday */}
+              {weekDayShift + 1 < 6
+                ? new Array(weekDayShift + 1)
+                    .fill(null)
+                    .map((_, index) => (
+                      <View key={index} style={styles.emptyCell} />
+                    ))
+                : null}
+              {days.map(({ dateFrom, dateTo }) => {
+                const daysBookings = bookings?.filter(
+                  ({ date }) =>
+                    dateFrom <= new Date(date) && dateTo >= new Date(date),
+                )
+                return (
+                  <CalendarCell
+                    bookings={daysBookings}
+                    key={dateFrom.toUTCString()}
+                    dateFrom={dateFrom.toUTCString()}
+                    dateTo={dateTo.toUTCString()}
+                  />
+                )
+              })}
+            </View>
+          </>
+        ) : (
+          <View style={styles.loader}>
+            <Text style={styles.loaderText}>LOADING</Text>
           </View>
-        </>
-      ) : (
-        <View style={styles.loader}>
-          <Text style={styles.loaderText}>LOADING</Text>
-        </View>
-      )}
-    </View>
-  )
-})
+        )}
+      </View>
+    )
+  },
+)
 
 const getStyles = (colors: Theme) =>
   StyleSheet.create({
