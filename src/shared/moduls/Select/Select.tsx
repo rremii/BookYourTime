@@ -10,42 +10,34 @@ import {
   LayoutChangeEvent,
   Dimensions,
 } from 'react-native'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Theme } from '@shared/moduls/theme/types'
 import ArrowUpIcon from '@icons/arrowUp.svg'
-import ArrowDownIcon from '@icons/arrowDown.svg'
 
 interface Props {
   initItems: string[]
   currentItem: string | null
   onChange: (item: string) => void
   label: string
-  width: number
-  withLabel: boolean
+  height?: number
+  width?: number
+  withLabel?: boolean
 }
-const itemCellHeight = 50
 export const Select = ({
   initItems,
   currentItem,
   label,
   onChange,
-  width,
-  withLabel,
+  width = 200,
+  height,
+  withLabel = true,
 }: Props) => {
+  const itemCellHeight = height || 50
+
   const { colors } = useTheme()
 
-  const getBcColorItem = (item: string, index: number) => {
-    if (currentItem == null) {
-      if (index === 0) return colors.borderColor_active
-      else return colors.bcColor_standart_container
-    } else if (currentItem === item) return colors.borderColor_active
-    else return colors.bcColor_standart_container
-  }
-
   const [isActive, setIsActive] = useState(false)
-  const [labelSize, setLabelSize] = useState(20)
-
-  const [fieldHeight, setFieldHeight] = useState(50)
+  const [labelHeight, setLabelHeight] = useState(20)
 
   const handleChoice = (item: string) => {
     setIsActive(false)
@@ -57,7 +49,7 @@ export const Select = ({
   }
 
   const isLabelShown = !!currentItem
-  const slideX = useAnimatedValue({
+  const labelX = useAnimatedValue({
     isActive: isLabelShown,
     initValue: 3,
     active: {
@@ -69,120 +61,136 @@ export const Select = ({
       value: 2,
     },
   })
-  const slideY = useAnimatedValue({
+  const labelY = useAnimatedValue({
     isActive: isLabelShown,
-    initValue: fieldHeight / 2 - labelSize / 2,
+    initValue: itemCellHeight / 2 - labelHeight / 2,
     active: {
       duration: 100,
-      value: -labelSize / 2,
+      value: -labelHeight / 2,
     },
     inactive: {
       duration: 100,
-      value: fieldHeight / 2 - labelSize / 2,
+      value: itemCellHeight / 2 - labelHeight / 2,
     },
   })
-  const itemBoxYAnim = useAnimatedValue({
-    isActive: isActive,
+  const itemBoxSlide = useAnimatedValue({
+    isActive,
     initValue: -itemCellHeight * 4,
     active: {
-      duration: 100,
+      duration: 200,
       value: 0,
     },
     inactive: {
-      duration: 100,
+      duration: 200,
       value: -itemCellHeight * 4,
     },
   })
+  const iconRotate = useAnimatedValue({
+    isActive,
+    initValue: 0,
+    active: {
+      duration: 100,
+      value: 1,
+    },
+    inactive: {
+      duration: 100,
+      value: 0,
+    },
+  })
+  const rotateAnim = iconRotate.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '180deg'],
+  })
 
   const onLabelLayout = (e: LayoutChangeEvent) => {
-    if (e.nativeEvent.layout.height) setLabelSize(e.nativeEvent.layout.height)
+    if (e.nativeEvent.layout.height) setLabelHeight(e.nativeEvent.layout.height)
+  }
+  const getBcColorItem = (item: string) => {
+    if (currentItem === item) return colors.borderColor_active
+    return colors.bcColor_standart_container
   }
 
-  const onLayout = (e: LayoutChangeEvent) => {
-    if (e.nativeEvent.layout.height) setFieldHeight(e.nativeEvent.layout.height)
-  }
-
-  const styles = getStyle(colors, isActive)
-
+  const styles = getStyle(colors, isActive, width, itemCellHeight)
   return (
-    <Pressable
-      onLayout={onLayout}
-      style={[styles.btn, { width }]}
-      onPress={pressButton}
-    >
-      {withLabel && (
-        <Animated.Text
-          onLayout={onLabelLayout}
+    <View style={[styles.container]}>
+      <Pressable style={[styles.btn]} onPress={pressButton}>
+        {withLabel && (
+          <Animated.Text
+            onLayout={onLabelLayout}
+            style={[
+              styles.label,
+              {
+                transform: [{ translateY: labelY }, { translateX: labelX }],
+              },
+            ]}
+            numberOfLines={1}
+          >
+            {label}
+          </Animated.Text>
+        )}
+        <Text style={styles.checkedText}>{currentItem}</Text>
+
+        <Animated.View
           style={[
-            styles.label,
+            styles.icon,
             {
-              transform: [{ translateY: slideY }, { translateX: slideX }],
+              transform: [{ rotate: rotateAnim }],
             },
           ]}
-          numberOfLines={1}
         >
-          {label}
-        </Animated.Text>
-      )}
-      <Text style={styles.checkedText}>
-        {currentItem === null ? initItems[0] : currentItem}
-      </Text>
-      {isActive ? (
-        <ArrowUpIcon style={styles.icon} color={colors.color_fill_icon} />
-      ) : (
-        <ArrowDownIcon style={styles.icon} color={colors.color_fill_icon} />
-      )}
+          <ArrowUpIcon
+            color={
+              isActive
+                ? colors.color_tabBar_active
+                : colors.borderColor_standart
+            }
+          />
+        </Animated.View>
+      </Pressable>
 
       <View style={styles.itemsContainer}>
         <Animated.View
           style={[
             styles.animContainer,
-            { transform: [{ translateY: itemBoxYAnim }] },
+            { transform: [{ translateY: itemBoxSlide }] },
           ]}
         >
           <FlatList
             data={initItems}
             contentContainerStyle={styles.flat}
             renderItem={({ item, index }) => {
-              const bcColor = getBcColorItem(item, index)
+              const bcColor = getBcColorItem(item)
               return (
                 <Pressable
-                  style={{ width }}
                   key={item}
+                  style={[styles.itemCell, { backgroundColor: bcColor }]}
                   onPress={() => handleChoice(item)}
                 >
-                  <View
-                    style={[
-                      styles.itemContainer,
-                      { backgroundColor: bcColor, width },
-                    ]}
-                  >
-                    <Text style={styles.text}>{item}</Text>
-                  </View>
+                  <Text style={styles.text}>{item}</Text>
                 </Pressable>
               )
             }}
           />
         </Animated.View>
       </View>
-    </Pressable>
+    </View>
   )
 }
 
-const getStyle = (colors: Theme, isActive: boolean) =>
+const getStyle = (
+  colors: Theme,
+  isActive: boolean,
+  width: number,
+  height: number,
+) =>
   StyleSheet.create({
-    itemsContainer: {
-      position: 'absolute',
-      top: '102%',
-      zIndex: 1,
-      left: 0,
-      width: '100%',
-      height: Dimensions.get('window').height,
-      overflow: 'hidden',
+    container: {
+      width,
+      position: 'relative',
     },
     btn: {
-      position: 'relative',
-      height: itemCellHeight,
+      width,
+      height: height,
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
@@ -191,6 +199,15 @@ const getStyle = (colors: Theme, isActive: boolean) =>
         : colors.borderColor_standart,
       backgroundColor: colors.bcColor_standart_container,
       borderWidth: 1,
+    },
+    itemsContainer: {
+      position: 'absolute',
+      top: '102%',
+      zIndex: 1,
+      left: 0,
+      width: '100%',
+      height: Dimensions.get('window').height,
+      overflow: 'hidden',
     },
     checkedText: {
       paddingLeft: 10,
@@ -208,7 +225,7 @@ const getStyle = (colors: Theme, isActive: boolean) =>
       color: colors.color_standart_text,
     },
     animContainer: {
-      maxHeight: itemCellHeight * 4,
+      maxHeight: height * 4,
       height: 'auto',
       width: '100%',
       backgroundColor: colors.bcColor_standart_container,
@@ -221,10 +238,10 @@ const getStyle = (colors: Theme, isActive: boolean) =>
     flat: {
       backgroundColor: colors.bcColor_standart_container,
     },
-    itemContainer: {
+    itemCell: {
       alignItems: 'center',
       width: '100%',
-      height: itemCellHeight,
+      height,
       justifyContent: 'center',
     },
     text: {
