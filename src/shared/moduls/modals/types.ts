@@ -8,6 +8,7 @@ export type ModalNames =
   | 'BookingPreview'
   | 'ProfileSettings'
   | 'ThemePicker'
+  | 'PickerFromButton'
 
 export interface IModal {
   isOpen: boolean

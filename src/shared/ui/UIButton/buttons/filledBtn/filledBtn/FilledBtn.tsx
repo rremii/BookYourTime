@@ -1,24 +1,27 @@
+
 import { BtnParams } from '@shared/ui/UIButton/types'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import {
   StyleSheet,
-  TouchableOpacity,
   Text,
   ActivityIndicator,
+  LayoutChangeEvent,
+  Pressable,
 } from 'react-native'
 
 export interface FilledBtnProps extends BtnParams {
-  withSpinner?: boolean
-  mainColor?: string
-  activeColor?: string
-  subColor?: string
+  pending?:boolean
+  withSpinner?:boolean
+  mainColor?:string
+  activeColor?:string
+  subColor?:string
 }
 
 type StyleParams = {
   pending?: boolean
   mainColor?: string
   activeColor?: string
-  subColor?: string
+  subColor?:string
 }
 
 export const FilledBtn: FC<FilledBtnProps> = ({
@@ -28,48 +31,50 @@ export const FilledBtn: FC<FilledBtnProps> = ({
   textStyles,
   children,
   withSpinner = false,
-  ...colors
+  mainColor = '#0A8537',
+  activeColor = '#12e35f',
+  subColor = '#fff',
 }) => {
-  const styles = getStyles({ pending, ...colors })
+  const styles = getStyles({ pending, mainColor, activeColor, subColor })
+
+  const [contentWidth, setContentWidth] = useState(0)
+
+  const onLayout = (e: LayoutChangeEvent) => {
+    if (contentWidth) return
+    setContentWidth(e.nativeEvent.layout.width)
+  }
 
   return (
-    <TouchableOpacity
+    <Pressable
       disabled={pending}
       onPress={onPress}
       style={[styles.btn, btnStyles]}
     >
       {withSpinner && pending ? (
-        <ActivityIndicator
-          size="small"
-          animating={true}
-          color={colors.subColor}
-        />
+        <ActivityIndicator size="small" animating={true} color={subColor} />
       ) : (
-        <Text style={[styles.text, textStyles]}>{children}</Text>
+        <Text onLayout={onLayout} style={[styles.text, textStyles]}>
+          {children}
+        </Text>
       )}
-    </TouchableOpacity>
+    </Pressable>
   )
 }
 
-const getStyles = ({
-  pending,
-  activeColor,
-  mainColor,
-  subColor,
-}: StyleParams) =>
+const getStyles = ({ pending, activeColor, mainColor, subColor }: StyleParams) =>
   StyleSheet.create({
     btn: {
       backgroundColor: pending ? activeColor : mainColor,
       borderRadius: 10,
       padding: 25,
       paddingTop: 7,
-      justifyContent: 'center',
       paddingBottom: 7,
+      justifyContent: 'center',
     },
     text: {
       textAlign: 'center',
-      fontSize: 16,
+      fontSize: 15,
       fontWeight: '500',
-      color: subColor,
+      color: subColor
     },
   })
